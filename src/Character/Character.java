@@ -6,7 +6,7 @@ import Food.NutritionalValue;
 abstract public class Character {
 	private String name;
 	private String sexe;
-	private String height;
+	private double height;
 	private Integer age;
 	private Integer strength;
 	private Integer stamina;
@@ -17,7 +17,7 @@ abstract public class Character {
 	
 	
 
-	public Character(String name, String sexe, String height, Integer age, Integer strength, Integer stamina,
+	public Character(String name, String sexe, double height, Integer age, Integer strength, Integer stamina,
 			Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion) {
 		this.name = name;
 		this.sexe = sexe;
