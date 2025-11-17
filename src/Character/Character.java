@@ -7,6 +7,87 @@ abstract public class Character {
 	private String name;
 	private String sexe;
 	private String height;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSexe() {
+		return sexe;
+	}
+
+	public void setSexe(String sexe) {
+		this.sexe = sexe;
+	}
+
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public Integer getStrength() {
+		return strength;
+	}
+
+	public void setStrength(Integer strength) {
+		this.strength = strength;
+	}
+
+	public Integer getStamina() {
+		return stamina;
+	}
+
+	public void setStamina(Integer stamina) {
+		this.stamina = stamina;
+	}
+
+	public Integer getHealth() {
+		return health;
+	}
+
+	public void setHealth(Integer health) {
+		this.health = health;
+	}
+
+	public Integer getHunger() {
+		return hunger;
+	}
+
+	public void setHunger(Integer hunger) {
+		this.hunger = hunger;
+	}
+
+	public Integer getBelligerence() {
+		return belligerence;
+	}
+
+	public void setBelligerence(Integer belligerence) {
+		this.belligerence = belligerence;
+	}
+
+	public Integer getLevelOfPotion() {
+		return levelOfPotion;
+	}
+
+	public void setLevelOfPotion(Integer levelOfPotion) {
+		this.levelOfPotion = levelOfPotion;
+	}
+
 	private Integer age;
 	private Integer strength;
 	private Integer stamina;
