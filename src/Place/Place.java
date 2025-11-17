@@ -25,6 +25,7 @@ abstract public class Place {
 	private ArrayList<Character> people;
 	private ArrayList<Food> food;
 	
+	// Print specifications of characters and food in the current place
 	public void displaySpecifications() {
 		Iterator<Food> itfood = this.food.iterator();
 		while (itfood.hasNext()) {
@@ -44,6 +45,7 @@ abstract public class Place {
 		people.remove(charac);
 	}
 	
+	
 	public void healPeople() {
 		Iterator<Character> itchar = this.people.iterator();
 		while (itchar.hasNext()) {
@@ -61,4 +63,15 @@ abstract public class Place {
 			}
 		}
 	}
+	
+	public ArrayList<Character> getPeople(){
+		return this.people;
+	}
+	
+	public ArrayList<Food> getListFood(){
+		return this.food;
+	}
 }
+
+
+

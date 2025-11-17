@@ -50,6 +50,7 @@ public enum Food {
 		return nutritionalValue;
 	}
 
+	
 	public boolean isInMagicPotion() {
 		return isInMagicPotion;
 	}

@@ -69,4 +69,16 @@ abstract public class Character {
 			eat();
 		}
 	}
+	
+	public void modifyHunger(Integer hunger) {
+		this.hunger += hunger;
+	}
+
+	public void modifyBelligerence(Integer belligerence) {
+		this.belligerence += belligerence;
+	}
+
+	public void modifyLevelOfPotion(Integer levelOfPotion) {
+		this.levelOfPotion += levelOfPotion;
+	}
 }
