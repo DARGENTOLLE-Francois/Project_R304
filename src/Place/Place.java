@@ -7,10 +7,16 @@ import Character.Character;
 import Food.Food;
 
 abstract public class Place {
-	public Place(String name, double surface) {
+	
+	public Place(String name, double surface, Integer numberOfPeople, ArrayList<Character> people,
+			ArrayList<Food> food) {
 		this.name = name;
 		this.surface = surface;
+		this.numberOfPeople = numberOfPeople;
+		this.people = people;
+		this.food = food;
 	}
+
 
 	private String name;
 	private double surface;
