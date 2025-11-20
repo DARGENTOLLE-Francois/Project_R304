@@ -49,7 +49,7 @@ abstract class ClanChief {
 	public void examinatePlace() {
 		System.out.println(displaySpecifications() + '\n');
 		System.out.println(getPeople() + '\n');
-		System.out.println(getPresentAilment() + '\n');
+		System.out.println(getFood() + '\n');
 	}
 	
 	public Character createACharacter() {
@@ -100,16 +100,24 @@ abstract class ClanChief {
 	}
 	
 	public void HealTheirCharacter() {
-		ArrayList<Character> charc = Place.getCharacterPresent();
-		for(int i=0; i < charc.length()-1; i++) {
-			charc[i].heal();
+		Iterator<Character> charc = place.getPeople().iterator();
+		while(charc.hasNext()) {
+			charc.next().heal();
 		}
 	}
 	
 	public void CharacterWillEat() {
-		ArrayList<Character> charc = Place.getCharacterPresent();
-		for(int i=0; i < charc.length()-1; i++) {
-			charc[i].eat();
+		Iterator<Character> charc = place.getPeople().iterator();
+		while(charc.hasNext()) {
+			if(place.getFood().size() == 0) {
+				System.out.println("Plus de nourriture disponible");
+				break;
+			}
+			else{
+				charc.next().eat(place.getFood().get(0));
+				place.getFood().remove(0);
+			}
+			
 		}
 	}
 	
