@@ -2,12 +2,19 @@ package Character;
 
 import Food.Food;
 import Food.NutritionalValue;
+import Potion.MagicPotion;
 
 abstract public class Character {
 	private String name;
 	private String sexe;
 	private String height;
 	
+	private boolean isInvincible = false;
+	private boolean isPetrified = false;
+	private boolean isLycanthrope = false;
+	private boolean hasSuperSpeed = false;
+	private int dosesConsumed = 0;
+
 	public String getName() {
 		return name;
 	}
@@ -112,8 +119,9 @@ abstract public class Character {
 		this.levelOfPotion = levelOfPotion;
 	}
 	
-	// Turn of this to strike
 	public Integer strike(Character c1, Integer turn) {
+		if (this.isPetrified) return 0; // statue donc cheh
+		
 		if (turn%2==0) {
 			return (c1.health-this.strength)*c1.stamina;
 		} else {
@@ -122,24 +130,65 @@ abstract public class Character {
 	}
 	
 	public void heal() {
-		++this.health;
+		if (!this.isPetrified) { // statue donc cheh
+			++this.health;
+		}
 	}
 	
 	public void eat() {
-		--this.hunger;
+		if (!this.isPetrified) { // statue donc cheh
+			--this.hunger;
+		}
 	}
 	
-	public void drinkMagicPotion() {
-		++this.levelOfPotion;
+	// ajout partie potion
+	public void drinkMagicPotion(MagicPotion potion) {
+		if (this.isPetrified) {
+			System.out.println(this.name + " est une statue !"); // statue donc cheh
+			return;
+		}
+
+		if (potion.takeDose()) { // on boit tah astérix
+			if (potion.isValid()) {
+				this.isInvincible = true;
+				this.strength += 50;
+				++this.levelOfPotion;
+				this.dosesConsumed++;
+				
+				if (potion.isNourishing()) {
+					this.hunger = Math.max(0, this.hunger - 20);
+				}
+				if (potion.givesSuperSpeed()) {
+					this.hasSuperSpeed = true;
+				}
+				if (potion.causesLycanthropy()) {
+					this.isLycanthrope = true;
+				}
+
+				if (this.dosesConsumed >= 10) { // 2 marmites (a définir plus tard)
+					this.isPetrified = true;
+					this.strength = 0; // statue donc cheh
+					System.out.println(this.name + " devient une statue de granit !");
+				} else if (this.dosesConsumed >= 5) { // 1 marmite (a définir plus tard)
+					System.out.println("Effets permanents !");
+				}
+			} else {
+				System.out.println("Potion ratée !");
+			}
+		} else {
+			System.out.println("Marmite vide !");
+		}
 	}
 	
 	public void passAway() {
-		if (this.health<3) {
+		if (!this.isPetrified && this.health<3) { // statue donc cheh
 			System.out.println(this.name +" passed away !");
 		}
 	}
 
 	public void eat(Food food) {
+		if (this.isPetrified) return; // statue donc cheh
+		
 		if (food.getNutritionalValue()==NutritionalValue.GOOD) {
 			this.hunger=this.hunger-20;
 		} else if (food.getNutritionalValue()==NutritionalValue.MID) {

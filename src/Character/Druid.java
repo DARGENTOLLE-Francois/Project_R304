@@ -1,26 +1,31 @@
 package Character;
-import Potion.*;
-//import places pour choper les ingrédients
 
-public class Druid extends Gallic implements Work, Rule, Fight, CookMagicPotion{
+import Potion.MagicPotion;
+import Food.Food;
+import java.util.List;
+
+public class Druid extends Gallic implements Work, Rule, Fight, CookMagicPotion {
 
 	public Druid(String name, String sexe, String height, Integer age, Integer strength, Integer stamina,
 			Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion) {
 		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion);
-		// TODO Auto-generated constructor stub
 	}
-	private boolean haveingredient = true; // variable de test
-	// faudrait une fonction dans place du style : haveIngredientForPotion
+
+	private boolean haveingredient = true; // variable de test(a changer quand on aura les lieux)
 	
-	public void MakePotion() {
-		if(haveingredient) {
-			//retirer les ingrédients du lieux en question
-			//créer une marmite de potion avec le nombre de dose maximum
-			//MagicPotionCauldron cauldron = new MagicPotionCauldron(place.cauldron.getDose(), Place.getIngredient(), false, true);
-			//cauldron.putPlace()			//Place la potion(et donc les x doses dans le lieux)
+	public MagicPotion MakePotion(List<Food> ingredientsAvailable) {
+		if(haveingredient && ingredientsAvailable != null) {
 			
+			MagicPotion cauldron = new MagicPotion(ingredientsAvailable);
+			
+			System.out.println(this.getName() + " a préparé une marmite !");
+			
+			// On retourne potion pour qu'il puisse être stocker dans le Lieu
+			return cauldron;
+			
+		} else {
+			System.out.println("flm ou pas ce qu'il faut");
+			return null;
 		}
 	}
-	
-	
 }
