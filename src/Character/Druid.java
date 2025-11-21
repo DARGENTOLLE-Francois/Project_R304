@@ -20,7 +20,7 @@ public class Druid extends Gallic implements Work, Rule, Fight, CookMagicPotion 
 			
 			System.out.println(this.getName() + " a préparé une marmite !");
 			
-			// On retourne potion pour qu'il puisse être stocker dans le Lieu
+			// On retourne potion pour qu'il puisse être stocker dans le lieu
 			return cauldron;
 			
 		} else {
