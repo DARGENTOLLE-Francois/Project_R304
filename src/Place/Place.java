@@ -53,12 +53,16 @@ abstract public class Place {
 	
 	
 	public void feedPeople() {
+		int foodIndex = 0;
 		Iterator<Character> itchar = this.people.iterator();
-		while (itchar.hasNext()) {
-			if (this.food.size()!=0) {
-				itchar.next().eat(this.food.get(0));
-				this.food.remove(0);
-			}
+		while (itchar.hasNext() && foodIndex < this.food.size()) {
+			Character person = itchar.next();
+			person.eat(this.food.get(foodIndex));
+			foodIndex++;
+		}
+		// Remove the food items that have been consumed
+		for (int i = 0; i < foodIndex; i++) {
+			this.food.remove(0);
 		}
 	}
 }
