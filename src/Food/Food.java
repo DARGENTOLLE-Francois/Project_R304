@@ -41,6 +41,10 @@ public enum Food {
 	public FreshnessLevel getFreshnessLevel() {
 		return freshnessLevel;
 	}
+	
+	public void setFreshnessLevel(FreshnessLevel freshnessLevel) {
+		this.freshnessLevel= freshnessLevel;
+	}
 
 	public Category getCategory() {
 		return category;
@@ -50,6 +54,7 @@ public enum Food {
 		return nutritionalValue;
 	}
 
+	
 	public boolean isInMagicPotion() {
 		return isInMagicPotion;
 	}

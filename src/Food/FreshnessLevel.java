@@ -1,8 +1,8 @@
 package Food;
 
-enum FreshnessLevel {
+public enum FreshnessLevel {
 	FRESH,
 	FAIRLY_FRESH,
 	STALE,
-	NONE
+	NONE;
 }
