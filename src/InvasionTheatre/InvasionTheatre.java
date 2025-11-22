@@ -47,12 +47,13 @@ public class InvasionTheatre {
 		for (int i=0; i<this.places.size(); ++i) {
 			Place currentPlace = this.places.get(i);
 			
+			Random rand = new Random();
 			Iterator<Character> it = currentPlace.getPeople().iterator();
 			while (it.hasNext()) {
-				Random rand = new Random();
 				int randint = rand.nextInt(0,2);
-				it.next().modifyHunger(randint);
-				it.next().modifyLevelOfPotion(-randint);
+				Character currentChar = it.next();
+				currentChar.modifyHunger(randint);
+				currentChar.modifyLevelOfPotion(-randint);
 			}
 		}
 	}
@@ -61,11 +62,10 @@ public class InvasionTheatre {
 	// Add boar and fairly fresh fish to all places except battlefield
 	public void spawnFood() {
 		Iterator<Place> it = this.places.iterator();
-		while (it.hasNext()) {
-			if (!(it.next().getClass().getName().equals(Battlefield.class.getName()))) {
-				it.next().getListFood().add(Food.BOAR);
-				it.next().getListFood().add(Food.FAIRLY_FRESH_FISH);
-			}
+		Place currentPlace = it.next();
+		if (!(currentPlace.getClass().getName().equals(Battlefield.class.getName()))) {
+			currentPlace.getListFood().add(Food.BOAR);
+			currentPlace.getListFood().add(Food.FAIRLY_FRESH_FISH);
 		}
 	}
 	
@@ -80,25 +80,27 @@ public class InvasionTheatre {
 			Iterator<Food> it = currentPlace.getListFood().iterator();
 			
 			while (it.hasNext()) {
-				FreshnessLevel currentFreshnessOfFood = it.next().getFreshnessLevel();
+				Food currentFood = it.next();
+				FreshnessLevel currentFreshnessOfFood = currentFood.getFreshnessLevel();
 				switch(currentFreshnessOfFood) {
 				case FRESH:
-					it.next().setFreshnessLevel(FreshnessLevel.FAIRLY_FRESH);
-					System.out.println("Changement d'état des aliments de fresh vers Faily Fresh");
+					currentFood.setFreshnessLevel(FreshnessLevel.FAIRLY_FRESH);
+					System.out.println("Changement d'état des aliments de fresh vers Fairly Fresh");
+					break;
 				case FAIRLY_FRESH:
-					it.next().setFreshnessLevel(FreshnessLevel.STALE);
+					currentFood.setFreshnessLevel(FreshnessLevel.STALE);
 					System.out.println("Changement d'état des aliments de fairly fresh vers Stale");
+					break;
 				default:
 					System.out.println("Changement d'état non nécessaire");
 				}
-
 			}
 		}
 	}
 	
 	public static void main(String[] args) {
 		InvasionTheatre i1 = new InvasionTheatre("test", null);
-		i1.alterCharacRandomly();;
+		i1.alterCharacRandomly();
 	}
 
 

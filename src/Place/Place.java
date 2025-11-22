@@ -73,7 +73,7 @@ abstract public class Place {
 	}
 	
 	public ArrayList<Food> getListFood(){
-		return this.food;
+		return new ArrayList<Food>(this.food);
 	}
 }
 

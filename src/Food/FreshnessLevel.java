@@ -5,7 +5,4 @@ public enum FreshnessLevel {
 	FAIRLY_FRESH,
 	STALE,
 	NONE;
-
-	private FreshnessLevel() {
-	}
 }
