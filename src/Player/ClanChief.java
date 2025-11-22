@@ -1,10 +1,11 @@
 package Player;
 
-import Character.Character;
 import Character.*;
+import Character.Character;
 import Place.*;
 
 import java.util.Scanner;
+import java.util.Iterator;
 
 abstract class ClanChief {
 	
@@ -68,31 +69,29 @@ abstract class ClanChief {
 				+ "- 2 : forgerons"+ "\n" + "- 3 : aubergistes"+ "\n" + "- 4 : marchands"
 				+ "\n" + "- 5 : légionnaires"+ "\n" + "- 6 : préfets"+ "\n" + "- 7: généraux"
 				+ "\n" + "- 8 : lycantrophe");
+		type = scanner.nextInt();
 		switch(type) {
 			case 1:
 				Druid druid = new Druid(name,sex,height,age,10,40,30,0,0,0);
 				return druid;
-				break;
-			case 2:
-				Blacksmith blacksmith = new Blacksmith(name,sex,height,age,20,30,20,0,0,0);
-				break;
 			case 3:
 				Innkeeper innkeeper = new Innkeeper(name,sex,height,age,10,40,20,0,0,0);
-				break;
+				return innkeeper;
 			case 4:
 				GallicMerchant merchant = new GallicMerchant(name,sex,height,age,15,20,25,0,0,0);
-				break;
+				return merchant;
 			case 5:
 				Legionnaire legionnaire = new Legionnaire(name,sex,height,age,20,30,25,0,0,0);
-				break;
+				return legionnaire;
 			case 6:
 				Prefect prefect = new Prefect(name,sex,height,age,22,12,35,0,0,0);
-				break;
+				return prefect;
 			case 7:
 				General general = new General(name,sex,height,age,26,18,30,0,0,0);
-				break;
+				return general;
 			case 8:
-				FantasticCreaturesLycantrophes lycantrophe = new FantasticCreaturesLycantrophes(name,sex,height,age,34,50,40,0,0,0);
+				FantasticCreaturesLycanthropes lycanthrope = new FantasticCreaturesLycanthropes(name,sex,height,age,34,50,40,0,0,0);
+				return lycanthrope;
 			default:
 				System.out.println("C'est pas un nombre valide(idiot)"+ "\n");
 				return null;
@@ -114,7 +113,8 @@ abstract class ClanChief {
 				break;
 			}
 			else{
-				charc.next().eat(place.getFood().get(0));
+				Character character = charc.next();
+				character.eat(place.getFood().get(0));
 				place.getFood().remove(0);
 			}
 			
