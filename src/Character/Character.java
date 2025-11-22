@@ -7,7 +7,7 @@ import Potion.MagicPotion;
 abstract public class Character {
 	private String name;
 	private String sexe;
-	private String height;
+	private double height;
 	
 	private boolean isInvincible = false;
 	private boolean isPetrified = false;
@@ -31,11 +31,11 @@ abstract public class Character {
 		this.sexe = sexe;
 	}
 
-	public String getHeight() {
+	public double getHeight() {
 		return height;
 	}
 
-	public void setHeight(String height) {
+	public void setHeight(double height) {
 		this.height = height;
 	}
 
@@ -105,7 +105,7 @@ abstract public class Character {
 	
 	
 
-	public Character(String name, String sexe, String height, Integer age, Integer strength, Integer stamina,
+	public Character(String name, String sexe, double height, Integer age, Integer strength, Integer stamina,
 			Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion) {
 		this.name = name;
 		this.sexe = sexe;

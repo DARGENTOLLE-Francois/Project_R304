@@ -15,7 +15,7 @@ public class TestDruidPotion {
         System.out.println("=== VILLAGE GAULOIS : TEST DE POTION ===\n");
 
         Druid panoramix = new Druid(
-                "Panoramix", "Homme", "1.80m", 90, // Nom, Sexe, Taille, Age
+                "Panoramix", "Homme", 1.80, 90, // Nom, Sexe, Taille, Age
                 10, 50, 100, 0, 0, // Force, Endu, Vie, Faim, Belligerance
                 10 // Niveau de potion
         );
