@@ -1,6 +1,11 @@
 package Menu;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Character.Druid;
 import Food.Food;
+import Potion.MagicPotion;
 
 public class Main {
 	public static void main(String[] args) {
