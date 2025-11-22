@@ -7,4 +7,5 @@ public class Innkeeper extends Character implements Work{
 		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion);
 		// TODO Auto-generated constructor stub
 	}
+
 }

@@ -7,4 +7,5 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion);
 		// TODO Auto-generated constructor stub
 	}
+
 }

@@ -7,4 +7,6 @@ public class Legionnaire extends Roman implements Fight{
 		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion);
 		// TODO Auto-generated constructor stub
 	}
+
+
 }

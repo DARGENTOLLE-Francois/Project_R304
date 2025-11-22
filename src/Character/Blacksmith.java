@@ -7,4 +7,6 @@ public class Blacksmith extends Gallic implements Work{
 		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion);
 		// TODO Auto-generated constructor stub
 	}
+
+
 }
