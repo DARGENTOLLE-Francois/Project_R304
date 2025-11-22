@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import Food.Food;
+import Potion.MagicPotion;
 
 public class Main {
 	public static void main(String[] args) {
