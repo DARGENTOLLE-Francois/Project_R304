@@ -48,8 +48,8 @@ public class ClanChief {
 
 	public void examinatePlace() {
 		place.displaySpecifications();
-		System.out.println(place.getPeople().size() + '\n');
-		System.out.println(place.getListFood().toString() + '\n');
+		System.out.println("People " + place.getPeople().size() + "\n");
+		System.out.println("Food" + place.getListFood().toString() + "\n");
 	}
 	
 	public Character createACharacter() {
@@ -60,7 +60,7 @@ public class ClanChief {
 		System.out.println("Le sexe de votre nouveau personnage : "+ "\n");
 		String sex = scanner.nextLine();
 		System.out.println("La taille de votre nouveau personnage : "+ "\n");
-	    double height = scanner.nextDouble();
+		double height = scanner.nextDouble(); // J'ai nettoyé les caractères invisibles ici
 		System.out.println("L'Age de votre nouveau personnage : "+ "\n");
 		int age = scanner.nextInt();
 		System.out.println("Votre type de personnage : ");
@@ -69,32 +69,42 @@ public class ClanChief {
 				+ "\n" + "- 5 : légionnaires"+ "\n" + "- 6 : préfets"+ "\n" + "- 7: généraux"
 				+ "\n" + "- 8 : lycantrophe");
 		type = scanner.nextInt();
+		
+		Character newChar = null; // Variable temporaire pour stocker le perso
+		
 		switch(type) {
 			case 1:
-				Druid druid = new Druid(name,sex,height,age,10,40,30,0,0,0);
-				return druid;
+				newChar = new Druid(name,sex,height,age,10,40,30,0,0,0);
+				break;
 			case 3:
-				Innkeeper innkeeper = new Innkeeper(name,sex,height,age,10,40,20,0,0,0);
-				return innkeeper;
+				newChar = new Innkeeper(name,sex,height,age,10,40,20,0,0,0);
+				break;
 			case 4:
-				GallicMerchant merchant = new GallicMerchant(name,sex,height,age,15,20,25,0,0,0);
-				return merchant;
+				newChar = new GallicMerchant(name,sex,height,age,15,20,25,0,0,0);
+				break;
 			case 5:
-				Legionnaire legionnaire = new Legionnaire(name,sex,height,age,20,30,25,0,0,0);
-				return legionnaire;
+				newChar = new Legionnaire(name,sex,height,age,20,30,25,0,0,0);
+				break;
 			case 6:
-				Prefect prefect = new Prefect(name,sex,height,age,22,12,35,0,0,0);
-				return prefect;
+				newChar = new Prefect(name,sex,height,age,22,12,35,0,0,0);
+				break;
 			case 7:
-				General general = new General(name,sex,height,age,26,18,30,0,0,0);
-				return general;
+				newChar = new General(name,sex,height,age,26,18,30,0,0,0);
+				break;
 			case 8:
-				FantasticCreaturesLycanthropes lycanthrope = new FantasticCreaturesLycanthropes(name,sex,height,age,34,50,40,0,0,0);
-				return lycanthrope;
+				newChar = new FantasticCreaturesLycanthropes(name,sex,height,age,34,50,40,0,0,0);
+				break;
 			default:
 				System.out.println("C'est pas un nombre valide(idiot)"+ "\n");
 				return null;
 		}
+		
+		// Putain ct long cette merde
+		if (newChar != null) {
+			this.place.getPeople().add(newChar);
+			newChar.setOriginPlace(this.place); 
+		}
+		return newChar;
 	}
 	
 	public void HealTheirCharacter() {
@@ -119,6 +129,37 @@ public class ClanChief {
 			
 		}
 	}
-	
-	
+
+	public void transferCharacter(Place destination) {
+		if (this.place.getPeople().isEmpty()) {
+			System.out.println("Aucun personnage à transférer.");
+			return;
+		}
+
+		if(scanner == null) scanner = new Scanner(System.in);
+
+		System.out.println("Quel personnage envoyer vers " + destination.getName() + " ? (Entrez l'index)");
+
+		for (int i = 0; i < this.place.getPeople().size(); i++) {
+			System.out.println(i + " : " + this.place.getPeople().get(i).getName());
+		}
+		
+		System.out.print("Choix : ");
+		if (scanner.hasNextInt()) {
+			int index = scanner.nextInt();
+			if (index >= 0 && index < this.place.getPeople().size()) {
+				Character c = this.place.getPeople().get(index);
+				
+				this.place.getPeople().remove(index);
+				destination.getPeople().add(c);
+				
+				System.out.println(c.getName() + " transféré vers " + destination.getName());
+			} else {
+				System.out.println("Index invalide.");
+			}
+		} else {
+			scanner.next();
+			System.out.println("Entrée invalide.");
+		}
+	}
 }

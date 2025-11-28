@@ -15,6 +15,13 @@ abstract public class Place {
 		this.numberOfPeople = numberOfPeople;
 		this.people = people;
 		this.food = food;
+		
+		// un test pour le spawn de bouffe
+		if (food == null) {
+	        this.food = new ArrayList<Food>(); 
+	    } else {
+	        this.food = food;
+	    }
 	}
 
 
@@ -74,6 +81,9 @@ abstract public class Place {
 	
 	public ArrayList<Food> getListFood(){
 		return new ArrayList<Food>(this.food);
+	}
+	public String getName() {
+		return this.name;
 	}
 }
 
