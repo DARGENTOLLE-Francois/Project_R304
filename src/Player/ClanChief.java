@@ -7,7 +7,7 @@ import Place.*;
 import java.util.Scanner;
 import java.util.Iterator;
 
-abstract class ClanChief {
+public class ClanChief {
 	
 	private String name;
 	private String sex;
@@ -40,7 +40,6 @@ abstract class ClanChief {
 	}
 
 	public ClanChief(String name, String sex, Integer age, Place place) {
-		super();
 		this.name = name;
 		this.sex = sex;
 		this.age = age;
@@ -48,9 +47,9 @@ abstract class ClanChief {
 	}
 
 	public void examinatePlace() {
-		System.out.println(displaySpecifications() + '\n');
-		System.out.println(getPeople() + '\n');
-		System.out.println(getFood() + '\n');
+		place.displaySpecifications();
+		System.out.println(place.getPeople().size() + '\n');
+		System.out.println(place.getListFood().toString() + '\n');
 	}
 	
 	public Character createACharacter() {
@@ -108,14 +107,14 @@ abstract class ClanChief {
 	public void CharacterWillEat() {
 		Iterator<Character> charc = place.getPeople().iterator();
 		while(charc.hasNext()) {
-			if(place.getFood().size() == 0) {
+			if(place.getListFood().size() == 0) {
 				System.out.println("Plus de nourriture disponible");
 				break;
 			}
 			else{
 				Character character = charc.next();
-				character.eat(place.getFood().get(0));
-				place.getFood().remove(0);
+				character.eat(place.getListFood().get(0));
+				place.getListFood().remove(0);
 			}
 			
 		}
