@@ -5,12 +5,12 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 
-import Place.Battlefield;
-import Place.Place;
 import Player.ClanChief;
-import Food.Food;
-import Food.FreshnessLevel;
-import Character.Character;
+import model.character.Character;
+import model.food.Food;
+import model.food.FreshnessLevel;
+import model.place.Battlefield;
+import model.place.Place;
 
 public class InvasionTheatre {
 	private String name;

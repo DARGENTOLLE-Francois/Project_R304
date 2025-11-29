@@ -1,8 +1,16 @@
 package Player;
 
 import Character.*;
-import Character.Character;
 import Place.*;
+import model.character.Character;
+import model.character.Druid;
+import model.character.FantasticCreaturesLycanthropes;
+import model.character.GallicMerchant;
+import model.character.General;
+import model.character.Innkeeper;
+import model.character.Legionnaire;
+import model.character.Prefect;
+import model.place.Place;
 
 import java.util.Scanner;
 import java.util.Iterator;

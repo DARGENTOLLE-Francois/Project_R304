@@ -1,10 +1,8 @@
 package Menu;
 
-// test réalisé par IA
-
-import Character.Druid;
-import Food.Food;
-import Potion.MagicPotion;
+import model.character.Druid;
+import model.food.Food;
+import model.magicPotion.MagicPotion;
 
 import java.util.ArrayList;
 import java.util.List;
