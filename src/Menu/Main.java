@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import InvasionTheatre.InvasionTheatre;
-import Player.ClanChief;
 import model.character.Character;
 import model.character.Druid;
 import model.food.Food;
 import model.place.Place;
 import model.place.RomanCity;
+import model.player.ClanChief;
 import Place.*;
 
 

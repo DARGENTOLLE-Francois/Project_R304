@@ -6,76 +6,91 @@ import java.util.Iterator;
 import model.character.Character;
 import model.food.Food;
 
-abstract public class Place {
-	
-	public Place(String name, double surface, Integer numberOfPeople, ArrayList<Character> people,
-			ArrayList<Food> food) {
-		this.name = name;
-		this.surface = surface;
-		this.numberOfPeople = numberOfPeople;
-		this.people = people;
-		this.food = food;
-	}
+public abstract class Place {
 
+    private String name;
+    private double surface;
+    private ArrayList<Character> people;
+    private ArrayList<Food> food;
 
-	private String name;
-	private double surface;
-	//private ClanChief clanchief;
-	private Integer numberOfPeople;
-	private ArrayList<Character> people;
-	private ArrayList<Food> food;
-	
-	// Print specifications of characters and food in the current place
-	public void displaySpecifications() {
-		Iterator<Food> itfood = this.food.iterator();
-		while (itfood.hasNext()) {
-			System.out.println(itfood.next().toString());
-		}
-		Iterator<Character> itchar = this.people.iterator();
-		while(itchar.hasNext()) {
-			System.out.println(itchar.next().toString());
-		}
-	}
-	
-	public void addPeople(Character charac) {
-		people.add(charac);
-	}
-	
-	public void removePeople(Character charac) {
-		people.remove(charac);
-	}
-	
-	
-	public void healPeople() {
-		Iterator<Character> itchar = this.people.iterator();
-		while (itchar.hasNext()) {
-			itchar.next().heal();
-		}
-	}
-	
-	
-	public void feedPeople() {
-		int foodIndex = 0;
-		Iterator<Character> itchar = this.people.iterator();
-		while (itchar.hasNext() && foodIndex < this.food.size()) {
-			Character person = itchar.next();
-			person.eat(this.food.get(foodIndex));
-			foodIndex++;
-		}
-		// Remove the food items that have been consumed
-		for (int i = 0; i < foodIndex; i++) {
-			this.food.remove(0);
-		}
-	}
-	
-	public ArrayList<Character> getPeople(){
-		return this.people;
-	}
-	
-	public ArrayList<Food> getListFood(){
-		return new ArrayList<Food>(this.food);
-	}
+    public Place(String name, double surface, Integer numberOfPeople, ArrayList<Character> people,
+                 ArrayList<Food> food) {
+        this.name = name;
+        this.surface = surface;
+        this.people = people != null ? people : new ArrayList<>();
+        this.food = food != null ? food : new ArrayList<>();
+    }
+
+    // ==============================
+    //      MVC-CORRECT METHOD
+    // ==============================
+    public String getSpecifications() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("=== FOOD IN PLACE ===\n");
+        for (Food f : food) {
+            sb.append(f.toString()).append("\n");
+        }
+
+        sb.append("\n=== PEOPLE IN PLACE ===\n");
+        for (Character c : people) {
+            sb.append(c.toString()).append("\n");
+        }
+
+        return sb.toString();
+    }
+
+    // ==============================
+    //     GAME LOGIC
+    // ==============================
+
+    public void addPeople(Character charac) {
+        people.add(charac);
+    }
+
+    public void removePeople(Character charac) {
+        people.remove(charac);
+    }
+
+    public void healPeople() {
+        for (Character c : people) {
+            c.heal();
+        }
+    }
+
+    public String feedPeople() {
+        int count = 0;
+
+        Iterator<Character> it = people.iterator();
+        Iterator<Food> foodIt = food.iterator();
+
+        while (it.hasNext() && foodIt.hasNext()) {
+            Character c = it.next();
+            Food f = foodIt.next();
+
+            c.eat(f);
+            count++;
+        }
+
+        // Remove consumed food
+        for (int i = 0; i < count; i++) {
+            food.remove(0);
+        }
+
+        return count + " characters have eaten.";
+    }
+
+    // ==============================
+    //     GETTERS
+    // ==============================
+
+    public ArrayList<Character> getPeople() {
+        return people; // return real list so controller can modify
+    }
+
+    public ArrayList<Food> getFood() {
+        return food; // real list
+    }
+
+    public String getName() { return name; }
 }
-
-
-
