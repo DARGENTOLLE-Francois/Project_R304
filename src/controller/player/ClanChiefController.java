@@ -39,10 +39,13 @@ public class ClanChiefController {
         int age = scanner.nextInt();
 
         view.showMessage("Enter character type: ");
+        view.showType();
         int type = scanner.nextInt();
         scanner.nextLine();
 
         Character character = clanChief.createCharacter(name, sex, height, age, type);
+        
+        
 
         if (character == null) {
             view.showMessage("Invalid type. Character not created.");

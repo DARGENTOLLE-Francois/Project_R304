@@ -37,10 +37,13 @@ public class ClanChief {
     }
 
     public Character createCharacter(String name, String sex, double height, int age, int type) {
+    	
         switch(type) {
             case 1:
                 return new Druid(name, sex, height, age, 10,40,30,0,0,0);
-            case 3:
+            case 2:
+				return new Blacksmith(name, sex, height, age, 10,40,60,0,0,0);            
+			case 3:
                 return new Innkeeper(name, sex, height, age, 10,40,20,0,0,0);
             case 4:
                 return new GallicMerchant(name, sex, height, age, 15,20,25,0,0,0);

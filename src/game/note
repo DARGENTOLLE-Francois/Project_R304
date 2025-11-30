@@ -1,6 +1,0 @@
-I had no idea how to structure the MVC for a video game
-After research, I ended up doing :
-Model : game logic
-Controller : receives input from the operator
-View : displays on screen
-Game : loops for the game to progress -> I didn't know if that was supposed to be a controller "game", it could be refactored if i'm wrong.

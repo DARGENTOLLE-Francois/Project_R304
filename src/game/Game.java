@@ -1,78 +1,50 @@
 package game;
 
-import controller.player.ClanChiefController;
+import controller.invasionTheatre.InvasionTheatreController;
 import model.player.ClanChief;
-import model.place.GallicVillage;
+import model.place.Place;
+import model.place.RomanCity;
+import model.InvasionTheatre.InvasionTheatreModel;
+import model.character.Legionnaire;
 import model.food.Food;
-import view.player.ClanChiefView;
+import view.InvasionTheatreView.InvasionTheatreView;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Game {
 
-    private boolean running = true;
-    private ClanChiefController controller;
+    private InvasionTheatreController controller;
+    private InvasionTheatreModel model;
+    private InvasionTheatreView view;
 
     public Game() {
+		RomanCity romanCity = new RomanCity("base", 10, 5, new ArrayList<>(), new ArrayList<>());
+		romanCity.getFood().add(Food.WINE);
+		romanCity.getFood().add(Food.MEAD); 
+		Legionnaire furkanus = new Legionnaire("Marcus Furkanus", "Homme", 1.25,
+	            28,
+	            18, 28, 45, 0, 0, 0 );
+		romanCity.addPeople(furkanus);
 
-        // Create one test village
-        GallicVillage village = new GallicVillage(
-                "Gaul Village",
-                1200,
-                0,
-                new ArrayList<>(),
-                new ArrayList<>()
-        );
-
-        // Add some food
-        village.getFood().add(Food.BOAR);
-        village.getFood().add(Food.MEAD);
-
-        // Create the player
-        ClanChief player = new ClanChief("Asterix", "M", 35, village);
-
-        // MVC wiring
-        ClanChiefView view = new ClanChiefView();
-        controller = new ClanChiefController(player, view);
+		
+        ArrayList<Place> places = new ArrayList<>();
+        places.add(romanCity);
+		
+		
+		ArrayList<ClanChief> lc1 = new ArrayList<>();
+		ClanChief c1 = new ClanChief("César", "Homme", 19, romanCity);
+        lc1.add(c1);
+        
+       
+        model = new InvasionTheatreModel("Simulation 50av JC", 10,places, lc1);
+        
+        view= new InvasionTheatreView();
+        controller = new InvasionTheatreController(model, view);
+		
+        
     }
 
     public void start() {
-        Scanner scanner = new Scanner(System.in);
-
-        while (running) {
-            System.out.println("\n===== MAIN MENU =====");
-            System.out.println("1. Examine the place");
-            System.out.println("2. Create a character");
-            System.out.println("3. Heal all characters");
-            System.out.println("4. Make characters eat");
-            System.out.println("5. Quit");
-            System.out.print("Your choice: ");
-
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (choice) {
-                case 1:
-                    controller.examinePlace();
-                    break;
-                case 2:
-                    controller.createCharacter();
-                    break;
-                case 3:
-                    controller.healAllCharacters();
-                    break;
-                case 4:
-                    controller.charactersEat();
-                    break;
-                case 5:
-                    running = false;
-                    System.out.println("Goodbye!");
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
-        }
-        scanner.close();
+    	controller.showMainMenu();
     }
 }
