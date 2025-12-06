@@ -1,0 +1,86 @@
+package model.place;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import model.character.Character;
+import model.food.Food;
+
+public abstract class Place {
+
+    private String name;
+    private double surface;
+    private ArrayList<Character> people;
+    private ArrayList<Food> food;
+
+    public Place(String name, double surface, Integer numberOfPeople, ArrayList<Character> people,
+                 ArrayList<Food> food) {
+        this.name = name;
+        this.surface = surface;
+        this.people = people != null ? people : new ArrayList<>();
+        this.food = food != null ? food : new ArrayList<>();
+    }
+
+    public String getSpecifications() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("=== FOOD IN PLACE ===\n");
+        for (Food f : food) {
+            sb.append(f.toString()).append("\n");
+        }
+
+        sb.append("\n=== PEOPLE IN PLACE ===\n");
+        for (Character c : people) {
+            sb.append(c.toString()).append("\n");
+        }
+
+        return sb.toString();
+    }
+
+    public void addPeople(Character charac) {
+        people.add(charac);
+    }
+
+    public void removePeople(Character charac) {
+        people.remove(charac);
+    }
+
+    public void healPeople() {
+        for (Character c : people) {
+            c.heal();
+        }
+    }
+
+    public String feedPeople() {
+        int count = 0;
+
+        Iterator<Character> it = people.iterator();
+        Iterator<Food> foodIt = food.iterator();
+
+        while (it.hasNext() && foodIt.hasNext()) {
+            Character c = it.next();
+            Food f = foodIt.next();
+
+            c.eat(f);
+            count++;
+        }
+
+        // Remove consumed food
+        for (int i = 0; i < count; i++) {
+            food.remove(0);
+        }
+
+        return count + " characters have eaten.";
+    }
+
+    
+    public ArrayList<Character> getPeople() {
+        return people; 
+    }
+
+    public ArrayList<Food> getFood() {
+        return food;
+    }
+
+    public String getName() { return name; }
+}
