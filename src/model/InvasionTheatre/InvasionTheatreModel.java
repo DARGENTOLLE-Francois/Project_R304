@@ -1,9 +1,7 @@
 package model.InvasionTheatre;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
-import java.util.Scanner;
 
 import model.character.Character;
 import model.food.Food;
@@ -166,11 +164,6 @@ public class InvasionTheatreModel {
     }
 
     
-    
-	public ArrayList<ClanChief> getChiefs(){
-		return this.chiefs;
-	}
-
 
 	public ClanChief getClanChief(int currentChiefIndex) {
 		return this.chiefs.get(currentChiefIndex);

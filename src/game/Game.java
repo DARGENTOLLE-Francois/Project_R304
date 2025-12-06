@@ -1,6 +1,5 @@
 package game;
 
-import controller.invasionTheatre.InvasionTheatreController;
 import model.player.ClanChief;
 import model.place.Place;
 import model.place.RomanCity;
@@ -10,6 +9,8 @@ import model.food.Food;
 import view.InvasionTheatreView.InvasionTheatreView;
 
 import java.util.ArrayList;
+
+import controller.InvasionTheatre.InvasionTheatreController;
 
 public class Game {
 

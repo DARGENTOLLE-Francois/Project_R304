@@ -1,4 +1,4 @@
-package controller.invasionTheatre;
+package controller.InvasionTheatre;
 
 import controller.player.ClanChiefController;
 import model.player.ClanChief;
@@ -67,13 +67,13 @@ public class InvasionTheatreController {
         // Tour du chef de clan
         ClanChiefView chiefView = new ClanChiefView();
         ClanChiefController chiefController = new ClanChiefController(chief, chiefView);
-
-        // Menu d'actions pour le chef (limité à 3 actions)
+  
+        // Événements automatiques
+        executeAutomaticEvents();
+        
+        // Menu d'actions pour le chef
         int maxActions = 3;
         for (int i = 0; i < maxActions; i++) {
-
-            // Événements automatiques
-            executeAutomaticEvents();
             view.showMessage("\n┌─ ACTIONS DISPONIBLES (" + (maxActions - i) + " restante(s)) ─┐");
             view.showClanChiefMenu();
 
