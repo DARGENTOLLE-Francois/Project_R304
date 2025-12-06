@@ -1,6 +1,14 @@
 package view.player;
 
+import view.character.CharacterView;
+
+import java.util.ArrayList;
+
+import model.character.Character;
+import model.place.Place;
+
 public class ClanChiefView {
+	private CharacterView viewCharac = new CharacterView();
 
     public void showMessage(String msg) {
         System.out.println(msg);
@@ -18,4 +26,36 @@ public class ClanChiefView {
 				+ "\n" + "- 5 : légionnaires"+ "\n" + "- 6 : préfets"+ "\n" + "- 7: généraux"
 				+ "\n" + "- 8 : lycantrophe");
     }
+    
+    public void showCharacter(Character character) {
+        viewCharac.showCharacter(character);
+    }
+    
+    public void showListCharacter(ArrayList<Character> people) {
+    	int a=0;
+        this.showMessage("\n=== Liste des personnages ===");
+        for (Character c : people) {
+        	++a;
+        	this.showMessage(a+" :");
+        	this.showCharacter(c);
+        	
+        }
+        this.showMessage("\n=============================");
+    }
+
+    
+    public void showDestinations(ArrayList<Place> destinations) {
+        this.showMessage("\n=== Destinations disponibles ===");
+        for (int i = 0; i < destinations.size(); i++) {
+            Place place = destinations.get(i);
+            this.showMessage((i + 1) + ". " + place.getName() + 
+                            " (" + place.getClass().getSimpleName() + ")" +
+                            " - Personnages: " + place.getPeople().size());
+        }
+        this.showMessage("================================\n");
+    }
+    
+    
+    
+    
 }

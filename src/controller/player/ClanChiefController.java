@@ -1,18 +1,21 @@
 package controller.player;
 
-import model.player.ClanChief;
+import model.player.ClanChiefModel;
 import model.character.Character;
+import model.place.Place;
+import view.character.CharacterView;
 import view.player.ClanChiefView;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ClanChiefController {
-
-    private ClanChief clanChief;
+	
+    private ClanChiefModel clanChief;
     private ClanChiefView view;
     private Scanner scanner;
-
-    public ClanChiefController(ClanChief clanChief, ClanChiefView view) {
+    
+    public ClanChiefController(ClanChiefModel clanChief, ClanChiefView view) {
         this.clanChief = clanChief;
         this.view = view;
         this.scanner = new Scanner(System.in);
@@ -26,19 +29,19 @@ public class ClanChiefController {
 
     // Create character
     public Character createCharacter() {
-        view.showMessage("Enter character name: ");
+        view.showMessage("Entrer le nom du personnage: ");
         String name = scanner.nextLine();
 
-        view.showMessage("Enter character sex: ");
+        view.showMessage("Entrer le sexe du personnage: ");
         String sex = scanner.nextLine();
 
-        view.showMessage("Enter character height: ");
+        view.showMessage("Entrer la taille du personnage: ");
         double height = scanner.nextDouble();
 
-        view.showMessage("Enter character age: ");
+        view.showMessage("Entrer l'âge du personnage: ");
         int age = scanner.nextInt();
 
-        view.showMessage("Enter character type: ");
+        view.showMessage("Entrer le type du personnage: ");
         view.showType();
         int type = scanner.nextInt();
         scanner.nextLine();
@@ -48,9 +51,10 @@ public class ClanChiefController {
         
 
         if (character == null) {
-            view.showMessage("Invalid type. Character not created.");
+            view.showMessage("Type invalide. Erreur lors de la création du personnage");
         } else {
-            view.showMessage("Character created successfully!");
+            view.showMessage("Personnage crée avec succès! \n");
+            view.showCharacter(character);
         }
 
         return character;
@@ -59,7 +63,7 @@ public class ClanChiefController {
     // Heal all characters
     public void healAllCharacters() {
         clanChief.healAllCharacters();
-        view.showMessage("All characters have been healed!");
+        view.showMessage("Tous les personnages sur le terrain ont été soignés!");
     }
 
     // Characters eat
@@ -67,4 +71,45 @@ public class ClanChiefController {
         String result = clanChief.getPlace().feedPeople();
         view.showMessage(result);
     }
+    
+    
+    public boolean isNotEmptyPlace() {
+    	ArrayList<Character> people = clanChief.getPlace().getPeople();
+    	if (people.size()!=0) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    
+   
+    
+    public Character chooseCharac() {
+    	view.showListCharacter(clanChief.getPlace().getPeople());
+    	view.showMessage("Choisissez le numéro du personnage que vous voulez déplacer :");
+    	int choice = scanner.nextInt();
+    	Character chosenCharac = clanChief.chooseCharac(choice);
+    	return chosenCharac;
+    }
+    
+    
+    public Place chooseDestination(ArrayList<Place> destinations) {
+    	view.showDestinations(destinations);
+    	view.showMessage("Choisissez le numéro du lieu dans lequel vous voulez déplacer votre personnage :");
+    	int choice = scanner.nextInt();
+    	Place chosenPlace = clanChief.chooseDestination(destinations, choice);
+    	return chosenPlace;
+    }
+    
+    public void moveCharac(ArrayList<Place> destinations) {
+    	Character chosenCharac= this.chooseCharac();
+    	Place chosenPlace = this.chooseDestination(destinations);
+    	if (clanChief.moveCharac(chosenCharac, chosenPlace)) {
+    		view.showMessage("Personnage vers champs de bataille ez");
+    	} else {
+    		view.showMessage("caca");
+    	}
+    	
+    }
+    
 }

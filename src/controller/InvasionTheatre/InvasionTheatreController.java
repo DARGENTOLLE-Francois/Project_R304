@@ -1,11 +1,13 @@
 package controller.InvasionTheatre;
 
 import controller.player.ClanChiefController;
-import model.player.ClanChief;
+import model.player.ClanChiefModel;
 import model.InvasionTheatre.*;
+import model.place.Place;
 import view.player.ClanChiefView;
 import view.InvasionTheatreView.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -58,7 +60,7 @@ public class InvasionTheatreController {
     }
 
 
-    private void executeClanChiefTurn(ClanChief chief, int turnNumber) {
+    private void executeClanChiefTurn(ClanChiefModel chief, int turnNumber) {
     	view.clearScreen();
     	
         // Affichage du tour
@@ -108,12 +110,21 @@ public class InvasionTheatreController {
                     break;
                 case 7:
                     view.showMessage("\n➤ Transférer un personnage");
-                    // TODO
-                    view.showMessage("Fonctionnalité à implémenter");
+                    if (chiefController.isNotEmptyPlace()) {
+                        if (model.checkBattleFieldIsPresent()) {
+                            ArrayList<Place> destinations = model.getTransferDestinations();
+                        	chiefController.moveCharac(destinations);
+                        }else {
+                        	view.showMessage("Pas de champ de bataille présent dans le théatre d'envahissement.");
+                        }
+                    } else {
+                    	view.showMessage("Aucun personnage présent dans le lieu \nVeuillez sélectionner une autre option");
+                    	--i;
+                    }
                     break;
                 default:
                     view.showMessage("Choix invalide");
-                    i--;
+                    --i;
             }
         }
     }
@@ -133,7 +144,7 @@ public class InvasionTheatreController {
         int currentChiefIndex = 0;
 
         while (true) {
-            ClanChief currentChief = model.getClanChief(currentChiefIndex);
+            ClanChiefModel currentChief = model.getClanChief(currentChiefIndex);
             executeClanChiefTurn(currentChief, turnNumber);
 
             currentChiefIndex = (currentChiefIndex + 1) % model.getNumberClanChiefs();
