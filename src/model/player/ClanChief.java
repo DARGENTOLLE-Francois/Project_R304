@@ -21,13 +21,12 @@ public class ClanChief {
         this.place = place;
     }
 
-    // ---------- GETTERS ----------
     public String getName() { return name; }
     public String getSex() { return sex; }
     public Integer getAge() { return age; }
     public Place getPlace() { return place; }
 
-    // ---------- LOGIC METHODS ----------
+
     public String examinePlace() {
         StringBuilder sb = new StringBuilder();
         sb.append(place.getSpecifications());

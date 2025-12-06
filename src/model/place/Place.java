@@ -21,9 +21,6 @@ public abstract class Place {
         this.food = food != null ? food : new ArrayList<>();
     }
 
-    // ==============================
-    //      MVC-CORRECT METHOD
-    // ==============================
     public String getSpecifications() {
         StringBuilder sb = new StringBuilder();
 
@@ -39,10 +36,6 @@ public abstract class Place {
 
         return sb.toString();
     }
-
-    // ==============================
-    //     GAME LOGIC
-    // ==============================
 
     public void addPeople(Character charac) {
         people.add(charac);
@@ -80,16 +73,13 @@ public abstract class Place {
         return count + " characters have eaten.";
     }
 
-    // ==============================
-    //     GETTERS
-    // ==============================
-
+    
     public ArrayList<Character> getPeople() {
-        return people; // return real list so controller can modify
+        return people; 
     }
 
     public ArrayList<Food> getFood() {
-        return food; // real list
+        return food;
     }
 
     public String getName() { return name; }

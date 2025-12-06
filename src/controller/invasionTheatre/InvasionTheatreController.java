@@ -59,21 +59,23 @@ public class InvasionTheatreController {
 
 
     private void executeClanChiefTurn(ClanChief chief, int turnNumber) {
+    	view.clearScreen();
+    	
         // Affichage du tour
         view.showTurnEvents(turnNumber, chief.getName());
 
-        // Événements automatiques
-        executeAutomaticEvents();
-
-        // Tour du chef de clan avec contrôleur MVC
+        // Tour du chef de clan
         ClanChiefView chiefView = new ClanChiefView();
         ClanChiefController chiefController = new ClanChiefController(chief, chiefView);
 
         // Menu d'actions pour le chef (limité à 3 actions)
         int maxActions = 3;
         for (int i = 0; i < maxActions; i++) {
+
+            // Événements automatiques
+            executeAutomaticEvents();
             view.showMessage("\n┌─ ACTIONS DISPONIBLES (" + (maxActions - i) + " restante(s)) ─┐");
-            showClanChiefMenu();
+            view.showClanChiefMenu();
 
             int choice = getIntInput();
 
@@ -113,25 +115,10 @@ public class InvasionTheatreController {
                     view.showMessage("Choix invalide");
                     i--;
             }
-
-            if (i < maxActions - 1) {
-                view.showMessage("\nAppuyez sur Entrée pour continuer...");
-                scanner.nextLine();
-            }
         }
     }
 
-    private void showClanChiefMenu() {
-        System.out.println("│ 1. Examiner son lieu");
-        System.out.println("│ 2. Créer un nouveau personnage");
-        System.out.println("│ 3. Soigner les personnages");
-        System.out.println("│ 4. Nourrir les personnages");
-        System.out.println("│ 5. Demander une potion magique à un druide");
-        System.out.println("│ 6. Faire boire de la potion magique");
-        System.out.println("│ 7. Transférer un personnage vers champ de bataille/enclos");
-        System.out.println("└────────────────────────────────────────────────────┘");
-        System.out.print("Votre choix : ");
-    }
+
 
 
     public void startSimulation() {

@@ -2,7 +2,7 @@ package view.character;
 
 import model.character.Blacksmith;
 
-public class blacksmithView {
+public class BlacksmithView {
 	public void showBlacksmith(Blacksmith b) {
         System.out.println("==== " + b.getName() + " - Blacksmith ====");
         System.out.println("Name - " + b.getName());

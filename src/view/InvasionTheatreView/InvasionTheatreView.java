@@ -65,7 +65,27 @@ public class InvasionTheatreView {
         System.out.println();
     }
 
+    
+    
+    public void clearScreen() {  
+        System.out.print("\033[H\033[2J");
+    }  
+    
+    
 
+    public void showClanChiefMenu() {
+        System.out.println("│ 1. Examiner son lieu");
+        System.out.println("│ 2. Créer un nouveau personnage");
+        System.out.println("│ 3. Soigner les personnages");
+        System.out.println("│ 4. Nourrir les personnages");
+        System.out.println("│ 5. Demander une potion magique à un druide");
+        System.out.println("│ 6. Faire boire de la potion magique");
+        System.out.println("│ 7. Transférer un personnage vers champ de bataille/enclos");
+        System.out.println("└────────────────────────────────────────────────────┘");
+        System.out.print("Votre choix : ");
+    }
+    
+    
     public void showMainMenu() {
         System.out.println("\n" + "─".repeat(60));
         System.out.println("  MENU PRINCIPAL DU THÉÂTRE");
