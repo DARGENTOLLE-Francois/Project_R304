@@ -186,7 +186,7 @@ abstract public class Character {
 	
 	public void passAway() {
 		if (!this.isPetrified && this.health<3) { // statue donc cheh
-			System.out.println(this.name +" passed away !");
+			System.out.println(this.name +" est mort !");
 		}
 	}
 
