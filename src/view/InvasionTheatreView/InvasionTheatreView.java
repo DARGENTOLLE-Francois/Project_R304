@@ -1,7 +1,6 @@
 package view.InvasionTheatreView;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class InvasionTheatreView {	
 	

@@ -3,12 +3,10 @@ package controller.player;
 import model.player.ClanChiefModel;
 import model.character.Character;
 import model.place.Place;
-import view.character.CharacterView;
 import view.player.ClanChiefView;
 import view.utils.Input;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ClanChiefController {
 	
@@ -100,7 +98,7 @@ public class ClanChiefController {
     	view.showDestinations(destinations);
     	view.showMessage("Choisissez le numéro du lieu dans lequel vous voulez déplacer votre personnage :");
     	int choice = Input.getIntInput();
-    	while (!clanChief.checkValidIndex(choice)) {
+    	while (choice <= 0 || choice > destinations.size()) {
     		 view.showMessage("Choix invalide. \nVeuillez réessayer :");
     		 choice = Input.getIntInput();
     	}
@@ -112,7 +110,7 @@ public class ClanChiefController {
     	Character chosenCharac= this.chooseCharac();
     	Place chosenPlace = this.chooseDestination(destinations);
     	if (clanChief.moveCharac(chosenCharac, chosenPlace)) {
-    		view.showMessage("Personnage transféré vers champs de bataille/enclos :");
+    		view.showMessage("Personnage transféré vers" + chosenPlace.getName());
     		view.showCharacter(chosenCharac);
     	} else {
     		view.showMessage("Erreur lors du transfert");

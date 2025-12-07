@@ -9,7 +9,6 @@ import view.utils.Input;
 import view.InvasionTheatreView.*;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * CONTROLLER - InvasionTheatre
