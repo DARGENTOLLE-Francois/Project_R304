@@ -42,7 +42,7 @@ public class Game {
         lc1.add(c1);
         
        
-        model = new InvasionTheatreModel("Simulation 50av JC", 10,places, lc1);
+        model = new InvasionTheatreModel("Simulation 50av JC", 10, lc1);
         view= new InvasionTheatreView();
         controller = new InvasionTheatreController(model, view);
         

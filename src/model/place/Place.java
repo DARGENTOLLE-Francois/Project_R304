@@ -12,7 +12,7 @@ public abstract class Place {
     private double surface;
     private ArrayList<Character> people;
     private ArrayList<Food> food;
-    private Boolean belongsTo; // Ideally 0 for Gallic, 1 for Roman and null for neutral.
+    private Integer belongsTo; // Ideally 0 for Gallic, 1 for Roman and null for neutral.
 
     public Place(String name, double surface, Integer numberOfPeople, ArrayList<Character> people,
                  ArrayList<Food> food) {
@@ -21,6 +21,15 @@ public abstract class Place {
         this.people = people != null ? people : new ArrayList<>();
         this.food = food != null ? food : new ArrayList<>();
     }
+    
+    public Place(String name, double surface, Integer numberOfPeople, ArrayList<Character> people,
+            ArrayList<Food> food, Integer belongsTo) {
+   this.name = name;
+   this.surface = surface;
+   this.people = people != null ? people : new ArrayList<>();
+   this.food = food != null ? food : new ArrayList<>();
+   this.belongsTo = belongsTo;
+}
 
     public String getSpecifications() {
         StringBuilder sb = new StringBuilder();
@@ -85,16 +94,16 @@ public abstract class Place {
 
     public String getName() { return name; }
     
-    public Boolean getBelongsTo() { return belongsTo; }
+    public Integer getBelongsTo() { return belongsTo; }
     
-    public void setBelongsTo(Boolean belongsTo) { this.belongsTo = belongsTo;}
+    public void setBelongsTo(Integer belongsTo) { this.belongsTo = belongsTo;}
     
     public String getBelongsToName() {
     	
-    	if(this.belongsTo == null) {
+    	if(this.belongsTo == 2) {
     		return "neutre";
     	}
-    	else if(this.belongsTo) {
+    	else if(this.belongsTo == 1) {
     		return "romains";
     	}
     	return "gaulois";

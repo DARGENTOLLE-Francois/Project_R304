@@ -12,5 +12,10 @@ public class RomanFortifiedCamp extends Place{
 		super(name, surface, numberOfPeople, people, food);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public RomanFortifiedCamp(String name, double surface, Integer numberOfPeople, ArrayList<Character> people,
+			ArrayList<Food> food, Integer belongsTo) {
+		super(name, surface, numberOfPeople, people, food, belongsTo);
+	}
 
 }

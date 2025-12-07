@@ -28,12 +28,14 @@ public class InvasionTheatreController {
     }
 
     public void displayTotalCharacters() {
-        int total = model.getTotalNumberOfCharacters();
-        view.showTotalCharacters(total);
+        view.showTotalCharacters(model.getTotalNumberOfCharacters());
     }
 
     public void displayAllCharacters() {
         view.showAllCharacters(model.getAllCharactersInfo());
+    }
+    public void displayMap() {
+    	view.showMap(model.getMap());
     }
 
 
@@ -63,6 +65,9 @@ public class InvasionTheatreController {
     	
         // Affichage du tour
         view.showTurnEvents(turnNumber, chief.getName());
+        
+        // Displays the map
+        view.showTurnEvents
 
         // Tour du chef de clan
         ClanChiefView chiefView = new ClanChiefView();

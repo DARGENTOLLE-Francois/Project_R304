@@ -13,4 +13,10 @@ public class Enclosure extends Place{
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Enclosure(String name, double surface, Integer numberOfPeople, ArrayList<Character> people,
+			ArrayList<Food> food, Integer belongsTo) {
+		super(name, surface, numberOfPeople, people, food, belongsTo);
+		// TODO Auto-generated constructor stub
+	}
+	
 }

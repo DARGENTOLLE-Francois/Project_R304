@@ -6,6 +6,7 @@ import java.util.Random;
 import model.character.Character;
 import model.food.Food;
 import model.food.FreshnessLevel;
+import model.map.PlaceData;
 import model.map.mapModel;
 import model.place.Battlefield;
 import model.place.Place;
@@ -14,38 +15,40 @@ import model.player.ClanChiefModel;
 public class InvasionTheatreModel {
 	private String name;
     private Integer maxNumberOfPlaces;
-	private ArrayList<Place> places;
 	private ArrayList<ClanChiefModel> chiefs;
 	private Random random;
 	
 	private mapModel map;
 	
 	
-	public InvasionTheatreModel(String name,Integer maxNumberOfPlaces, ArrayList<Place> places, ArrayList<ClanChiefModel> chiefs) {
+	public InvasionTheatreModel(String name,Integer maxNumberOfPlaces, ArrayList<ClanChiefModel> chiefs) {
 		this.name = name;
 		this.maxNumberOfPlaces=maxNumberOfPlaces;
-		this.places = places;
 		this.chiefs = chiefs;
 		this.random= new Random();
+		this.map = mapModel.getInstance();
 	}
-	
 	
     public String getName() {
         return name;
+    }
+    
+    public mapModel getMap() {
+    	return this.map;
     }
 
     public Integer getMaxNumberOfPlaces() {
         return maxNumberOfPlaces;
     }
 
-    public ArrayList<Place> getPlaces() {
-        return places;
+    public ArrayList<PlaceData> getPlaces() {
+        return this.map.getThePlaces();
     }
 
     public ArrayList<String> getPlaceNames() {
         ArrayList<String> names = new ArrayList<>();
-        for (Place place : places) {
-            names.add(place.getName() + " (" + place.getClass().getSimpleName() + ")");
+        for (PlaceData place : this.map.getThePlaces()) {
+            names.add(place.getThePlace().getName() + " (" + place.getClass().getSimpleName() + ")");
         }
         return names;
     }
@@ -55,13 +58,13 @@ public class InvasionTheatreModel {
     public ArrayList<String> getAllCharactersInfo() {
         ArrayList<String> infos = new ArrayList<>();
         
-        for (Place place : places) {
-            infos.add("=== " + place.getName() + " ===");
+        for (PlaceData place : map.getThePlaces()) {
+            infos.add("=== " + place.getThePlace().getName() + " ===");
             
-            if (place.getPeople().isEmpty()) {
+            if (place.getThePlace().getPeople().isEmpty()) {
                 infos.add("  (Aucun personnage)");
             } else {
-                for (Character character : place.getPeople()) {
+                for (Character character : place.getThePlace().getPeople()) {
                     infos.add("  - " + character.getName() + 
                              " (" + character.getClass().getSimpleName() + ")" +
                              " | Santé: " + character.getHealth() +
@@ -87,13 +90,13 @@ public class InvasionTheatreModel {
 	
 	// print all places in the theatre
 	public String displayPlaces () {
-		return this.places.toString();
+		return this.map.getThePlaces().toString();
 	}
 
     public int getTotalNumberOfCharacters() {
         int total = 0;
-        for (Place place : places) {
-            total += place.getPeople().size();
+        for (PlaceData place : map.getThePlaces()) {
+            total += place.getThePlace().getPeople().size();
         }
         return total;
     }
@@ -101,8 +104,8 @@ public class InvasionTheatreModel {
 	
     
     public void fightBelligerents() {
-        for (Place place : places) {
-        	if (place instanceof Battlefield) {
+        for (PlaceData place : map.getThePlaces()) {
+        	if (place.getThePlace() instanceof Battlefield) {
         		//TODO
         	}
         }
@@ -110,8 +113,8 @@ public class InvasionTheatreModel {
 
 	public void alterCharacRandomly() {
 		//Modify hunger by the value of randint
-        for (Place place : places) {
-            for (Character character : place.getPeople()) {
+        for (PlaceData place : map.getThePlaces()) {
+            for (Character character : place.getThePlace().getPeople()) {
                 if (!character.isPetrified()) {
                     int hungerChange = random.nextInt(3);
                     int potionChange = random.nextInt(2);
@@ -126,19 +129,19 @@ public class InvasionTheatreModel {
 	
 	// Add boar and fairly fresh fish to all places except battlefield
     public void spawnFood() {
-        for (Place place : places) {
+        for (PlaceData place : map.getThePlaces()) {
             // Ne pas spawner sur les champs de bataille
-            if (!(place instanceof Battlefield)) {
-                place.getFood().add(Food.BOAR);
-                place.getFood().add(Food.FAIRLY_FRESH_FISH);
+            if (!(place.getThePlace() instanceof Battlefield)) {
+                place.getThePlace().getFood().add(Food.BOAR);
+                place.getThePlace().getFood().add(Food.FAIRLY_FRESH_FISH);
             }
         }
     }
 	
 	
     public void decreaseFoodFreshness() {
-        for (Place place : places) {
-            for (Food food : place.getFood()) {
+        for (PlaceData place : map.getThePlaces()) {
+            for (Food food : place.getThePlace().getFood()) {
                 FreshnessLevel currentFreshness = food.getFreshnessLevel();
                 
                 switch (currentFreshness) {
@@ -158,8 +161,8 @@ public class InvasionTheatreModel {
     
     
     public boolean checkBattleFieldIsPresent() {
-    	for (Place place : places) {
-    		if (place instanceof Battlefield) {
+    	for (PlaceData place : map.getThePlaces()) {
+    		if (place.getThePlace() instanceof Battlefield) {
     			return true;
     		}
     	}
@@ -167,7 +170,7 @@ public class InvasionTheatreModel {
     	
     }
     
-
+/*
     public boolean canAddPlace() {
         return places.size() < maxNumberOfPlaces;
     }
@@ -179,7 +182,7 @@ public class InvasionTheatreModel {
         }
         return false;
     }
-
+*/
     
 
 	public ClanChiefModel getClanChief(int currentChiefIndex) {
@@ -189,9 +192,9 @@ public class InvasionTheatreModel {
 
 	public ArrayList<Place> getTransferDestinations() {
 	    ArrayList<Place> destinations = new ArrayList<>();
-	    for (Place place : places) {
-	        if (place instanceof Battlefield || place.getClass().getSimpleName().equals("Enclos")) {
-	            destinations.add(place);
+	    for (PlaceData place : map.getThePlaces()) {
+	        if (place.getThePlace() instanceof Battlefield || place.getThePlace().getClass().getSimpleName().equals("Enclos")) {
+	            destinations.add(place.getThePlace());
 	        }
 	    }
 	    return destinations;
