@@ -6,7 +6,7 @@ import model.InvasionTheatre.*;
 import model.place.Place;
 import view.player.ClanChiefView;
 import view.utils.Input;
-import view.InvasionTheatreView.*;
+import view.InvasionTheatreView.InvasionTheatreView;
 
 import java.util.ArrayList;
 
@@ -48,12 +48,19 @@ public class InvasionTheatreController {
         model.spawnFood();
 
         // 3. Diminution de fraîcheur
-        view.showMessage( "Vieillissement de la nourriture...");
+        view.showMessage("Vieillissement de la nourriture...");
         model.decreaseFoodFreshness();
 
         // 4. Combats (à implémenté)
-        view.showMessage("Résolution des combats sur les champs de bataille...");
-        model.fightBelligerents();
+
+        if (!model.isBattlefieldPresent()) {
+        	view.showMessage("Il doit y avoir un champ de bataille dans le théatre d'envahissement");
+        //}else if (!model.hasBattlefieldAtLeastTwoCharac()) {
+        	//view.showMessage("Il doit y avoir au moins 2 caractères présents sur le champ de bataille");
+        } else {
+            view.showMessage("Résolution des combats sur les champs de bataille...");
+        	model.fightBelligerents();
+        }
 
     }
 
@@ -109,7 +116,7 @@ public class InvasionTheatreController {
                 case 7:
                     view.showMessage("\n➤ Transférer un personnage");
                     if (chiefController.isNotEmptyPlace()) {
-                        if (model.checkBattleFieldIsPresent()) {
+                        if (model.isBattlefieldPresent()) {
                             ArrayList<Place> destinations = model.getTransferDestinations();
                         	chiefController.moveCharac(destinations);
                         }else {

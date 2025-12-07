@@ -95,14 +95,49 @@ public class InvasionTheatreModel {
         return total;
     }
 	
+    
+    private ArrayList<Battlefield> getBattlefields() {
+        ArrayList<Battlefield> battlefields = new ArrayList<>();
+        for (Place place : places) {
+            if (place instanceof Battlefield) {
+                battlefields.add((Battlefield) place);
+            }
+        }
+        return battlefields;
+    }
 	
+    // Battlefield is valid if present in InvasionTheatre
+    public boolean isBattlefieldPresent() {
+        return !getBattlefields().isEmpty();
+    }
+    
     
     public void fightBelligerents() {
-        for (Place place : places) {
-        	if (place instanceof Battlefield) {
-        		//TODO
-        	}
-        }
+    	for (Battlefield b : getBattlefields()) {
+    		if (b.canFight()) {
+    			ArrayList<Character> gallicPeople = b.getGallic();
+    			ArrayList<Character> romanPeople = b.getRoman();
+    			
+    			//Ajouter vérif effet de bord listes romanPeople et gallicPeople
+    			Character gallicFighter = gallicPeople.get(0);
+    			Character romanFighter = romanPeople.get(0);
+    			
+    			gallicFighter.strike(romanFighter);
+    			romanFighter.strike(gallicFighter);
+    			
+    			//Renvoyer vers endroit d'origine
+    			romanPeople.remove(romanFighter);
+    			if (!romanFighter.passAway()) {
+    				romanFighter.setCurrentPlace(romanFighter.getPlaceOfOrigin());
+    			}
+    			
+    			gallicPeople.remove(gallicFighter);
+    			if (!gallicFighter.passAway()) {
+    				gallicPeople.remove(gallicFighter);
+    				gallicFighter.setCurrentPlace(gallicFighter.getPlaceOfOrigin());	
+    			}
+    		}
+    	}
     }
 
 	public void alterCharacRandomly() {
@@ -153,17 +188,7 @@ public class InvasionTheatreModel {
         }
     }
     
-    
-    public boolean checkBattleFieldIsPresent() {
-    	for (Place place : places) {
-    		if (place instanceof Battlefield) {
-    			return true;
-    		}
-    	}
-		return false;
-    	
-    }
-    
+
 
     public boolean canAddPlace() {
         return places.size() < maxNumberOfPlaces;

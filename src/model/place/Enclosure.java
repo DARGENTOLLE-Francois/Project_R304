@@ -7,9 +7,9 @@ import model.food.Food;
 
 public class Enclosure extends Place{
 
-	public Enclosure(String name, double surface, Integer numberOfPeople, ArrayList<Character> people,
+	public Enclosure(String name, double surface, ArrayList<Character> people,
 			ArrayList<Food> food) {
-		super(name, surface, numberOfPeople, people, food);
+		super(name, surface, people, food);
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -145,12 +145,13 @@ abstract public class Character {
 		this.currentPlace = placeOfOrigin;
 	}
 	
-	public Integer strike(Character c1) {
-		if (this.isPetrified) return 0; // statue donc cheh
+	public void strike(Character c1) {
+		// pass -> if (this.isPetrified) return 0; // statue donc cheh 
 		
-		else {
-			return (c1.health-this.strength)*c1.stamina;
-		}
+			System.out.println("Force : " + this.strength );
+			System.out.println("Stamina :"+this.stamina);
+			c1.setHealth(c1.health-this.strength*this.stamina);
+			System.out.println("Vie :"+c1.getHealth());
 	}
 	
 	public void heal() {
@@ -199,10 +200,11 @@ abstract public class Character {
 	    return messages;
 	}
 	
-	public void passAway() {
-		if (!this.isPetrified && this.health<3) { // statue donc cheh
-			System.out.println(this.name +" est mort !");
+	public boolean passAway() {
+		if (!this.isPetrified && this.health<0) { // statue donc cheh
+			return true;
 		}
+		return false;
 	}
 
 	public void eat(Food food) {
