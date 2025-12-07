@@ -8,17 +8,17 @@ import model.food.Food;
 import model.food.FreshnessLevel;
 import model.place.Battlefield;
 import model.place.Place;
-import model.player.ClanChief;
+import model.player.ClanChiefModel;
 
 public class InvasionTheatreModel {
 	private String name;
     private Integer maxNumberOfPlaces;
 	private ArrayList<Place> places;
-	private ArrayList<ClanChief> chiefs;
+	private ArrayList<ClanChiefModel> chiefs;
 	private Random random;
 	
 	
-	public InvasionTheatreModel(String name,Integer maxNumberOfPlaces, ArrayList<Place> places, ArrayList<ClanChief> chiefs) {
+	public InvasionTheatreModel(String name,Integer maxNumberOfPlaces, ArrayList<Place> places, ArrayList<ClanChiefModel> chiefs) {
 		this.name = name;
 		this.maxNumberOfPlaces=maxNumberOfPlaces;
 		this.places = places;
@@ -72,7 +72,7 @@ public class InvasionTheatreModel {
         return infos;
     }
     
-    public ArrayList<ClanChief> getClanChiefs() {
+    public ArrayList<ClanChiefModel> getClanChiefs() {
         return chiefs;
     }
 
@@ -99,7 +99,9 @@ public class InvasionTheatreModel {
     
     public void fightBelligerents() {
         for (Place place : places) {
-        	//TODO
+        	if (place instanceof Battlefield) {
+        		//TODO
+        	}
         }
     }
 
@@ -150,6 +152,18 @@ public class InvasionTheatreModel {
             }
         }
     }
+    
+    
+    public boolean checkBattleFieldIsPresent() {
+    	for (Place place : places) {
+    		if (place instanceof Battlefield) {
+    			return true;
+    		}
+    	}
+		return false;
+    	
+    }
+    
 
     public boolean canAddPlace() {
         return places.size() < maxNumberOfPlaces;
@@ -165,8 +179,19 @@ public class InvasionTheatreModel {
 
     
 
-	public ClanChief getClanChief(int currentChiefIndex) {
+	public ClanChiefModel getClanChief(int currentChiefIndex) {
 		return this.chiefs.get(currentChiefIndex);
+	}
+
+
+	public ArrayList<Place> getTransferDestinations() {
+	    ArrayList<Place> destinations = new ArrayList<>();
+	    for (Place place : places) {
+	        if (place instanceof Battlefield || place.getClass().getSimpleName().equals("Enclos")) {
+	            destinations.add(place);
+	        }
+	    }
+	    return destinations;
 	}
 
 }

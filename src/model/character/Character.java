@@ -6,17 +6,28 @@ import java.util.List;
 import model.food.Food;
 import model.food.NutritionalValue;
 import model.magicPotion.MagicPotion;
+import model.place.Place;
 
 abstract public class Character {
+
 	private String name;
 	private String sexe;
 	private double height;
-	
+	private Integer age;
+	private Integer strength;
+	private Integer stamina;
+	private Integer health;
+	private Integer hunger;
+	private Integer belligerence;
+	private Integer levelOfPotion;
 	private boolean isInvincible = false;
 	private boolean isPetrified = false;
 	private boolean isLycanthrope = false;
 	private boolean hasSuperSpeed = false;
 	private int dosesConsumed = 0;
+    private Place placeOfOrigin; 
+    private Place currentPlace;  
+	
 
 	public String getName() {
 		return name;
@@ -103,19 +114,23 @@ abstract public class Character {
 	public boolean hasSuperSpeed() { return hasSuperSpeed; }
 	public int getDosesConsumed() { return dosesConsumed; }
 
+	
+	public Place getPlaceOfOrigin() {
+		return placeOfOrigin;
+	}
 
-	private Integer age;
-	private Integer strength;
-	private Integer stamina;
-	private Integer health;
-	private Integer hunger;
-	private Integer belligerence;
-	private Integer levelOfPotion;
+	public Place getCurrentPlace() {
+		return currentPlace;
+	}
 	
 	
+	public void setCurrentPlace(Place currentPlace) {
+		this.currentPlace = currentPlace;
+	}
+
 
 	public Character(String name, String sexe, double height, Integer age, Integer strength, Integer stamina,
-			Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion) {
+			Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion, Place placeOfOrigin) {
 		this.name = name;
 		this.sexe = sexe;
 		this.height = height;
@@ -126,15 +141,15 @@ abstract public class Character {
 		this.hunger = hunger;
 		this.belligerence = belligerence;
 		this.levelOfPotion = levelOfPotion;
+		this.placeOfOrigin = placeOfOrigin;
+		this.currentPlace = placeOfOrigin;
 	}
 	
-	public Integer strike(Character c1, Integer turn) {
+	public Integer strike(Character c1) {
 		if (this.isPetrified) return 0; // statue donc cheh
 		
-		if (turn%2==0) {
+		else {
 			return (c1.health-this.strength)*c1.stamina;
-		} else {
-			return (this.health-c1.strength)*this.stamina;
 		}
 	}
 	
