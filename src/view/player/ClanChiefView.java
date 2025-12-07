@@ -3,6 +3,7 @@ package view.player;
 import view.character.CharacterView;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import model.character.Character;
 import model.place.Place;
@@ -56,6 +57,9 @@ public class ClanChiefView {
     }
     
     
+
+    
+
     
     
 }

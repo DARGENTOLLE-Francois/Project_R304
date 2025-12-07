@@ -1,9 +1,10 @@
 package view.InvasionTheatreView;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class InvasionTheatreView {
-
+public class InvasionTheatreView {	
+	
     public void showMessage(String message) {
         System.out.println(message);
     }

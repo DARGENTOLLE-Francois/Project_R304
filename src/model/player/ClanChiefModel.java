@@ -91,6 +91,13 @@ public class ClanChiefModel {
     	//TODO
     }
     
+    public boolean checkValidIndex(int index) {
+    	if (index>place.getPeople().size()) {
+    		return false;
+    	}
+		return true;
+    }
+    
     
     public Character chooseCharac(int index) {
     	--index;
@@ -104,7 +111,6 @@ public class ClanChiefModel {
     	// à changer avec exception ?
 		return null;
     }
-    
     
     public Place chooseDestination(ArrayList<Place> destinations, int index) {
     	--index;

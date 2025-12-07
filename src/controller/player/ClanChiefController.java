@@ -5,6 +5,7 @@ import model.character.Character;
 import model.place.Place;
 import view.character.CharacterView;
 import view.player.ClanChiefView;
+import view.utils.Input;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,12 +14,10 @@ public class ClanChiefController {
 	
     private ClanChiefModel clanChief;
     private ClanChiefView view;
-    private Scanner scanner;
     
     public ClanChiefController(ClanChiefModel clanChief, ClanChiefView view) {
         this.clanChief = clanChief;
         this.view = view;
-        this.scanner = new Scanner(System.in);
     }
 
     // Examine place
@@ -30,21 +29,20 @@ public class ClanChiefController {
     // Create character
     public Character createCharacter() {
         view.showMessage("Entrer le nom du personnage: ");
-        String name = scanner.nextLine();
+        String name = Input.getStringInput();
 
         view.showMessage("Entrer le sexe du personnage: ");
-        String sex = scanner.nextLine();
+        String sex = Input.getStringInput();
 
         view.showMessage("Entrer la taille du personnage: ");
-        double height = scanner.nextDouble();
+        double height = Input.getDoubleInput();
 
         view.showMessage("Entrer l'âge du personnage: ");
-        int age = scanner.nextInt();
+        int age = Input.getIntInput();
 
         view.showMessage("Entrer le type du personnage: ");
         view.showType();
-        int type = scanner.nextInt();
-        scanner.nextLine();
+        int type = Input.getIntInput();
 
         Character character = clanChief.createCharacter(name, sex, height, age, type);
         
@@ -87,7 +85,12 @@ public class ClanChiefController {
     public Character chooseCharac() {
     	view.showListCharacter(clanChief.getPlace().getPeople());
     	view.showMessage("Choisissez le numéro du personnage que vous voulez déplacer :");
-    	int choice = scanner.nextInt();
+
+    	int choice = Input.getIntInput();
+    	while (!clanChief.checkValidIndex(choice)) {
+    		 view.showMessage("Choix invalide. \nVeuillez réessayer :");
+    		 choice = Input.getIntInput();
+    	}
     	Character chosenCharac = clanChief.chooseCharac(choice);
     	return chosenCharac;
     }
@@ -96,7 +99,11 @@ public class ClanChiefController {
     public Place chooseDestination(ArrayList<Place> destinations) {
     	view.showDestinations(destinations);
     	view.showMessage("Choisissez le numéro du lieu dans lequel vous voulez déplacer votre personnage :");
-    	int choice = scanner.nextInt();
+    	int choice = Input.getIntInput();
+    	while (!clanChief.checkValidIndex(choice)) {
+    		 view.showMessage("Choix invalide. \nVeuillez réessayer :");
+    		 choice = Input.getIntInput();
+    	}
     	Place chosenPlace = clanChief.chooseDestination(destinations, choice);
     	return chosenPlace;
     }
@@ -105,9 +112,10 @@ public class ClanChiefController {
     	Character chosenCharac= this.chooseCharac();
     	Place chosenPlace = this.chooseDestination(destinations);
     	if (clanChief.moveCharac(chosenCharac, chosenPlace)) {
-    		view.showMessage("Personnage vers champs de bataille ez");
+    		view.showMessage("Personnage transféré vers champs de bataille/enclos :");
+    		view.showCharacter(chosenCharac);
     	} else {
-    		view.showMessage("caca");
+    		view.showMessage("Erreur lors du transfert");
     	}
     	
     }
