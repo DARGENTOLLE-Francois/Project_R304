@@ -13,6 +13,8 @@ public class ClanChief {
     private String sex;
     private Integer age;
     private Place place;
+    private Sex sexenum;
+    private CategoryAge categoryAge;
 
     public ClanChief(String name, String sex, Integer age, Place place) {
         this.name = name;
@@ -53,7 +55,7 @@ public class ClanChief {
             case 7:
                 return new General(name, sex, height, age, 26,18,30,0,0,0);
             case 8:
-                return new FantasticCreaturesLycanthropes(name,sex,height,age,34,50,40,0,0,0);
+                return new FantasticCreaturesLycanthropes(name,sexenum,height,categoryAge,34,50,40,0,0,0);
             default:
                 return null;
         }

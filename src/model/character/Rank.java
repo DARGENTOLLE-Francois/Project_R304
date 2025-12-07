@@ -1,4 +1,4 @@
-package Character;
+package model.character;
 
 public enum Rank {
 	ALPHA(10),

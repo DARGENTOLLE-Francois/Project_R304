@@ -2,7 +2,7 @@ package model.character;
 
 public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 
-	public FantasticCreaturesLycanthropes(String name, String sexe, double height, Integer age, Integer strength,
+	public FantasticCreaturesLycanthropes(String name, Sex sexe, double height, CategoryAge age, Integer strength,
 			Integer stamina, Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion) {
 		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion);
 	}
@@ -17,10 +17,10 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	private CategoryAge cage;
 	//private Pack pack
 	
-	public FantasticCreaturesLycanthropes(String name, String sexe, double height, Integer age, Integer strength,
+	public FantasticCreaturesLycanthropes(String name, Sex sexe, double height, CategoryAge age, Integer strength,
 			Integer stamina, Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion,
 			Integer domination_factor, double level, String domination_rank, Integer impentuosity_factor,
-			boolean sickness, Rank rank, boolean human, CategoryAge cage) {
+			boolean sickness, Rank rank, boolean human) {
 		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion);
 		this.domination_factor = domination_factor;
 		this.level = level;
@@ -29,7 +29,6 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 		this.sickness = sickness;
 		this.rank = rank;
 		this.human = human;
-		this.cage = cage;
 	}
 
 	public CategoryAge getCage() {
