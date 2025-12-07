@@ -6,6 +6,7 @@ import java.util.Random;
 import model.character.Character;
 import model.food.Food;
 import model.food.FreshnessLevel;
+import model.map.mapModel;
 import model.place.Battlefield;
 import model.place.Place;
 import model.player.ClanChiefModel;
@@ -16,6 +17,8 @@ public class InvasionTheatreModel {
 	private ArrayList<Place> places;
 	private ArrayList<ClanChiefModel> chiefs;
 	private Random random;
+	
+	private mapModel map;
 	
 	
 	public InvasionTheatreModel(String name,Integer maxNumberOfPlaces, ArrayList<Place> places, ArrayList<ClanChiefModel> chiefs) {
