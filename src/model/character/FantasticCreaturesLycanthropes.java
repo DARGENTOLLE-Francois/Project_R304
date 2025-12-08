@@ -117,6 +117,13 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
         return getName() + " [" + rank + "] (Lvl: " + getLevel() + ")";
     }
 	
-	
+	public void naturalHierachydown() {
+		if (this.rank != Rank.OMEGA) {
+			if(this.rank.getValue() < 3) {
+				this.rank.setValue(this.rank.getValue() - 1);
+				System.out.println(this.getName() + " descend dans la hiérarchie au rang de " + this.rank);
+			}
+		}
+	}
 
 }

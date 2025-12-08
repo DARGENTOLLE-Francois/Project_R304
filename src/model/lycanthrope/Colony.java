@@ -23,4 +23,8 @@ public class Colony {
 	public List<Pack> getPacks() {
         return packs;
     }
+
+    public void fastForwardTime(int years) {
+        // ToDo : avancer le temps dans la colinie pour faire vieillir les lycanthropes , à voir avec la simulation du controleur
+    }
 }
