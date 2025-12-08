@@ -36,11 +36,12 @@ public class Game {
 		General general1 = new General("François", "Jte dis pas", 0.55, 30, 5, 10, 10, 0,0,0, romanCity);
 		General general2 = new General("Enzo", "Obscur", 2.80, 20, 40, 10, 10, 0,0,0, romanCity);
 		GallicMerchant gallic1 = new GallicMerchant("Dinesh", "Indien", 0.25, 10,5,1,1,0,0,0, gallicVillage);
+		Gallic gallic2 = new GallicMerchant("Samuel", "Renoi", 0.40, 18,10,1,20,0,0,0, gallicVillage);
 		
 		battlefield.addPeople(gallic1);
 		battlefield.addPeople(general1);
 		battlefield.addPeople(general2);
-		
+		battlefield.addPeople(gallic2);
 		
 		// Add Places into array of Places
         ArrayList<Place> places = new ArrayList<>();

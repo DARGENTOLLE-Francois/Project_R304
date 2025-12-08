@@ -58,9 +58,13 @@ public class InvasionTheatreController {
         //}else if (!model.hasBattlefieldAtLeastTwoCharac()) {
         	//view.showMessage("Il doit y avoir au moins 2 caractères présents sur le champ de bataille");
         } else {
-            view.showMessage("Résolution des combats sur les champs de bataille...");
             ArrayList<String> combatResults = model.fightBelligerents();
-            view.showCombatResults(combatResults);
+            if (combatResults.size()==0) {
+            	view.showMessage("Aucun combat sur les champs de bataille");
+            }else {
+                view.showCombatResults(combatResults);
+            }
+
         }
 
     }

@@ -132,7 +132,7 @@ public class InvasionTheatreModel {
             romanFighter.getStrength()*romanFighter.getStamina()+" points de dégats. PV restants : "+gallicFighter.getHealth() );
             
             // Renvoyer vers endroit d'origine
-            romanPeople.remove(romanFighter);
+            b.removePeople(romanFighter);
             if (!romanFighter.passAway()) {
                 romanFighter.setCurrentPlace(romanFighter.getPlaceOfOrigin());
                 combatMessages.add(romanFighter.getName() + " retourne à son lieu d'origine");
@@ -140,7 +140,7 @@ public class InvasionTheatreModel {
                 combatMessages.add(romanFighter.getName() + " est mort au combat !");
             }
             
-            gallicPeople.remove(gallicFighter);
+            b.removePeople(gallicFighter);
             if (!gallicFighter.passAway()) {
                 gallicFighter.setCurrentPlace(gallicFighter.getPlaceOfOrigin());
                 combatMessages.add(gallicFighter.getName() + " retourne à son lieu d'origine");
