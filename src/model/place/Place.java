@@ -14,12 +14,12 @@ public abstract class Place {
     private ArrayList<Food> food;
     private Boolean belongsTo; // Ideally 0 for Gallic, 1 for Roman and null for neutral.
 
-    public Place(String name, double surface, Integer numberOfPeople, ArrayList<Character> people,
+    public Place(String name, double surface, ArrayList<Character> people,
                  ArrayList<Food> food) {
         this.name = name;
         this.surface = surface;
-        this.people = people != null ? people : new ArrayList<>();
-        this.food = food != null ? food : new ArrayList<>();
+        this.people = people;
+        this.food = food;
     }
 
     public String getSpecifications() {
@@ -40,6 +40,7 @@ public abstract class Place {
 
     public void addPeople(Character charac) {
         people.add(charac);
+        charac.setCurrentPlace(this);
     }
 
     public void removePeople(Character charac) {
@@ -84,6 +85,12 @@ public abstract class Place {
     }
 
     public String getName() { return name; }
+    
+    
+    public int getNumberOfPeople() {
+        return people.size();
+    }
+    
     
     public Boolean getBelongsTo() { return belongsTo; }
     
