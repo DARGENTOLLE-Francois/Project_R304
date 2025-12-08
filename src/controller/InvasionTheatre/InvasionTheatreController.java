@@ -55,8 +55,6 @@ public class InvasionTheatreController {
 
         if (!model.isBattlefieldPresent()) {
         	view.showMessage("Il doit y avoir un champ de bataille dans le théatre d'envahissement");
-        //}else if (!model.hasBattlefieldAtLeastTwoCharac()) {
-        	//view.showMessage("Il doit y avoir au moins 2 caractères présents sur le champ de bataille");
         } else {
             ArrayList<String> combatResults = model.fightBelligerents();
             if (combatResults.size()==0) {

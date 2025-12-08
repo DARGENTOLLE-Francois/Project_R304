@@ -136,6 +136,7 @@ public class InvasionTheatreModel {
             if (!romanFighter.passAway()) {
                 romanFighter.setCurrentPlace(romanFighter.getPlaceOfOrigin());
                 combatMessages.add(romanFighter.getName() + " retourne à son lieu d'origine");
+                romanFighter.getPlaceOfOrigin().addPeople(romanFighter);
             } else {
                 combatMessages.add(romanFighter.getName() + " est mort au combat !");
             }
@@ -143,6 +144,7 @@ public class InvasionTheatreModel {
             b.removePeople(gallicFighter);
             if (!gallicFighter.passAway()) {
                 gallicFighter.setCurrentPlace(gallicFighter.getPlaceOfOrigin());
+                gallicFighter.getPlaceOfOrigin().addPeople(gallicFighter);
                 combatMessages.add(gallicFighter.getName() + " retourne à son lieu d'origine");
             } else {
                 combatMessages.add(gallicFighter.getName() + " est mort au combat !");
