@@ -111,34 +111,63 @@ public class InvasionTheatreModel {
         return !getBattlefields().isEmpty();
     }
     
+
+    public ArrayList<String> fightBelligerents() {
+        ArrayList<String> combatMessages = new ArrayList<>();
+        ArrayList<Battlefield> availableBattlefields = this.getAvailableBattlefields();
+        
+        for (Battlefield b : availableBattlefields) {
+            ArrayList<Character> gallicPeople = b.getGallic();
+            ArrayList<Character> romanPeople = b.getRoman();
+            
+            Character gallicFighter = gallicPeople.get(0);
+            Character romanFighter = romanPeople.get(0);
+            
+            gallicFighter.strike(romanFighter);
+            combatMessages.add(gallicFighter.getName() + " a frappé " + romanFighter.getName()+" de "+
+            gallicFighter.getStrength()*gallicFighter.getStamina()+" points de dégats. PV restants : "+romanFighter.getHealth() );
+            
+            romanFighter.strike(gallicFighter);
+            combatMessages.add(romanFighter.getName() + " a frappé " + gallicFighter.getName()+" de "+
+            romanFighter.getStrength()*romanFighter.getStamina()+" points de dégats. PV restants : "+gallicFighter.getHealth() );
+            
+            // Renvoyer vers endroit d'origine
+            romanPeople.remove(romanFighter);
+            if (!romanFighter.passAway()) {
+                romanFighter.setCurrentPlace(romanFighter.getPlaceOfOrigin());
+                combatMessages.add(romanFighter.getName() + " retourne à son lieu d'origine");
+            } else {
+                combatMessages.add(romanFighter.getName() + " est mort au combat !");
+            }
+            
+            gallicPeople.remove(gallicFighter);
+            if (!gallicFighter.passAway()) {
+                gallicFighter.setCurrentPlace(gallicFighter.getPlaceOfOrigin());
+                combatMessages.add(gallicFighter.getName() + " retourne à son lieu d'origine");
+            } else {
+                combatMessages.add(gallicFighter.getName() + " est mort au combat !");
+            }
+        }
+        
+        return combatMessages;
+    }
     
-    public void fightBelligerents() {
+    
+    public ArrayList<Battlefield> getAvailableBattlefields() {
+    	ArrayList<Battlefield> availableBattlefields = new ArrayList<>();
     	for (Battlefield b : getBattlefields()) {
     		if (b.canFight()) {
-    			ArrayList<Character> gallicPeople = b.getGallic();
-    			ArrayList<Character> romanPeople = b.getRoman();
-    			
-    			//Ajouter vérif effet de bord listes romanPeople et gallicPeople
-    			Character gallicFighter = gallicPeople.get(0);
-    			Character romanFighter = romanPeople.get(0);
-    			
-    			gallicFighter.strike(romanFighter);
-    			romanFighter.strike(gallicFighter);
-    			
-    			//Renvoyer vers endroit d'origine
-    			romanPeople.remove(romanFighter);
-    			if (!romanFighter.passAway()) {
-    				romanFighter.setCurrentPlace(romanFighter.getPlaceOfOrigin());
-    			}
-    			
-    			gallicPeople.remove(gallicFighter);
-    			if (!gallicFighter.passAway()) {
-    				gallicPeople.remove(gallicFighter);
-    				gallicFighter.setCurrentPlace(gallicFighter.getPlaceOfOrigin());	
-    			}
+    			availableBattlefields.add(b);
     		}
     	}
+    	return availableBattlefields;
     }
+    
+    
+    
+    
+    
+    
 
 	public void alterCharacRandomly() {
 		//Modify hunger by the value of randint

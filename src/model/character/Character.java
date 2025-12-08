@@ -146,12 +146,8 @@ abstract public class Character {
 	}
 	
 	public void strike(Character c1) {
-		// pass -> if (this.isPetrified) return 0; // statue donc cheh 
-		
-			System.out.println("Force : " + this.strength );
-			System.out.println("Stamina :"+this.stamina);
+		if (!this.isPetrified) 
 			c1.setHealth(c1.health-this.strength*this.stamina);
-			System.out.println("Vie :"+c1.getHealth());
 	}
 	
 	public void heal() {
