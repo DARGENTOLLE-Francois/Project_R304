@@ -15,12 +15,13 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	private Rank rank;
 	private boolean human;
 	private CategoryAge cage;
+	private boolean isMale;
 	//private Pack pack
 	
 	public FantasticCreaturesLycanthropes(String name, Sex sexe, double height, CategoryAge age, Integer strength,
 			Integer stamina, Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion,
 			Integer domination_factor, double level, String domination_rank, Integer impentuosity_factor,
-			boolean sickness, Rank rank, boolean human) {
+			boolean sickness, Rank rank, boolean human, boolean isMale) {
 		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion);
 		this.domination_factor = domination_factor;
 		this.level = level;
@@ -29,6 +30,7 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 		this.sickness = sickness;
 		this.rank = rank;
 		this.human = human;
+		this.isMale = isMale;
 	}
 
 	public CategoryAge getCage() {
@@ -50,7 +52,7 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	public double getLevel() {
 		return level;
 	}
-
+	
 	public void setLevel(double level) {
 		this.level = level;
 	}
@@ -103,6 +105,18 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 		//separateFromPack();
 		this.human = true;
 	}
+	
+	public void attemptDomination(FantasticCreaturesLycanthropes target) {
+		
+	}
+	public void howl(String message) {
+		
+	}
+	@Override
+    public String toString() {
+        return getName() + " [" + rank + "] (Lvl: " + getLevel() + ")";
+    }
+	
 	
 
 }
