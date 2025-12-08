@@ -51,9 +51,11 @@ public class Game {
 		
 		// Definition of Chiefs
 		ClanChiefModel c1 = new ClanChiefModel("César", "Homme", 19, romanCity);
+		ClanChiefModel c2 = new ClanChiefModel("Versingetorix", "Homme", 25, gallicVillage);
 		
 		ArrayList<ClanChiefModel> lc1 = new ArrayList<>();
         lc1.add(c1);
+        lc1.add(c2);
         
        
         model = new InvasionTheatreModel("Simulation 50av JC", 10,places, lc1);

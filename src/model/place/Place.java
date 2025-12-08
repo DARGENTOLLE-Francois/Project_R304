@@ -45,7 +45,6 @@ public abstract class Place {
 
     public void removePeople(Character charac) {
         people.remove(charac);
-        charac.setCurrentPlace(null);
     }
 
     public void healPeople() {
