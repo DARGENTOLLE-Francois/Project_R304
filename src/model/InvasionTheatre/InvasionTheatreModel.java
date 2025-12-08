@@ -124,11 +124,11 @@ public class InvasionTheatreModel {
             Character romanFighter = romanPeople.get(0);
             
             gallicFighter.strike(romanFighter);
-            combatMessages.add(gallicFighter.getName() + " a frappé " + romanFighter.getName()+" de "+
+            combatMessages.add(gallicFighter.getName()+ " du camps des Gaulois a frappé " + romanFighter.getName()+" du camp des Romains de "+
             gallicFighter.getStrength()*gallicFighter.getStamina()+" points de dégats. PV restants : "+romanFighter.getHealth() );
             
             romanFighter.strike(gallicFighter);
-            combatMessages.add(romanFighter.getName() + " a frappé " + gallicFighter.getName()+" de "+
+            combatMessages.add(romanFighter.getName() + " du camps des Romains a frappé " + gallicFighter.getName()+" du camps des Gaulois de "+
             romanFighter.getStrength()*romanFighter.getStamina()+" points de dégats. PV restants : "+gallicFighter.getHealth() );
             
             // Renvoyer vers endroit d'origine
