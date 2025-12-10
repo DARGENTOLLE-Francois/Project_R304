@@ -1,4 +1,5 @@
 package model.character;
+
 /**
  * Model of the Lycanthrope objects
  * 
@@ -222,6 +223,7 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 				System.out.println(this.getName() + " descend dans la hiérarchie au rang de " + this.rank);
 			}
 		}
+
 	}
 
 }

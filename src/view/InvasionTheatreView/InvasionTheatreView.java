@@ -2,8 +2,8 @@ package view.InvasionTheatreView;
 
 import java.util.ArrayList;
 
-public class InvasionTheatreView {
-
+public class InvasionTheatreView {	
+	
     public void showMessage(String message) {
         System.out.println(message);
     }
@@ -52,6 +52,16 @@ public class InvasionTheatreView {
             System.out.println(info);
         }
     }
+    
+    
+    public void showCombatResults(ArrayList<String> messages) {
+        System.out.println("\n═══ RÉSULTATS DES COMBATS ═══");
+        for (String message : messages) {
+            System.out.println(message);
+        }
+        System.out.println("═════════════════════════════\n");
+    }
+    
 
     /**
      * Affiche les événements automatiques d'un tour

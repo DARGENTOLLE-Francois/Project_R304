@@ -5,9 +5,10 @@ import model.character.Character;
 import model.place.Place;
 import model.food.Food;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ClanChief {
+public class ClanChiefModel {
 
     private String name;
     private String sex;
@@ -16,7 +17,7 @@ public class ClanChief {
     private Sex sexenum;
     private CategoryAge categoryAge;
 
-    public ClanChief(String name, String sex, Integer age, Place place) {
+    public ClanChiefModel(String name, String sex, Integer age, Place place) {
         this.name = name;
         this.sex = sex;
         this.age = age;
@@ -41,21 +42,22 @@ public class ClanChief {
     	
         switch(type) {
             case 1:
-                return new Druid(name, sex, height, age, 10,40,30,0,0,0);
+                return new Druid(name, sex, height, age, 10,40,30,0,0,0, this.place);
             case 2:
-				return new Blacksmith(name, sex, height, age, 10,40,60,0,0,0);            
+				return new Blacksmith(name, sex, height, age, 10,40,60,0,0,0, this.place);          
 			case 3:
-                return new Innkeeper(name, sex, height, age, 10,40,20,0,0,0);
+                return new Innkeeper(name, sex, height, age, 10,40,20,0,0,0, this.place);   
             case 4:
-                return new GallicMerchant(name, sex, height, age, 15,20,25,0,0,0);
+                return new GallicMerchant(name, sex, height, age, 15,20,25,0,0,0, this.place);  
             case 5:
-                return new Legionnaire(name, sex, height, age, 20,30,25,0,0,0);
+                return new Legionnaire(name, sex, height, age, 20,30,25,0,0,0, this.place);    
             case 6:
-                return new Prefect(name, sex, height, age, 22,12,35,0,0,0);
+                return new Prefect(name, sex, height, age, 22,12,35,0,0,0, this.place);  
             case 7:
-                return new General(name, sex, height, age, 26,18,30,0,0,0);
+                return new General(name, sex, height, age, 26,18,30,0,0,0, this.place);    
             case 8:
                 return new FantasticCreaturesLycanthropes(name,sexenum,height,categoryAge,34,50,40,0,0,0);
+
             default:
                 return null;
         }
@@ -82,6 +84,61 @@ public class ClanChief {
         }
 
         return fed + " characters have eaten.";
+    }
+    
+    public void askMagicPotion() {
+    	//TODO
+    }
+    
+    public void drinkMagicPotion() {
+    	//TODO
+    }
+    
+    public boolean checkValidIndex(int index) {
+    	if (index>place.getPeople().size()) {
+    		return false;
+    	}
+		return true;
+    }
+    
+    
+    public Character chooseCharac(int index) {
+    	--index;
+    	int i=0;
+    	for (Character c : place.getPeople()) {
+    		if (i==index) {
+    			return c; 
+    		}
+    		++i;
+    	}
+    	// à changer avec exception ?
+		return null;
+    }
+    
+    public Place chooseDestination(ArrayList<Place> destinations, int index) {
+    	--index;
+    	int i=0;
+    	for (Place p : destinations) {
+    		if (i==index) {
+    			return p; 
+    		}
+    		++i;
+    	}
+    	// à changer avec exception ?
+		return null;
+    }
+    
+    
+    public boolean moveCharac(Character chosenCharacter, Place destination) {
+
+    	if (!place.getPeople().contains(chosenCharacter)) {
+            return false;
+        }
+        
+        place.removePeople(chosenCharacter);
+        destination.addPeople(chosenCharacter);
+        chosenCharacter.setCurrentPlace(destination);
+		return true;
     }
 
 }
