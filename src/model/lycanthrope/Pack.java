@@ -1,6 +1,7 @@
 package model.lycanthrope;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.character.*;
@@ -9,8 +10,6 @@ public class Pack {
 	private List<FantasticCreaturesLycanthropes> members;
 	private FantasticCreaturesLycanthropes alphaMale;
 	private FantasticCreaturesLycanthropes alphaFemale;
-	private Rank firstRank = members.get(0).getRank();
-	private Rank lastRank = members.get(members.size()-1).getRank();
 
 	
 	public Pack() {
@@ -27,7 +26,15 @@ public class Pack {
 		recalculateHierarchy();
 	}
 	public void recalculateHierarchy() {
-		// TODO : 
+		for (FantasticCreaturesLycanthropes member : members) {
+			if(member.getLevel() < alphaMale.getLevel() && !member.equals(alphaMale) && member.isMale()) {
+				setAlphaMale(member);
+			}
+			if(member.getLevel() < alphaFemale.getLevel() && !member.equals(alphaFemale) && !member.isMale()) {
+				setAlphaFemale(member);
+			}
+		}
+		
 	}
 	public void reproduce() {
 		if (alphaMale != null && alphaFemale != null) {
@@ -58,12 +65,30 @@ public class Pack {
 	}
 	
 	public List<FantasticCreaturesLycanthropes> getMembersSortedByRank(){
-		//TODO
-		return getMembers();
+		// a tester
+		List<FantasticCreaturesLycanthropes> result = new ArrayList<>();
+		result.addAll(getMembers());
+		result.sort(Comparator.comparingInt((FantasticCreaturesLycanthropes e) -> e.getRank().getValue()).reversed());		
+		return result;
 	}
 	
 	public List<FantasticCreaturesLycanthropes> getMembers(){
 		return members;
+	}
+	
+	public void setAlphaMale(FantasticCreaturesLycanthropes male) {
+		this.alphaMale = male;
+	}
+	
+	public void setAlphaFemale(FantasticCreaturesLycanthropes female) {
+		this.alphaFemale = female;
+	}
+	
+	public FantasticCreaturesLycanthropes getAlphaMale() {
+		return this.alphaMale;
+	}
+	public FantasticCreaturesLycanthropes getAlphaFemale() {
+		return this.alphaFemale;
 	}
 	
 	

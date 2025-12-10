@@ -175,6 +175,9 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	public void setHuman(boolean human) {
 		this.human = human;
 	}
+	public boolean isMale() {
+		return this.isMale;
+	}
 	
 	/**
 	 * Method that calculate the level of the lycanthrope
