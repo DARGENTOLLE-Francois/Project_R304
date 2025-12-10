@@ -4,9 +4,11 @@ import model.character.*;
 import model.character.Character;
 import model.place.Place;
 import model.food.Food;
+import model.magicPotion.MagicPotion;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ClanChiefModel {
 
@@ -83,12 +85,46 @@ public class ClanChiefModel {
         return fed + " characters have eaten.";
     }
     
-    public void askMagicPotion() {
-    	//TODO
+    public Druid getDruid() {
+    	for (Character c: place.getPeople()) {
+    		if (c instanceof Druid) {
+    			return (Druid)c;
+    		}
+    	}
+    	return null;
     }
     
-    public void drinkMagicPotion() {
-    	//TODO
+
+    public MagicPotion getDruidPotion() {
+        if (hasDruidInPlace()) {
+            return this.getDruid().getMagicPotion();
+        }
+        return null;
+    }
+    
+    public MagicPotion askMagicPotion() {
+    	if (!this.hasDruidInPlace()) return null;
+    	Druid druid = (Druid) this.getDruid();
+        List<Food> ingredients = druid.prepareIngredients(); 
+        MagicPotion newPotion = druid.MakePotion(ingredients);
+        
+        druid.setMagicPotion(newPotion);
+        return newPotion;
+    	
+    }
+    
+    
+    public boolean hasDruidInPlace() {
+    	if (this.getDruid()!=null) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public List<String>  drinkMagicPotion(MagicPotion potion, Character charac) {
+    	List<String> messages = charac.drinkMagicPotion(potion);
+    	
+    	return messages;
     }
     
     public boolean checkValidIndex(int index) {

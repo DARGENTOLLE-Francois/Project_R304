@@ -3,6 +3,7 @@ package view.player;
 import view.character.CharacterView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import model.character.Character;
@@ -56,7 +57,12 @@ public class ClanChiefView {
         this.showMessage("================================\n");
     }
     
-    
+
+    public void showListString(List<String> results) {
+        for (String i : results) {
+            System.out.println("➤ " + i);
+        }
+    }
 
     
 

@@ -69,7 +69,7 @@ public class InvasionTheatreController {
 
 
     private void executeClanChiefTurn(ClanChiefModel chief, int turnNumber) {
-    	view.clearScreen();
+    	//view.clearScreen();
     	
         // Affichage du tour
         view.showTurnEvents(turnNumber, chief.getName());
@@ -108,13 +108,12 @@ public class InvasionTheatreController {
                     break;
                 case 5:
                     view.showMessage("\n➤ Demande de potion magique à un druide");
-                    // TODO: À implémenter avec le système de potion
-                    view.showMessage("Fonctionnalité à implémenter");
+                    chiefController.askMagicPotion();
                     break;
                 case 6:
                     view.showMessage("\n➤ Faire boire de la potion magique");
-                    // TODO: À implémenter
-                    view.showMessage("Fonctionnalité à implémenter");
+                    chiefController.drinkMagicPotion();
+                    
                     break;
                 case 7:
                     view.showMessage("\n➤ Transférer un personnage");

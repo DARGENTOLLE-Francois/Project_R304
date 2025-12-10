@@ -176,6 +176,7 @@ abstract public class Character {
 	            ++levelOfPotion;
 	            dosesConsumed++;
 	            
+	            
 	            if (potion.isNourishing()) hunger = Math.max(0, hunger - 20);
 	            if (potion.givesSuperSpeed()) hasSuperSpeed = true;
 	            if (potion.causesLycanthropy()) isLycanthrope = true;
