@@ -39,7 +39,7 @@ public class lycanthropeController {
         
         pack1.addMember(new FantasticCreaturesLycanthropes("WOUF1", Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Alpha", 40, false, Rank.ALPHA, false, true));// Strong male
         pack1.addMember(new FantasticCreaturesLycanthropes("WOUF2", Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Alpha", 40, false, Rank.ALPHA, false, false));  // Strong female
-        pack1.addMember(new FantasticCreaturesLycanthropes("CHOSE", Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Beta", 40, false, Rank.BETA, false, true));   // Weaker
+        pack1.addMember(new FantasticCreaturesLycanthropes("CHOSE", Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Beta", 40, false, Rank.OMEGA, false, true));   // Weaker
         colony.addPack(pack1);
         
         
@@ -56,16 +56,15 @@ public class lycanthropeController {
      * @return void
      */
     public void startSimulation(int turns) {
-    	initializeDemoData();
+
         for (int i = 0; i < turns; i++) {
             System.out.println("\n[Turn " + i + "]");
-
-            if (i % 10 == 0) isSeasonLove = !isSeasonLove;
 
             for (Pack p : colony.getPacks()) {
                 p.recalculateHierarchy();
 
-                if (isSeasonLove) {
+                if (i != 0 && i % 3 == 0) { 
+                    System.out.println("--- C'est la saison des amours ! ---");
                     p.reproduce();
                 }
 

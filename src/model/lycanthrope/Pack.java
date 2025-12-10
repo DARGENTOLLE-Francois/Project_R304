@@ -73,7 +73,7 @@ public class Pack {
 	public void reproduce() {
 		if (alphaMale != null && alphaFemale != null) {
 			int litterSize = 1 + (int)(Math.random()*7);
-			System.out.println("Ils se reproduisent avec une porté de" + litterSize);
+			//System.out.println("Ils se reproduisent avec une porté de" + litterSize);
 			Integer countBeta = 0;
 			// Check if there is already a Beta in the pack
 			for (FantasticCreaturesLycanthropes member : members) {
@@ -84,13 +84,13 @@ public class Pack {
 			if(countBeta == 0){
 				for (int i = 0; i < litterSize; i++) {
 				//valeur au pif a adapter
-				FantasticCreaturesLycanthropes child = new FantasticCreaturesLycanthropes("child" + 1, Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Beta", 40, false, Rank.BETA, false, true);
+				FantasticCreaturesLycanthropes child = new FantasticCreaturesLycanthropes("child" + i, Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Beta", 40, false, Rank.BETA, false, true);
 				addMember(child);
 			    }
 			} else {
 				for (int i = 0; i < litterSize; i++) {
 				//valeur au pif a adapter
-				FantasticCreaturesLycanthropes child = new FantasticCreaturesLycanthropes("child" + 1, Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Gamma", 40, false, Rank.GAMMA, false, true);
+				FantasticCreaturesLycanthropes child = new FantasticCreaturesLycanthropes("child" + i, Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Gamma", 40, false, Rank.GAMMA, false, true);
 				addMember(child);
 			    }
 			}
@@ -103,7 +103,6 @@ public class Pack {
 	 * @return result the list of lycanthrope sorted by rank
 	 */
 	public List<FantasticCreaturesLycanthropes> getMembersSortedByRank(){
-		// a tester
 		List<FantasticCreaturesLycanthropes> result = new ArrayList<>();
 		result.addAll(getMembers());
 		result.sort(Comparator.comparingInt((FantasticCreaturesLycanthropes e) -> e.getRank().getValue()).reversed());		
