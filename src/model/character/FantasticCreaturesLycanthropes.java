@@ -105,14 +105,16 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	}
 	
 	public void transformationHuman() {
-		//separateFromPack();
 		this.human = true;
+		
 	}
 	
 	public void attemptDomination(FantasticCreaturesLycanthropes target) {
+		//TODO
 		
 	}
 	public void howl(String message) {
+		System.out.println("Je suis le loup" + this.getName()+ "et je crie jsp pk");
 		
 	}
 	@Override

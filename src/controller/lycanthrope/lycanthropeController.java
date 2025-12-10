@@ -41,6 +41,7 @@ public class lycanthropeController {
 
             for (Pack p : colony.getPacks()) {
                 p.recalculateHierarchy();
+                System.out.print("couple" + p.coupleAlphaString());
 
                 if (i != 0 && i % 3 == 0) { 
                     System.out.println("--- C'est la saison des amours ! ---");

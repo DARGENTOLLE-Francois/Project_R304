@@ -90,5 +90,8 @@ public class Pack {
 		return this.alphaFemale;
 	}
 	
+	public String coupleAlphaString() {
+		return alphaMale.toString() + alphaFemale.toString();
+	}
 	
 }
