@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.character.*;
+import java.util.Random;
 /**
  * Class of the pack of Lycanthrope objects
  * 
@@ -31,7 +32,7 @@ public class Pack {
 	 */
 	public void addMember (FantasticCreaturesLycanthropes wolf) {
 		members.add(wolf);
-		//wolf.setPack(this);
+		wolf.setPack(this);
 		recalculateHierarchy();
 	}
 	
@@ -42,7 +43,9 @@ public class Pack {
 	 */
 	public void removeMember (FantasticCreaturesLycanthropes wolf) {
 		members.remove(wolf);
-		//wolf.setPack(this);
+		wolf.setPack(null);
+		if (wolf == alphaMale) alphaMale = null;
+        if (wolf == alphaFemale) alphaFemale = null;
 		recalculateHierarchy();
 	}
 	
@@ -53,16 +56,42 @@ public class Pack {
 	 * @return void
 	 */
 	public void recalculateHierarchy() {
+		
+		FantasticCreaturesLycanthropes bestMale = null;
+        FantasticCreaturesLycanthropes bestFemale = null;
+        
+        // ON COMMENCE PAR LA PIERRE (le male, ref a gon tu connais)
+        
 		for (FantasticCreaturesLycanthropes member : members) {
-			if(member.getLevel() < alphaMale.getLevel() && !member.equals(alphaMale) && member.isMale()) {
-				setAlphaMale(member);
+			if(member.isMale()) {
+				if (bestMale == null || member.getLevel() > bestMale.getLevel()) { // je change ma logique, ca me parait plus simple
+					bestMale = member;
+				}
 			}
-			if(member.getLevel() < alphaFemale.getLevel() && !member.equals(alphaFemale) && !member.isMale()) {
-				setAlphaFemale(member);
+			else {
+				if (bestFemale == null || member.getLevel() > bestFemale.getLevel()) {
+                    bestFemale = member;
+                }
 			}
 		}
+		// après la boucle qui check qui est le best, on setup les potentiels nouveaux alpha çipjfeziç
 		
-	}
+        if (bestMale != null) {
+            if (this.alphaMale != null && this.alphaMale != bestMale) {
+                this.alphaMale.setRank(Rank.BETA); // bouh le gros nul a perdu sa place, cheh
+            }
+            this.alphaMale = bestMale;
+            this.alphaMale.setRank(Rank.ALPHA);
+        }
+
+        if (bestFemale != null) {
+            if (this.alphaFemale != null && this.alphaFemale != bestFemale) {
+                this.alphaFemale.setRank(Rank.BETA); // bouh la grosse nulle a perdu sa place, cheh
+            }
+            this.alphaFemale = bestFemale;
+            this.alphaFemale.setRank(Rank.ALPHA);
+        }
+    }
 	
 	/**
 	 * Method that will make baby out of the alpha couple
@@ -71,30 +100,35 @@ public class Pack {
      * @return void
 	 */
 	public void reproduce() {
-		if (alphaMale != null && alphaFemale != null) {
-			int litterSize = 1 + (int)(Math.random()*7);
-			//System.out.println("Ils se reproduisent avec une porté de" + litterSize);
-			Integer countBeta = 0;
-			// Check if there is already a Beta in the pack
-			for (FantasticCreaturesLycanthropes member : members) {
-				if (member.getRank() == Rank.BETA) {
-					countBeta++;
-				}
-			}
-			if(countBeta == 0){
-				for (int i = 0; i < litterSize; i++) {
-				//valeur au pif a adapter
-				FantasticCreaturesLycanthropes child = new FantasticCreaturesLycanthropes("child" + i, Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Beta", 40, false, Rank.BETA, false, true);
-				addMember(child);
-			    }
-			} else {
-				for (int i = 0; i < litterSize; i++) {
-				//valeur au pif a adapter
-				FantasticCreaturesLycanthropes child = new FantasticCreaturesLycanthropes("child" + i, Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Gamma", 40, false, Rank.GAMMA, false, true);
-				addMember(child);
-			    }
-			}
-			// a changer plus tard
+        if (alphaMale != null && alphaFemale != null) {
+            
+            Random rand = new Random();
+            int litterSize = 1 + rand.nextInt(7); // 1 à 7 petits
+            
+            System.out.println("Reproduction : " + litterSize + " pôti loup tout mignon et sanguinaire sont nés !");
+            
+            boolean hasBeta = members.stream().anyMatch(w -> w.getRank() == Rank.BETA); // j'ai mis 20 min a écrire cette ligne putain de merde
+            Rank childRank = hasBeta ? Rank.GAMMA : Rank.BETA;
+
+            for (int i = 0; i < litterSize; i++) {
+                boolean isMale = rand.nextBoolean();
+                Sex sex = isMale ? Sex.MALE : Sex.FEMALE;
+                
+                FantasticCreaturesLycanthropes child = new FantasticCreaturesLycanthropes("Child_" + System.currentTimeMillis() + "_" + i, 
+                		sex, 1.95, CategoryAge.YOUNG, 45, 100, 100, 0, 0, 0, 0, 40, false, childRank, isMale);
+                
+                members.add(child);
+                child.setPack(this);
+            }
+        } else 
+        {
+            System.out.println("Pas de couple Alpha complet, pas de reproduction.");
+        }
+    }
+	//faire doc ^^
+	public void decreaseRanksNaturally() {
+		for (FantasticCreaturesLycanthropes member : members) {
+			member.naturalHierachydown();
 		}
 	}
 	
