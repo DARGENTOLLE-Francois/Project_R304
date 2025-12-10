@@ -8,6 +8,15 @@ import java.util.Scanner;
 import model.character.Character;
 import model.place.Place;
 
+/**
+* The view class for the ClanChief object .
+* Is used to display the informations about the operator's interactions.
+* <p>
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public class ClanChiefView {
 	private CharacterView viewCharac = new CharacterView();
 

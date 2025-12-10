@@ -4,6 +4,16 @@ import java.util.List;
 
 import model.food.Food;
 
+
+/**
+* The model class for the MagicPotion object.
+* Contains the properties of the magic potion's game logic.
+* <p>
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public class MagicPotion {
 
     private int doses; // nbr de dose de potion dans une marmitte

@@ -8,6 +8,15 @@ import model.food.Food;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+* The model class for the ClanChiefModel object and game logic.
+* Contains all the properties used by the operator to interact with it's environement, as examinePlace() or healAllCharacters().
+* <p>
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public class ClanChiefModel {
 
     private String name;

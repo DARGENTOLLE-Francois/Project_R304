@@ -1,5 +1,15 @@
 package model.food;
 
+/**
+* The Food enumeration. Lists all the foods that exists.
+* Uses the category emun for the kind of food, the NutritionalValue for the nutritional value and the Freshnesslevel for the freshness level of the food.
+* Also has a some methods besides that, getters and setters.
+* <p>
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public enum Food {
 	// Name, Freshness Level, Category, Nutritional Value, is in magic potion
 	BOAR("Sanglier", FreshnessLevel.FRESH, Category.MEAT, NutritionalValue.GOOD),

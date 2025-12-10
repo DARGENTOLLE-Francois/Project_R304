@@ -6,6 +6,16 @@ import java.util.Iterator;
 import model.character.Character;
 import model.food.Food;
 
+/**
+* The abstract mother class of all the places, Place.
+* Contains the properties and methods relative to all the places.
+* Can also manage the people in it as it is a propertie of it.
+* <p>
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public abstract class Place {
 
     private String name;
