@@ -33,33 +33,87 @@ import model.place.Place;
 * - Die
 * - Strike another character
 * - Modify the properties above through getters, setters and methods like "heal()".
-* <p>
+* 
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
 * @author      William Edelstein 
 * @author      Nathan Griguer
 */
 abstract public class Character {
-
+	/**
+	* The name of the character
+	*/
 	private String name;
+	/**
+	* The gender of the character
+	*/
 	private String sexe;
+	/**
+	* The height of the character
+	*/
 	private double height;
+	/**
+	* The age of the character
+	*/
 	private Integer age;
+	/**
+	* The strength of the character
+	*/
 	private Integer strength;
+	/**
+	* The stamina of the character
+	*/
 	private Integer stamina;
+	/**
+	* The health of the character
+	*/
 	private Integer health;
+	/**
+	* The hunger of the character
+	*/
 	private Integer hunger;
+	/**
+	* The belligerence of the character
+	*/
 	private Integer belligerence;
+	/**
+	* The levelOfPotion of the character
+	*/
 	private Integer levelOfPotion;
+	/**
+	* The Invincibility of the character
+	*/
 	private boolean isInvincible = false;
+	/**
+	* The Petrification of the character
+	*/
 	private boolean isPetrified = false;
+	/**
+	* The Lycanthropy of the character
+	*/
 	private boolean isLycanthrope = false;
+	/**
+	* The super speed of the character
+	*/
 	private boolean hasSuperSpeed = false;
+	/**
+	* The amount of doses consumed of the character
+	*/
 	private int dosesConsumed = 0;
+	/**
+	* The place of origin of the character
+	*/
     private Place placeOfOrigin; 
+    /**
+	* The current place of the character
+	*/
     private Place currentPlace;  
 	
-
+    /**
+	* Returns the name of the character
+	* 
+	* @return the name of the character
+	*/
 	public String getName() {
 		return name;
 	}

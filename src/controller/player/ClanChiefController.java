@@ -18,29 +18,49 @@ import java.util.ArrayList;
 * - Make the characters eat
 * - Manage the characters position though the board.
 * As it is a controller it will only gather the user's input and send the informations to the model and the view to be used...
-* <p>
+* 
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
 * @author      William Edelstein 
 * @author      Nathan Griguer
 */
 public class ClanChiefController {
-	
+	/** 
+     * The clanChief to control.
+     */
     private ClanChiefModel clanChief;
+    /** 
+     * The clanChief view.
+     */
     private ClanChiefView view;
     
+    /** 
+     * Creates a InvasionTheatreController object. will make a relation with it's model and view.
+     *  
+     * @param model        The ClanChief to control.
+     * @param view         The view that will show the ClanChief info.
+     * @return             the newly created object
+     */
     public ClanChiefController(ClanChiefModel clanChief, ClanChiefView view) {
         this.clanChief = clanChief;
         this.view = view;
     }
 
-    // Examine place
+    /** 
+     * Asks the model for the place's informations and sends them to the view.
+     *
+     * @return             void
+     */
     public void examinePlace() {
     	String info = clanChief.getPlace().getSpecifications();
         view.showPlaceInfo(info);
     }
 
-    // Create character
+    /** 
+     * Prompts the operator for the new character's informations and if they're valid creates it through the model.
+     *
+     * @return             void
+     */
     public Character createCharacter() {
         view.showMessage("Entrer le nom du personnage: ");
         String name = Input.getStringInput();
@@ -72,19 +92,31 @@ public class ClanChiefController {
         return character;
     }
 
-    // Heal all characters
+    /** 
+     * Heals all the character through the model.
+     *
+     * @return             void
+     */
     public void healAllCharacters() {
         clanChief.healAllCharacters();
         view.showMessage("Tous les personnages sur le terrain ont été soignés!");
     }
 
-    // Characters eat
+    /** 
+     * Make all the characters eat.
+     *
+     * @return             void
+     */
     public void charactersEat() {
         String result = clanChief.getPlace().feedPeople();
         view.showMessage(result);
     }
     
-    
+    /** 
+     * Checks if the current place is empty
+     *
+     * @return             boolean is the place empty?
+     */
     public boolean isNotEmptyPlace() {
     	ArrayList<Character> people = clanChief.getPlace().getPeople();
     	if (people.size()!=0) {
@@ -93,9 +125,11 @@ public class ClanChiefController {
     	return false;
     }
     
-    
-   
-    
+    /** 
+     * Prompts the operator to choose a character and returns it.
+     *
+     * @return             Character the chosen one.
+     */
     public Character chooseCharac() {
     	view.showListCharacter(clanChief.getPlace().getPeople());
     	view.showMessage("Choisissez le numéro du personnage que vous voulez déplacer :");
@@ -109,7 +143,11 @@ public class ClanChiefController {
     	return chosenCharac;
     }
     
-    
+    /** 
+     * Prompts the operator to choose a destination and returns it.
+     *
+     * @return             Place the chosen one.
+     */
     public Place chooseDestination(ArrayList<Place> destinations) {
     	view.showDestinations(destinations);
     	view.showMessage("Choisissez le numéro du lieu dans lequel vous voulez déplacer votre personnage :");
@@ -122,6 +160,12 @@ public class ClanChiefController {
     	return chosenPlace;
     }
     
+    /** 
+     * Prompts the operator to choose a character to transfer and the destination.
+     * Will use the chooseCharac and ChooseDestination functions.
+     *
+     * @return             void
+     */
     public void moveCharac(ArrayList<Place> destinations) {
     	Character chosenCharac= this.chooseCharac();
     	Place chosenPlace = this.chooseDestination(destinations);

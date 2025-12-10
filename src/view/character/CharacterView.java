@@ -5,7 +5,7 @@ import model.character.Character;
 /**
 * The view class for the Character object .
 * Displays informations about the characters given in the constructor.
-* <p>
+*
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
 * @author      William Edelstein 

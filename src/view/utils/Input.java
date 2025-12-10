@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
 * The input class .
 * Is used to ease the prompt the operator.
-* <p>
+*
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
 * @author      William Edelstein 

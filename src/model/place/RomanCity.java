@@ -8,7 +8,7 @@ import model.food.Food;
 /**
 * The model class for the RomanCity object.
 * Contains the properties relative to the battlefield, which is not much as most of the places properties are in the mother class Place.
-* <p>
+*
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
 * @author      William Edelstein 

@@ -2,7 +2,7 @@ package model.food;
 
 /**
 * The NutritionalValue enumeration. Lists all the Nutritional Values of food that exists.
-* <p>
+*
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
 * @author      William Edelstein 

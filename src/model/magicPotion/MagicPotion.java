@@ -8,7 +8,7 @@ import model.food.Food;
 /**
 * The model class for the MagicPotion object.
 * Contains the properties of the magic potion's game logic.
-* <p>
+*
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
 * @author      William Edelstein 

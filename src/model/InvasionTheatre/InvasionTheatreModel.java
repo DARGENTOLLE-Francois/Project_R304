@@ -13,7 +13,7 @@ import model.player.ClanChiefModel;
 /**
 * The model class for the InvasionTheater object.
 * Contains the properties relative to the current game and methods related to it or to a group of object like fightBelligerents().
-* <p>
+*
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
 * @author      William Edelstein 

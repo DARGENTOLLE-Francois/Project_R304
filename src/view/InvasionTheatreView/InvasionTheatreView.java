@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
 * The view class for the InvasionTheatre object .
 * Will be created in game and only one instance of this class should exist.
-* <p>
+*
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
 * @author      William Edelstein 

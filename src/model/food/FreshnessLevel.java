@@ -2,7 +2,7 @@ package model.food;
 
 /**
 * The FreshnessLevel enumeration. Lists all the freshness Levels of food that exists.
-* <p>
+*
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
 * @author      William Edelstein 
