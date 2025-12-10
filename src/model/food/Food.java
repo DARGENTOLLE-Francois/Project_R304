@@ -30,9 +30,21 @@ public enum Food {
 	IDEFIX_HAIR("Poil d'Idéfix", FreshnessLevel.NONE, Category.INGREDIENT_OF_MAGIC_POTION, NutritionalValue.NONE),
 	SECRET_INGREDIENT("Ingrédient secret", FreshnessLevel.NONE, Category.INGREDIENT_OF_MAGIC_POTION, NutritionalValue.NONE);
 
+	/**
+	* The name of the food
+	*/
 	private String name;
+	/**
+	* The freshness level of the food
+	*/
 	private FreshnessLevel freshnessLevel;
+	/**
+	* The category of the food
+	*/
 	private Category category;
+	/**
+	* The nutritional value of the food
+	*/
 	private NutritionalValue nutritionalValue;
 
 	Food(String name, FreshnessLevel freshnessLevel, Category category, NutritionalValue nutritionalValue) {
@@ -42,22 +54,48 @@ public enum Food {
 		this.nutritionalValue = nutritionalValue;
 	}
 
+	/**
+	* Returns the name of the food
+	* 
+	* @return the name of the food
+	*/
 	public String getName() {
 		return name;
 	}
 
+	/**
+	* Returns the freshnessLevel of the food
+	* 
+	* @return the freshnessLevel of the food
+	*/
 	public FreshnessLevel getFreshnessLevel() {
 		return freshnessLevel;
 	}
 	
+	/**
+	* Sets the freshnessLevel of the character
+	* 
+	* @param freshnessLevel 
+	* @return void
+	*/
 	public void setFreshnessLevel(FreshnessLevel freshnessLevel) {
 		this.freshnessLevel= freshnessLevel;
 	}
 
+	/**
+	* Returns the category of the food
+	* 
+	* @return the category of the food
+	*/
 	public Category getCategory() {
 		return category;
 	}
 
+	/**
+	* Returns the NutritionalValue of the food
+	* 
+	* @return the NutritionalValue of the food
+	*/
 	public NutritionalValue getNutritionalValue() {
 		return nutritionalValue;
 	}

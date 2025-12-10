@@ -39,14 +39,25 @@ public class Druid extends Gallic implements Work, Rule, Fight, CookMagicPotion 
 		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion, placeOfOrigin);
 	}
 
-	private boolean haveingredient = true; // variable de test(a changer quand on aura les lieux)
+	/** 
+	 * Does the druid have enough ingredients to cook.
+	 * Say my name.
+     */
+	private boolean haveingredient = true; // test variable
 	
+	/** 
+	 * The druid will cook the potion, hopefully his name will be said...
+	 * Returns the potion to be stored in the place.
+	 * 
+	 * @param			   ingredientsAvailable The ingredients the druid has
+     * @return             MagicPotion the magic potion that was made.
+     */
 	public MagicPotion MakePotion(List<Food> ingredientsAvailable) {
 		if(haveingredient && ingredientsAvailable != null) {
 			
 			MagicPotion cauldron = new MagicPotion(ingredientsAvailable);
 			
-			// On retourne potion pour qu'il puisse être stocker dans le lieu
+			// The potion is return so it can be stored in the place.
 			return cauldron;
 			
 		} else {

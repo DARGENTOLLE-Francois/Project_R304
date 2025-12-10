@@ -24,6 +24,16 @@ public abstract class Place {
     private ArrayList<Food> food;
     private Boolean belongsTo; // Ideally 0 for Gallic, 1 for Roman and null for neutral.
 
+    /**
+	 * Creates a Place object.
+	 * 
+	 * @param name
+	 * @param surface
+	 * @param people
+	 * @param food
+	 * 
+	 * @return the newly created object
+	 */
     public Place(String name, double surface, ArrayList<Character> people,
                  ArrayList<Food> food) {
         this.name = name;

@@ -16,13 +16,28 @@ import model.food.Food;
 */
 public class Battlefield extends Place{
 	
+	/**
+	 * Creates a Battlefield object.
+	 * 
+	 * @param name
+	 * @param surface
+	 * @param people
+	 * @param food
+	 * 
+	 * @return the newly created object
+	 */
 	public Battlefield(String name, double surface, ArrayList<Character> people,
 			ArrayList<Food> food) {
 		super(name, surface, people, food);
 		
 	}
 	
-	
+	/**
+	 * Returns the possibility of a fight amongst the people of the battlefield.
+	 * Checks the presence of gallic and roman on the battlefield.
+	 * 
+	 * @return	boolean is there gallic and roman on the battlefield.
+	 */
 	public boolean canFight() {
 		if (this.getGallic().size()>0 && this.getRoman().size()>0) {
 			return true;
@@ -30,6 +45,11 @@ public class Battlefield extends Place{
 		return false;
 	}
     
+	/**
+	 * Returns the gallics on the battlefield
+	 * 
+	 * @return	ArrayList<Character> the gallics on the battlefield
+	 */
     public ArrayList<Character> getGallic() {
     	ArrayList<Character> gallicPeople = new ArrayList<>();
     	for (Character c: this.getPeople()) {
@@ -41,6 +61,11 @@ public class Battlefield extends Place{
 		return gallicPeople;
     }
     
+    /**
+	 * Returns the romans on the battlefield
+	 * 
+	 * @return	ArrayList<Character> the romans on the battlefield
+	 */
     public ArrayList<Character> getRoman() {
     	ArrayList<Character> romanPeople = new ArrayList<>();
     	for (Character c: this.getPeople()) {

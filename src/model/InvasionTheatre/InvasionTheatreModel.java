@@ -20,13 +20,38 @@ import model.player.ClanChiefModel;
 * @author      Nathan Griguer
 */
 public class InvasionTheatreModel {
+	/**
+	* The name of the invasion theatre.
+	*/
 	private String name;
+	/**
+	* The maxNumberOfPlaces of the invasion theatre.
+	*/
     private Integer maxNumberOfPlaces;
+    /**
+	* The places of the invasion theatre.
+	*/
 	private ArrayList<Place> places;
+	/**
+	* The chiefs of the invasion theatre.
+	*/
 	private ArrayList<ClanChiefModel> chiefs;
+	/**
+	* A random value to be initiated.
+	*/
 	private Random random;
 	
-	
+	/** 
+     * Creates an instance with the given parameters.
+     *
+     *
+     * @param name		    	The name of the invasion theatre
+     * @param maxNumberOfPlaces The maxNumberOfPlaces of the invasion theatre
+     * @param places	    	The places of the invasion theatre
+     * @param chiefs		    The chiefs of the invasion theatre
+     * 
+     * @return             The newly created object
+     */
 	public InvasionTheatreModel(String name,Integer maxNumberOfPlaces, ArrayList<Place> places, ArrayList<ClanChiefModel> chiefs) {
 		this.name = name;
 		this.maxNumberOfPlaces=maxNumberOfPlaces;
@@ -35,19 +60,38 @@ public class InvasionTheatreModel {
 		this.random= new Random();
 	}
 	
-	
+	/**
+	* Returns the name of the invasion theatre.
+	* 
+	* @return the name of the invasion theatre.
+	*/
     public String getName() {
         return name;
     }
-
+    
+    /**
+	* Returns the maxNumberOfPlaces of the invasion theatre.
+	* 
+	* @return the maxNumberOfPlaces of the invasion theatre.
+	*/
     public Integer getMaxNumberOfPlaces() {
         return maxNumberOfPlaces;
     }
 
+    /**
+	* Returns the places of the invasion theatre.
+	* 
+	* @return the places of the invasion theatre.
+	*/
     public ArrayList<Place> getPlaces() {
         return places;
     }
 
+    /**
+	* Returns the places names of the invasion theatre.
+	* 
+	* @return the places names of the invasion theatre.
+	*/
     public ArrayList<String> getPlaceNames() {
         ArrayList<String> names = new ArrayList<>();
         for (Place place : places) {
@@ -56,8 +100,11 @@ public class InvasionTheatreModel {
         return names;
     }
 
-    
-    
+    /**
+	* Returns the characters info of the invasion theatre.
+	* 
+	* @return the characters info of the invasion theatre.
+	*/
     public ArrayList<String> getAllCharactersInfo() {
         ArrayList<String> infos = new ArrayList<>();
         
@@ -81,21 +128,40 @@ public class InvasionTheatreModel {
         return infos;
     }
     
+    /**
+	* Returns the chiefs of the invasion theatre.
+	* 
+	* @return the chiefs of the invasion theatre.
+	*/
     public ArrayList<ClanChiefModel> getClanChiefs() {
         return chiefs;
     }
 
-    
+    /**
+	* Returns the number of clan chiefs of the invasion theatre.
+	* 
+	* @return the number of clan chiefs of the invasion theatre.
+	*/
     public Integer getNumberClanChiefs() {
     	return chiefs.size();
     }
 	
 	
-	// print all places in the theatre
+    /**
+	* Returns as a string all the places of the theatre.
+	* To be used in the view.
+	* 
+	* @return String the places within the theatre.
+	*/
 	public String displayPlaces () {
 		return this.places.toString();
 	}
 
+	/**
+	* Returns the total number of characters of the invasion theatre.
+	* 
+	* @return the total number of characters of the invasion theatre.
+	*/
     public int getTotalNumberOfCharacters() {
         int total = 0;
         for (Place place : places) {
@@ -104,7 +170,11 @@ public class InvasionTheatreModel {
         return total;
     }
 	
-    
+    /**
+	* Returns the battlefields of the invasion theatre.
+	* 
+	* @return the battlefields of the invasion theatre
+	*/
     private ArrayList<Battlefield> getBattlefields() {
         ArrayList<Battlefield> battlefields = new ArrayList<>();
         for (Place place : places) {
@@ -115,12 +185,22 @@ public class InvasionTheatreModel {
         return battlefields;
     }
 	
-    // Battlefield is valid if present in InvasionTheatre
+    /**
+	* Returns a boolean for the presence of a battlefield in the theatre.
+	* 
+	* @return boolean the presence of a battlefield in the theatre.
+	*/
     public boolean isBattlefieldPresent() {
         return !getBattlefields().isEmpty();
     }
     
-
+    /**
+	* Triggers a fight between all the belligerents.
+	* Will make the gallics and romans on the battlefield fight.
+	* The deads will go back to their origin place.
+	* 
+	* @return rrayList<String> the messages to be displayed about the fight.
+	*/
     public ArrayList<String> fightBelligerents() {
         ArrayList<String> combatMessages = new ArrayList<>();
         ArrayList<Battlefield> availableBattlefields = this.getAvailableBattlefields();
@@ -140,7 +220,7 @@ public class InvasionTheatreModel {
             combatMessages.add(romanFighter.getName() + " du camps des Romains a frappé " + gallicFighter.getName()+" du camps des Gaulois de "+
             romanFighter.getStrength()*romanFighter.getStamina()+" points de dégats. PV restants : "+gallicFighter.getHealth() );
             
-            // Renvoyer vers endroit d'origine
+            // Return to the original place
             b.removePeople(romanFighter);
             if (!romanFighter.passAway()) {
                 combatMessages.add(romanFighter.getName() + " retourne à son lieu d'origine");
@@ -163,7 +243,11 @@ public class InvasionTheatreModel {
         return combatMessages;
     }
     
-    
+    /**
+	* Returns, for all the battlefields in the theatre, all the available ones.
+	* 
+	* @return ArrayList<Battlefield> the available battlefield.
+	*/
     public ArrayList<Battlefield> getAvailableBattlefields() {
     	ArrayList<Battlefield> availableBattlefields = new ArrayList<>();
     	for (Battlefield b : getBattlefields()) {
@@ -174,12 +258,11 @@ public class InvasionTheatreModel {
     	return availableBattlefields;
     }
     
-    
-    
-    
-    
-    
-
+    /**
+	* Alters the characters hunger and potion level randomly.
+	* 
+	* @return void
+	*/
 	public void alterCharacRandomly() {
 		//Modify hunger by the value of randint
         for (Place place : places) {
@@ -195,8 +278,11 @@ public class InvasionTheatreModel {
         }
 	}
 	
-	
-	// Add boar and fairly fresh fish to all places except battlefield
+	/**
+	* Add boar and fairly fresh fish to all places except battlefield.
+	* 
+	* @return void
+	*/
     public void spawnFood() {
         for (Place place : places) {
             // Ne pas spawner sur les champs de bataille
@@ -207,7 +293,11 @@ public class InvasionTheatreModel {
         }
     }
 	
-	
+    /**
+	* decreases the freshness level of the food in the places.
+	* 
+	* @return void
+	*/
     public void decreaseFoodFreshness() {
         for (Place place : places) {
             for (Food food : place.getFood()) {
@@ -228,12 +318,21 @@ public class InvasionTheatreModel {
         }
     }
     
-
-
+    /**
+	* Returns the possibility of adding a place to the theatre.
+	* The method is based on the maxNumberOfPlaces property.
+	* 
+	* @return boolean is there available space in the theatre
+	*/
     public boolean canAddPlace() {
         return places.size() < maxNumberOfPlaces;
     }
 
+    /**
+	* Returns the possibility of adding a place to the theatre and adds it to the places array
+	* 
+	* @return boolean is there available space in the theatre
+	*/
     public boolean addPlace(Place place) {
         if (canAddPlace()) {
             places.add(place);
@@ -242,13 +341,20 @@ public class InvasionTheatreModel {
         return false;
     }
 
-    
-
+    /**
+	* Returns the currentChiefIndex of the invasion theatre.
+	* 
+	* @return ClanChiefModel the currentChiefIndex of the invasion theatre.
+	*/
 	public ClanChiefModel getClanChief(int currentChiefIndex) {
 		return this.chiefs.get(currentChiefIndex);
 	}
 
-
+	/**
+	* Returns a list of all the transfer destination in the invasion theatre.
+	* 
+	* @return ArrayList<Place> list of all the transfer destination in the invasion theatre.
+	*/
 	public ArrayList<Place> getTransferDestinations() {
 	    ArrayList<Place> destinations = new ArrayList<>();
 	    for (Place place : places) {

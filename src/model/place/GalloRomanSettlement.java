@@ -16,6 +16,16 @@ import model.food.Food;
 */
 public class GalloRomanSettlement extends Place{
 
+	/**
+	 * Creates a GalloRomanSettlement object.
+	 * 
+	 * @param name
+	 * @param surface
+	 * @param people
+	 * @param food
+	 * 
+	 * @return the newly created object
+	 */
 	public GalloRomanSettlement(String name, double surface, ArrayList<Character> people,
 			ArrayList<Food> food) {
 		super(name, surface,  people, food);
