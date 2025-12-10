@@ -8,17 +8,17 @@ import model.food.Food;
 import model.food.FreshnessLevel;
 import model.place.Battlefield;
 import model.place.Place;
-import model.player.ClanChief;
+import model.player.ClanChiefModel;
 
 public class InvasionTheatreModel {
 	private String name;
     private Integer maxNumberOfPlaces;
 	private ArrayList<Place> places;
-	private ArrayList<ClanChief> chiefs;
+	private ArrayList<ClanChiefModel> chiefs;
 	private Random random;
 	
 	
-	public InvasionTheatreModel(String name,Integer maxNumberOfPlaces, ArrayList<Place> places, ArrayList<ClanChief> chiefs) {
+	public InvasionTheatreModel(String name,Integer maxNumberOfPlaces, ArrayList<Place> places, ArrayList<ClanChiefModel> chiefs) {
 		this.name = name;
 		this.maxNumberOfPlaces=maxNumberOfPlaces;
 		this.places = places;
@@ -72,7 +72,7 @@ public class InvasionTheatreModel {
         return infos;
     }
     
-    public ArrayList<ClanChief> getClanChiefs() {
+    public ArrayList<ClanChiefModel> getClanChiefs() {
         return chiefs;
     }
 
@@ -95,13 +95,81 @@ public class InvasionTheatreModel {
         return total;
     }
 	
-	
     
-    public void fightBelligerents() {
+    private ArrayList<Battlefield> getBattlefields() {
+        ArrayList<Battlefield> battlefields = new ArrayList<>();
         for (Place place : places) {
-        	//TODO
+            if (place instanceof Battlefield) {
+                battlefields.add((Battlefield) place);
+            }
         }
+        return battlefields;
     }
+	
+    // Battlefield is valid if present in InvasionTheatre
+    public boolean isBattlefieldPresent() {
+        return !getBattlefields().isEmpty();
+    }
+    
+
+    public ArrayList<String> fightBelligerents() {
+        ArrayList<String> combatMessages = new ArrayList<>();
+        ArrayList<Battlefield> availableBattlefields = this.getAvailableBattlefields();
+        
+        for (Battlefield b : availableBattlefields) {
+            ArrayList<Character> gallicPeople = b.getGallic();
+            ArrayList<Character> romanPeople = b.getRoman();
+            
+            Character gallicFighter = gallicPeople.get(0);
+            Character romanFighter = romanPeople.get(0);
+            
+            gallicFighter.strike(romanFighter);
+            combatMessages.add(gallicFighter.getName()+ " du camps des Gaulois a frappé " + romanFighter.getName()+" du camp des Romains de "+
+            gallicFighter.getStrength()*gallicFighter.getStamina()+" points de dégats. PV restants : "+romanFighter.getHealth() );
+            
+            romanFighter.strike(gallicFighter);
+            combatMessages.add(romanFighter.getName() + " du camps des Romains a frappé " + gallicFighter.getName()+" du camps des Gaulois de "+
+            romanFighter.getStrength()*romanFighter.getStamina()+" points de dégats. PV restants : "+gallicFighter.getHealth() );
+            
+            // Renvoyer vers endroit d'origine
+            b.removePeople(romanFighter);
+            if (!romanFighter.passAway()) {
+                combatMessages.add(romanFighter.getName() + " retourne à son lieu d'origine");
+                romanFighter.getPlaceOfOrigin().addPeople(romanFighter);
+            } else {
+                combatMessages.add(romanFighter.getName() + " est mort au combat !");
+                romanFighter.setCurrentPlace(null);
+            }
+            
+            b.removePeople(gallicFighter);
+            if (!gallicFighter.passAway()) {
+                gallicFighter.getPlaceOfOrigin().addPeople(gallicFighter);
+                combatMessages.add(gallicFighter.getName() + " retourne à son lieu d'origine");
+            } else {
+                combatMessages.add(gallicFighter.getName() + " est mort au combat !");
+                gallicFighter.setCurrentPlace(null);
+            }
+        }
+        
+        return combatMessages;
+    }
+    
+    
+    public ArrayList<Battlefield> getAvailableBattlefields() {
+    	ArrayList<Battlefield> availableBattlefields = new ArrayList<>();
+    	for (Battlefield b : getBattlefields()) {
+    		if (b.canFight()) {
+    			availableBattlefields.add(b);
+    		}
+    	}
+    	return availableBattlefields;
+    }
+    
+    
+    
+    
+    
+    
 
 	public void alterCharacRandomly() {
 		//Modify hunger by the value of randint
@@ -150,6 +218,8 @@ public class InvasionTheatreModel {
             }
         }
     }
+    
+
 
     public boolean canAddPlace() {
         return places.size() < maxNumberOfPlaces;
@@ -165,8 +235,19 @@ public class InvasionTheatreModel {
 
     
 
-	public ClanChief getClanChief(int currentChiefIndex) {
+	public ClanChiefModel getClanChief(int currentChiefIndex) {
 		return this.chiefs.get(currentChiefIndex);
+	}
+
+
+	public ArrayList<Place> getTransferDestinations() {
+	    ArrayList<Place> destinations = new ArrayList<>();
+	    for (Place place : places) {
+	        if (place instanceof Battlefield || place.getClass().getSimpleName().equals("Enclos")) {
+	            destinations.add(place);
+	        }
+	    }
+	    return destinations;
 	}
 
 }
