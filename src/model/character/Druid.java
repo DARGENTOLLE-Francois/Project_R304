@@ -6,6 +6,14 @@ import model.place.Place;
 
 import java.util.List;
 
+/**
+* The Druid class, extends the Gallic class and implements the Work, Rule, Fight, CookMagicPotion interface.s.
+* <p>
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public class Druid extends Gallic implements Work, Rule, Fight, CookMagicPotion {
 
 	public Druid(String name, String sexe, double height, Integer age, Integer strength, Integer stamina,

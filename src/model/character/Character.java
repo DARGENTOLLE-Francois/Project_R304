@@ -8,6 +8,37 @@ import model.food.NutritionalValue;
 import model.magicPotion.MagicPotion;
 import model.place.Place;
 
+/**
+* The abstract model for the characters.
+* Every characters will extend this class at some degree.
+* It contains the basics properties for the characters in our game which is:
+* - Their name
+* - Their age
+* - Their gender
+* - Their height
+* - Their strength
+* - Their stamina
+* - Their hunger level
+* - Their belligerence
+* - Their level of magic potion
+* - Their current lace
+* - Their original place
+* - Their invincibility (boolean)
+* - Their petrification status (boolean)
+* - Their lycanthrope status (boolean)
+* - Their super speed status (boolean)
+* - Their amount of potion doses consumed
+* 
+* They also can:
+* - Die
+* - Strike another character
+* - Modify the properties above through getters, setters and methods like "heal()".
+* <p>
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 abstract public class Character {
 
 	private String name;

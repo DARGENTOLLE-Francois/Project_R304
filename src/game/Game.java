@@ -11,6 +11,16 @@ import java.util.ArrayList;
 
 import controller.InvasionTheatre.InvasionTheatreController;
 
+/**
+* The Game class.
+* This class is the starter component of the game, it will give a link between the three Invasion Theatre MVC elements.
+* From this class, the game can run.
+* <p>
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public class Game {
 
     private InvasionTheatreController controller;

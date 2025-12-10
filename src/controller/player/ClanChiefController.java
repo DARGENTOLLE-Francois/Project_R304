@@ -8,6 +8,22 @@ import view.utils.Input;
 
 import java.util.ArrayList;
 
+
+/**
+* The controller class for the ClanChief object.
+* It is used to manage the actions relative to the chiefClan (representation of the operator).
+* It can:
+* - Create a character
+* - Heal the characters
+* - Make the characters eat
+* - Manage the characters position though the board.
+* As it is a controller it will only gather the user's input and send the informations to the model and the view to be used...
+* <p>
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public class ClanChiefController {
 	
     private ClanChiefModel clanChief;

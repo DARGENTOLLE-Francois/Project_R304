@@ -11,9 +11,18 @@ import view.InvasionTheatreView.InvasionTheatreView;
 import java.util.ArrayList;
 
 /**
- * CONTROLLER - InvasionTheatre
- * Gère les interactions entre le modèle et la vue du théâtre
- */
+* The controller class for the InvasionTheater object.
+* It is used as the main board of the game and the controller will be sort of the main axis between the programm and the operator.
+* It can execute the main functions of the simulation as such as:
+* - Start the simulation
+* - Send the simulation state to the view to be shown
+* - Listen to the operator's inputs to make the simulation go on.
+* <p>
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public class InvasionTheatreController {
     private InvasionTheatreModel model;
     private InvasionTheatreView view;
@@ -164,7 +173,7 @@ public class InvasionTheatreController {
         }
     }
 
-    // ==================== MENU PRINCIPAL ====================
+    // ==================== Main Menu ====================
 
     /**
      * Gère le menu principal du théâtre

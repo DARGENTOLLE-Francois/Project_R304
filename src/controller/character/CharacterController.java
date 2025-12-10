@@ -8,6 +8,22 @@ import view.character.CharacterView;
 import java.util.List;
 import java.util.Scanner;
 
+
+/**
+* The controller class for the Character element.
+* Contains all the tool for the operator to use the character objects through the MVC architecture.
+* It can:
+* - Send character info to the view
+* - Send a signal to drink a potion to the model and display it's success
+* - Send a signal to eat food to the model and display it's success
+* - Send a signal to heal to the model and display it's success
+* - Send a signal to modify the hunger level to the model and display it's state
+* <p>
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public class CharacterController {
     private Character character;
     private CharacterView view;
