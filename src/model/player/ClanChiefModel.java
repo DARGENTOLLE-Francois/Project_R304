@@ -14,6 +14,8 @@ public class ClanChiefModel {
     private String sex;
     private Integer age;
     private Place place;
+    private Sex sexenum;
+    private CategoryAge categoryAge;
 
     public ClanChiefModel(String name, String sex, Integer age, Place place) {
         this.name = name;
@@ -54,7 +56,8 @@ public class ClanChiefModel {
             case 7:
                 return new General(name, sex, height, age, 26,18,30,0,0,0, this.place);    
             case 8:
-                return new FantasticCreaturesLycanthropes(name,sex,height,age,34,50,40,0,0,0, this.place);    
+                return new FantasticCreaturesLycanthropes(name,sexenum,height,categoryAge,34,50,40,0,0,0);
+
             default:
                 return null;
         }

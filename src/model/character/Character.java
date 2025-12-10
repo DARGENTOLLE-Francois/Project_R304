@@ -108,6 +108,18 @@ abstract public class Character {
 	public void setLevelOfPotion(Integer levelOfPotion) {
 		this.levelOfPotion = levelOfPotion;
 	}
+	public CategoryAge getCategoryAge() {
+		return categoryAge;
+	}
+	public void setCategoryAge(CategoryAge categoryAge) {
+		this.categoryAge = categoryAge;
+	}
+	public Sex getSexenum() {
+		return sexenum;
+	}
+	public void setSexenum(Sex sexenum) {
+		this.sexenum = sexenum;
+	}
 	public boolean isInvincible() { return isInvincible; }
 	public boolean isPetrified() { return isPetrified; }
 	public boolean isLycanthrope() { return isLycanthrope; }
@@ -119,9 +131,14 @@ abstract public class Character {
 		return placeOfOrigin;
 	}
 
+
+	private CategoryAge categoryAge;
+	private Sex sexenum;
+	
 	public Place getCurrentPlace() {
 		return currentPlace;
 	}
+
 	
 	
 	public void setCurrentPlace(Place currentPlace) {
@@ -143,6 +160,20 @@ abstract public class Character {
 		this.levelOfPotion = levelOfPotion;
 		this.placeOfOrigin = placeOfOrigin;
 		this.currentPlace = placeOfOrigin;
+	}
+
+	public Character(String name, Sex sexenum, double height, CategoryAge categoryAge, Integer strength, Integer stamina,
+			Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion) {
+		this.name = name;
+		this.sexenum = sexenum;
+		this.height = height;
+		this.categoryAge = categoryAge;
+		this.strength = strength;
+		this.stamina = stamina;
+		this.health = health;
+		this.hunger = hunger;
+		this.belligerence = belligerence;
+		this.levelOfPotion = levelOfPotion;
 	}
 	
 	public void strike(Character c1) {
