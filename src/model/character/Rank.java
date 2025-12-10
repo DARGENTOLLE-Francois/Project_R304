@@ -26,4 +26,25 @@ public enum Rank {
 	public void setValue(int value) {
 		this.value = value;
 	}
+
+	public Rank next() {
+    	int nextValue = this.value + 1;
+    	for (Rank r : Rank.values()) {
+        	if (r.value == nextValue) {
+            	return r;
+        	}
+    	}
+    	return this;
+	}
+
+	public Rank previous() {
+		int previousValue = this.value - 1;
+		for (Rank r : Rank.values()) {
+			if (r.value == previousValue) {
+				return r;
+			}
+		}
+		return this;
+	}
+
 }

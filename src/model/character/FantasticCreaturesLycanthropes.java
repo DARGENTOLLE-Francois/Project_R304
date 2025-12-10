@@ -25,6 +25,7 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	private boolean human;
 	private CategoryAge cage;
 	private boolean isMale;
+	private TypeHowling howl;
 	//private Pack pack
 	
 	public FantasticCreaturesLycanthropes(String name, Sex sexe, double height, CategoryAge age, Integer strength,
@@ -193,14 +194,39 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	 * @return void
 	 */
 	public void transformationHuman() {
-		//separateFromPack();
 		this.human = true;
-	}
-	
-	public void attemptDomination(FantasticCreaturesLycanthropes target) {
 		
 	}
+	
+	/**
+	 * Method that attempt to make a lycanthrope dominate another lycanthrope
+	 * @param target the lycanthrope to dominate
+	 * @return void
+	 */
+	public void attemptDomination(FantasticCreaturesLycanthropes target) {
+		if(this.howl == TypeHowling.DOMINATION && target.howl == TypeHowling.SUBMISSION) {
+			this.domination_factor += 1;
+			System.out.println(this.getName() + " a dominé " + target.getName());
+			if(this.rank.getValue() > target.rank.getValue()){
+				System.out.println(target.getName() + " ne gagne pas de rang");
+			}
+		}
+		if(this.howl == TypeHowling.DOMINATION && target.howl != TypeHowling.SUBMISSION) {
+			if(this.getDomination_factor() > target.getDomination_factor()) {
+				System.out.println(this.getName() + " a dominé " + target.getName());
+				this.domination_factor += 10;
+				this.rank = this.rank.next();
+				System.out.println(this.getName() + " monte dans la hiérarchie au rang de " + this.rank);
+			} else {
+				System.out.println(this.getName() + " a échoué à dominer " + target.getName());
+			}
+		}	
+	}
+
+	// Faire en sorte que les hurlements soit "entendu" par les autres lycanthropes dans un certain rayon
 	public void howl(String message) {
+		this.howl = TypeHowling.BELONGE_TO; //placeholder
+		System.out.println("Je suis le loup" + this.getName()+ "et je crie jsp pk");
 		
 	}
 	/**
@@ -219,7 +245,7 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	public void naturalHierachydown() {
 		if (this.rank != Rank.OMEGA) {
 			if(this.rank.getValue() < 3) {
-				this.rank.setValue(this.rank.getValue() - 1);
+				this.rank = this.rank.previous();
 				System.out.println(this.getName() + " descend dans la hiérarchie au rang de " + this.rank);
 			}
 		}

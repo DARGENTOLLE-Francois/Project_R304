@@ -1,6 +1,6 @@
 package model.character;
 
-public enum TypeHurlement {
+public enum TypeHowling {
 	BELONGE_TO,
 	DOMINATION,
 	SUBMISSION,
