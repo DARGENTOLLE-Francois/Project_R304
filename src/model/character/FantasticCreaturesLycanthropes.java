@@ -96,6 +96,9 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	public void setHuman(boolean human) {
 		this.human = human;
 	}
+	public boolean isMale() {
+		return this.isMale;
+	}
 	
 	public double CalculateLevel() {
 		return (rank.getValue()+ domination_factor * Impentuosity_factor) * cage.getValue(); 

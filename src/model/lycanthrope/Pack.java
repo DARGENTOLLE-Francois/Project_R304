@@ -29,17 +29,13 @@ public class Pack {
 	}
 	public void recalculateHierarchy() {
 		for (FantasticCreaturesLycanthropes member : members) {
-			if(member.getLevel() < alphaMale.getLevel() && !member.equals(alphaMale)) {
+			if(member.getLevel() < alphaMale.getLevel() && !member.equals(alphaMale) && member.isMale()) {
 				setAlphaMale(member);
 			}
-			if(member.getLevel() < alphaFemale.getLevel() && !member.equals(alphaFemale)) {
+			if(member.getLevel() < alphaFemale.getLevel() && !member.equals(alphaFemale) && !member.isMale()) {
 				setAlphaFemale(member);
 			}
 		}
-		
-		
-		
-		
 		
 	}
 	public void reproduce() {
