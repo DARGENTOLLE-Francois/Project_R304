@@ -182,13 +182,13 @@ abstract public class Character {
 	}
 	
 	public void heal() {
-		if (!this.isPetrified) { // statue donc cheh
+		if (!this.isPetrified) { 
 			++this.health;
 		}
 	}
 	
 	public void eat() {
-		if (!this.isPetrified) { // statue donc cheh
+		if (!this.isPetrified) { 
 			--this.hunger;
 		}
 	}
@@ -228,14 +228,14 @@ abstract public class Character {
 	}
 	
 	public boolean passAway() {
-		if (!this.isPetrified && this.health<0) { // statue donc cheh
+		if (!this.isPetrified && this.health<0) {
 			return true;
 		}
 		return false;
 	}
 
 	public void eat(Food food) {
-		if (this.isPetrified) return; // statue donc cheh
+		if (this.isPetrified) return; 
 		
 		if (food.getNutritionalValue()==NutritionalValue.GOOD) {
 			this.hunger=this.hunger-20;
