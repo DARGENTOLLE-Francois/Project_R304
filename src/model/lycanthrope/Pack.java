@@ -10,8 +10,6 @@ public class Pack {
 	private List<FantasticCreaturesLycanthropes> members;
 	private FantasticCreaturesLycanthropes alphaMale;
 	private FantasticCreaturesLycanthropes alphaFemale;
-	private Rank firstRank = members.get(0).getRank();
-	private Rank lastRank = members.get(members.size()-1).getRank();
 
 	
 	public Pack() {
