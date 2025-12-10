@@ -12,6 +12,12 @@ import model.character.Character;
 * @author      Nathan Griguer
 */
 public class CharacterView {
+	
+	/**
+	 * Prints all the informations about a character given in parameters
+	 * 
+	 * @param c Character the character to show.
+	 */
     public void showCharacter(Character c) {
         System.out.println("==== " + c.getName() + " - " + c.getClass().getSimpleName() + " ====");
         System.out.println("Name - " + c.getName());
@@ -53,6 +59,11 @@ public class CharacterView {
         System.out.println("======================================");
     }
 
+    /**
+	 * Prints the message given in parameter as a string
+	 * 
+	 * @param message String the message to display
+	 */
     public void showMessage(String message) {
         System.out.println(message);
     }

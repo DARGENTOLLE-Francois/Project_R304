@@ -14,13 +14,20 @@ import java.util.ArrayList;
 */
 public class InvasionTheatreView {	
 	
+	/**
+	 * Prints the message given in parameter as a string
+	 * 
+	 * @param message String the message to display
+	 */
     public void showMessage(String message) {
         System.out.println(message);
     }
 
     /**
-     * Affiche un titre de section
-     */
+	 * Shows a formated title.
+	 * 
+	 * @param title String the message to display
+	 */
     public void showSectionTitle(String title) {
         System.out.println("\n" + "=".repeat(60));
         System.out.println("  " + title);
@@ -28,7 +35,10 @@ public class InvasionTheatreView {
     }
 
     /**
-     * Affiche la liste des lieux
+     * Shows the theatre name and all th places amongst it a formated way.
+     * 
+     * @param theatreName String
+     * @param placeNames ArrayList<String>
      */
     public void showPlaces(String theatreName, ArrayList<String> placeNames) {
         showSectionTitle("LIEUX DU THÉÂTRE : " + theatreName);
@@ -44,7 +54,9 @@ public class InvasionTheatreView {
     }
 
     /**
-     * Affiche le nombre total de personnages
+     * Shows the total number of character a formated way
+     * 
+     * @param total int
      */
     public void showTotalCharacters(int total) {
         showSectionTitle("POPULATION DU THÉÂTRE");
@@ -53,7 +65,9 @@ public class InvasionTheatreView {
     }
 
     /**
-     * Affiche tous les personnages de tous les lieux
+     * Shows the characters info a formated way.
+     * 
+     * @param charactersInfo ArrayList<String>
      */
     public void showAllCharacters(ArrayList<String> charactersInfo) {
         showSectionTitle("TOUS LES PERSONNAGES DU THÉÂTRE");
@@ -63,7 +77,11 @@ public class InvasionTheatreView {
         }
     }
     
-    
+    /**
+     * At the end of a combat, uses this formating to display the result.
+     * 
+     * @param messages
+     */
     public void showCombatResults(ArrayList<String> messages) {
         System.out.println("\n═══ RÉSULTATS DES COMBATS ═══");
         for (String message : messages) {
@@ -74,7 +92,10 @@ public class InvasionTheatreView {
     
 
     /**
-     * Affiche les événements automatiques d'un tour
+     * Shows the turn event.
+     * 
+     * @param turnNumber int
+     * @param chiefName String
      */
     public void showTurnEvents(int turnNumber, String chiefName) {
         System.out.println("\n");
@@ -86,13 +107,18 @@ public class InvasionTheatreView {
     }
 
     
-    
+    /**
+     * Clears the terminal.
+     * 
+     */
     public void clearScreen() {  
         System.out.print("\033[H\033[2J");
     }  
     
-    
-
+    /**
+     * Shows the clan chief menu
+     * 
+     */
     public void showClanChiefMenu() {
         System.out.println("│ 1. Examiner son lieu");
         System.out.println("│ 2. Créer un nouveau personnage");
@@ -105,7 +131,10 @@ public class InvasionTheatreView {
         System.out.print("Votre choix : ");
     }
     
-    
+    /**
+     * Shows the main menu
+     * 
+     */
     public void showMainMenu() {
         System.out.println("\n" + "─".repeat(60));
         System.out.println("  MENU PRINCIPAL DU THÉÂTRE");
