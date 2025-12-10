@@ -246,7 +246,7 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	 * @return void
 	 */
 	public void naturalHierachydown() {
-		if (this.rank != Rank.OMEGA) {
+		if (this.rank != Rank.OMEGA && this.rank != Rank.ALPHA) {
 			if(this.domination_factor < 3) {
 				this.rank = this.rank.previous();
 				System.out.println(this.getName() + " descend dans la hiérarchie au rang de " + this.rank);
@@ -267,5 +267,12 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 
     public void setHowl(TypeHowling howl) {
         this.howl = howl;
+    }
+    public Sex getSex() {
+        if (this.isMale) {
+            return Sex.MALE;
+        } else {
+            return Sex.FEMALE;
+        }
     }
 }
