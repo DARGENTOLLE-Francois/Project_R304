@@ -109,8 +109,10 @@ public class InvasionTheatreController {
         view.showMessage("Gestion de la colonie de Lycanthropes...");
         for (Place place : model.getPlaces()) {
             if (place instanceof model.place.Enclosure) {
-
-                ((model.place.Enclosure) place).updateLycanthropes();
+                ArrayList<String>  messages = ((model.place.Enclosure) place).updateLycanthropes();
+                for (String message : messages) {
+                    view.showMessage(message);
+                }
             }
         }
 

@@ -96,13 +96,14 @@ public class Pack {
      * the rank of everyone in the pack</p>
      * @return void
 	 */
-	public void reproduce() {
+	public ArrayList<String> reproduce() {
+		ArrayList<String> messages = new ArrayList<>();
         if (alphaMale != null && alphaFemale != null) {
             
             Random rand = new Random();
             int litterSize = 1 + rand.nextInt(7);
             
-            System.out.println("Reproduction : " + litterSize + " pôti loup tout mignon et sanguinaire sont nés !");
+            messages.add("Reproduction : " + litterSize + " pôti loup tout mignon et sanguinaire sont nés !\n");
             
             boolean hasBeta = members.stream().anyMatch(w -> w.getRank() == Rank.BETA);
             Rank childRank = hasBeta ? Rank.GAMMA : Rank.BETA;
@@ -119,8 +120,9 @@ public class Pack {
             }
         } else 
         {
-            System.out.println("Pas de couple Alpha complet, pas de reproduction.");
+            messages.add("Pas de couple Alpha complet, pas de reproduction.\n");
         }
+		return messages;
     }
 
 	public void decreaseRanksNaturally() {

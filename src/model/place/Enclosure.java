@@ -39,8 +39,10 @@ public class Enclosure extends Place {
         }
     }
     
-    public void updateLycanthropes() {
-        colony.fastForwardTime(1);
+    public ArrayList<String> updateLycanthropes() {
+        ArrayList<String> messages = new ArrayList<>();
+        messages = colony.fastForwardTime(1);
+        return messages;
     }
     
     public Colony getColony() {
