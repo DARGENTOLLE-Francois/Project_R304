@@ -151,7 +151,7 @@ public class ClanChiefController {
     	view.showDestinations(destinations);
     	view.showMessage("Choisissez le numéro du lieu dans lequel vous voulez déplacer votre personnage :");
     	int choice = Input.getIntInput();
-    	while (choice <= 0 || choice > destinations.size()) {
+    	while (choice>destinations.size() || choice<0) {
     		 view.showMessage("Choix invalide. \nVeuillez réessayer :");
     		 choice = Input.getIntInput();
     	}
