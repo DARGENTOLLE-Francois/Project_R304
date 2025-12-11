@@ -10,7 +10,6 @@ module game {
     // --- CONTROLLER LAYER ---
     exports controller.character;
     exports controller.invasiontheatre;
-    exports controller.lycanthrope;
     exports controller.player;
 
     // --- MODEL LAYER ---
