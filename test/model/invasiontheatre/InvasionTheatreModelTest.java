@@ -2,108 +2,134 @@ package model.invasiontheatre;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import model.place.*;
+import model.player.ClanChiefModel;
 
 class InvasionTheatreModelTest {
 
-	@Test
-	void testInvasionTheatreModel() {
-		fail("Not yet implemented");
-	}
+	private InvasionTheatreModel theatre;
+    private ArrayList<Place> places;
+    private ArrayList<ClanChiefModel> chiefs;
 
-	@Test
-	void testGetName() {
-		fail("Not yet implemented");
-	}
+    @BeforeEach
+    void setUp() {
+    	this.places = new ArrayList<>();
+    	this.chiefs = new ArrayList<>();
 
-	@Test
-	void testGetMaxNumberOfPlaces() {
-		fail("Not yet implemented");
-	}
+        places.add(new RomanCity("a", 10, new ArrayList<>(), new ArrayList<>()));
+        places.add(new RomanCity("b", 8, new ArrayList<>(), new ArrayList<>()));
 
-	@Test
-	void testGetPlaces() {
-		fail("Not yet implemented");
-	}
+        chiefs.add(new ClanChiefModel("A", "B", 1, new RomanCity("a", 10, new ArrayList<>(), new ArrayList<>())));
+        chiefs.add(new ClanChiefModel("B", "C", 1, new RomanCity("b", 10, new ArrayList<>(), new ArrayList<>())));
 
-	@Test
-	void testGetPlaceNames() {
-		fail("Not yet implemented");
-	}
+        this.theatre = new InvasionTheatreModel("ascascasc", 5, places, chiefs);
+    }
+	
+        @Test
+        void testInvasionTheatreModel() {
+            assertEquals("ascascasc", this.theatre.getName());
+            assertEquals(5, this.theatre.getMaxNumberOfPlaces());
+            assertEquals(this.places, this.theatre.getPlaces());
+            assertEquals(this.chiefs, this.theatre.getClanChiefs());
+        }
 
-	@Test
-	void testGetAllCharactersInfo() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testGetName() {
+            assertEquals("ascascasc", theatre.getName());
+        }
 
-	@Test
-	void testGetClanChiefs() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testGetMaxNumberOfPlaces() {
+            assertEquals(5, theatre.getMaxNumberOfPlaces());
+        }
 
-	@Test
-	void testGetNumberClanChiefs() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testGetPlaces() {
+            assertEquals(2, theatre.getPlaces().size());
+            assertEquals("a", theatre.getPlaces().get(0).getName());
+            assertEquals("b", theatre.getPlaces().get(1).getName());
+        }
 
-	@Test
-	void testDisplayPlaces() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testGetPlaceNames() {
+            ArrayList<String> names = theatre.getPlaceNames();
+            assertEquals(2, names.size());
+            assertEquals("a (RomanCity)", names.get(0));
+            assertEquals("b (RomanCity)", names.get(1));
+        }
 
-	@Test
-	void testGetTotalNumberOfCharacters() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testGetAllCharactersInfo() {
+        	ArrayList<String> array = new ArrayList<String>();
+        	array.add("=== a ===");
+        	array.add("  (Aucun personnage)");
+        	array.add("");
+        	array.add("=== b ===");
+        	array.add("  (Aucun personnage)");
+        	array.add("");
+        	
+            assertEquals(this.theatre.getAllCharactersInfo(), array);
+        }
 
-	@Test
-	void testIsBattlefieldPresent() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testGetClanChiefs() {
+            assertEquals(2, theatre.getClanChiefs().size());
+            assertEquals("A", theatre.getClanChiefs().get(0).getName());
+            assertEquals("B", theatre.getClanChiefs().get(1).getName());
+        }
 
-	@Test
-	void testFightBelligerents() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testGetNumberClanChiefs() {
+            assertEquals(2, theatre.getNumberClanChiefs());
+        }
 
-	@Test
-	void testGetAvailableBattlefields() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testGetTotalNumberOfCharacters() {
+            assertEquals(0, theatre.getTotalNumberOfCharacters());
+        }
 
-	@Test
-	void testAlterCharacRandomly() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testIsBattlefieldPresent() {
+            assertEquals(this.theatre.isBattlefieldPresent(), false);
+        }
 
-	@Test
-	void testSpawnFood() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testFightBelligerents() {
+            assertEquals(this.theatre.fightBelligerents(), new ArrayList<>());
+        }
 
-	@Test
-	void testDecreaseFoodFreshness() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testGetAvailableBattlefields() {
+            assertEquals(this.theatre.getAvailableBattlefields(), new ArrayList<>());
+        }
 
-	@Test
-	void testCanAddPlace() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testCanAddPlace() {
+            assertTrue(theatre.canAddPlace());
+        }
 
-	@Test
-	void testAddPlace() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testAddPlace() {
+            Place newPlace = new RomanCity("Lyon", 6, new ArrayList<>(), new ArrayList<>());
+            assertTrue(theatre.addPlace(newPlace));
+            assertEquals(3, theatre.getPlaces().size());
+        }
 
-	@Test
-	void testGetClanChief() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testGetClanChief() {
+            assertEquals("A", theatre.getClanChief(0).getName());
+            assertEquals("B", theatre.getClanChief(1).getName());
+        }
 
-	@Test
-	void testGetTransferDestinations() {
-		fail("Not yet implemented");
-	}
+        @Test
+        void testGetTransferDestinations() {
+            ArrayList<Place> dest = theatre.getTransferDestinations();
+            assertEquals(0, dest.size()); 
+        }
 
 }

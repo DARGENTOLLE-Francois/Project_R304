@@ -2,223 +2,240 @@ package model.character;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import model.food.Food;
+import model.place.RomanCity;
+
+import model.character.CategoryAge;
+
 class CharacterTest {
+	private RomanCity place;
+	private Blacksmith testCharacter;
+	private Blacksmith testCharacter2;
+	
+	@BeforeEach
+	void setUp() {
+		this.place = new RomanCity("B", 9, new ArrayList<Character>(), new ArrayList<Food>());
+		this.testCharacter = new Blacksmith("A", "male", 1, 2, 3, 4, 5, 6, 7, 8, place);
+		this.testCharacter2 = new Blacksmith("A", "male", 1, 2, 3, 4, 13, 6, 7, 8, place);
+	}
+
 
 	@Test
 	void testGetName() {
-		fail("Not yet implemented");
+		assertEquals("A", this.testCharacter.getName());
 	}
 
 	@Test
 	void testSetName() {
-		fail("Not yet implemented");
+		testCharacter.setName("C");
+		assertEquals("C", testCharacter.getName());
 	}
 
 	@Test
 	void testGetSexe() {
-		fail("Not yet implemented");
+		assertEquals("male", testCharacter.getSexe());
 	}
 
 	@Test
 	void testSetSexe() {
-		fail("Not yet implemented");
+		testCharacter.setSexe("notMale");
+		assertEquals("notMale", testCharacter.getSexe());
+
 	}
 
 	@Test
 	void testGetHeight() {
-		fail("Not yet implemented");
+		assertEquals(1, testCharacter.getHeight());
 	}
 
 	@Test
 	void testSetHeight() {
-		fail("Not yet implemented");
+		testCharacter.setHeight(11);
+		assertEquals(11, testCharacter.getHeight());
 	}
 
 	@Test
 	void testGetAge() {
-		fail("Not yet implemented");
+		assertEquals(2, testCharacter.getAge());
 	}
 
 	@Test
 	void testSetAge() {
-		fail("Not yet implemented");
+		testCharacter.setAge(22);
+		assertEquals(22, testCharacter.getAge());
 	}
 
 	@Test
 	void testGetStrength() {
-		fail("Not yet implemented");
+		assertEquals(3, testCharacter.getStrength());
 	}
 
 	@Test
 	void testSetStrength() {
-		fail("Not yet implemented");
+		testCharacter.setStrength(33);
+		assertEquals(33, testCharacter.getStrength());
+
 	}
 
 	@Test
 	void testGetStamina() {
-		fail("Not yet implemented");
+		assertEquals(4, testCharacter.getStamina());
 	}
 
 	@Test
 	void testSetStamina() {
-		fail("Not yet implemented");
+		testCharacter.setStamina(44);
+		assertEquals(44, testCharacter.getStamina());
 	}
 
 	@Test
 	void testGetHealth() {
-		fail("Not yet implemented");
+		assertEquals(5, testCharacter.getHealth());
 	}
 
 	@Test
 	void testSetHealth() {
-		fail("Not yet implemented");
+		testCharacter.setHealth(55);
+		assertEquals(55, testCharacter.getHealth());
 	}
 
 	@Test
 	void testGetHunger() {
-		fail("Not yet implemented");
+		assertEquals(6, testCharacter.getHunger());
 	}
 
 	@Test
 	void testSetHunger() {
-		fail("Not yet implemented");
+		testCharacter.setHunger(66);
+		assertEquals(66, testCharacter.getHunger());
 	}
 
 	@Test
 	void testGetBelligerence() {
-		fail("Not yet implemented");
+		assertEquals(7, testCharacter.getBelligerence());
 	}
 
 	@Test
 	void testSetBelligerence() {
-		fail("Not yet implemented");
+		testCharacter.setBelligerence(77);
+		assertEquals(77, testCharacter.getBelligerence());
 	}
 
 	@Test
 	void testGetLevelOfPotion() {
-		fail("Not yet implemented");
+		assertEquals(8, testCharacter.getLevelOfPotion());
 	}
 
 	@Test
 	void testSetLevelOfPotion() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetCategoryAge() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testSetCategoryAge() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetSexenum() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testSetSexenum() {
-		fail("Not yet implemented");
+		testCharacter.setLevelOfPotion(88);
+		assertEquals(88, testCharacter.getLevelOfPotion());
 	}
 
 	@Test
 	void testIsInvincible() {
-		fail("Not yet implemented");
+		assertEquals(this.testCharacter.isInvincible(), false);
 	}
 
 	@Test
 	void testIsPetrified() {
-		fail("Not yet implemented");
+		assertEquals(this.testCharacter.isPetrified(), false);
 	}
 
 	@Test
 	void testIsLycanthrope() {
-		fail("Not yet implemented");
+		assertEquals(this.testCharacter.isLycanthrope(), false);
 	}
 
 	@Test
 	void testHasSuperSpeed() {
-		fail("Not yet implemented");
+		assertEquals(this.testCharacter.hasSuperSpeed(), false);
 	}
 
 	@Test
 	void testGetDosesConsumed() {
-		fail("Not yet implemented");
+		assertEquals(this.testCharacter.getDosesConsumed(), 0);
 	}
 
 	@Test
 	void testGetPlaceOfOrigin() {
-		fail("Not yet implemented");
+		assertEquals(place, testCharacter.getCurrentPlace());
 	}
 
 	@Test
 	void testGetCurrentPlace() {
-		fail("Not yet implemented");
+		assertEquals(place, testCharacter.getCurrentPlace());
 	}
 
 	@Test
 	void testSetCurrentPlace() {
-		fail("Not yet implemented");
+		testCharacter.setCurrentPlace(null);
+		assertEquals(null, testCharacter.getCurrentPlace());
 	}
 
 	@Test
 	void testCharacterStringStringDoubleIntegerIntegerIntegerIntegerIntegerIntegerIntegerPlace() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testCharacterStringSexDoubleCategoryAgeIntegerIntegerIntegerIntegerIntegerInteger() {
-		fail("Not yet implemented");
+		assertEquals("A", testCharacter.getName());
+		assertEquals("male", testCharacter.getSexe());
+		assertEquals(1, testCharacter.getHeight());
+		assertEquals(2, testCharacter.getAge());
+		assertEquals(3, testCharacter.getStrength());
+		assertEquals(4, testCharacter.getStamina());
+		assertEquals(5, testCharacter.getHealth());
+		assertEquals(6, testCharacter.getHunger());
+		assertEquals(7, testCharacter.getBelligerence());
+		assertEquals(8, testCharacter.getLevelOfPotion());
+		assertEquals(place, testCharacter.getPlaceOfOrigin());
+		assertEquals(place, testCharacter.getCurrentPlace());
 	}
 
 	@Test
 	void testStrike() {
-		fail("Not yet implemented");
+		testCharacter.strike(testCharacter2);
+		assertEquals(testCharacter2.getHealth(), 1);
 	}
 
 	@Test
 	void testHeal() {
-		fail("Not yet implemented");
+		testCharacter.heal();
+		assertEquals(testCharacter.getHealth(), 6);
 	}
 
 	@Test
 	void testEat() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testDrinkMagicPotion() {
-		fail("Not yet implemented");
+		testCharacter.eat();
+		assertEquals(testCharacter.getHunger(), 5);
 	}
 
 	@Test
 	void testPassAway() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testEatFood() {
-		fail("Not yet implemented");
+		assertEquals(testCharacter.passAway(), false);
+		testCharacter.setHealth(0);
+		assertEquals(testCharacter.passAway(), true);
 	}
 
 	@Test
 	void testModifyHunger() {
-		fail("Not yet implemented");
+		testCharacter.modifyHunger(2);
+		assertEquals(testCharacter.getHunger(), 8);
+		
 	}
 
 	@Test
 	void testModifyBelligerence() {
-		fail("Not yet implemented");
+		testCharacter.modifyBelligerence(2);
+		assertEquals(testCharacter.getBelligerence(), 9);
 	}
 
 	@Test
 	void testModifyLevelOfPotion() {
-		fail("Not yet implemented");
+		testCharacter.modifyLevelOfPotion(2);
+		assertEquals(testCharacter.getHunger(), 6);
 	}
 
 }

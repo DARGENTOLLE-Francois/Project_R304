@@ -313,7 +313,7 @@ abstract public class Character {
 	}
 	
 	public boolean passAway() {
-		if (!this.isPetrified && this.health<0) {
+		if (!this.isPetrified && this.health<=0) {
 			return true;
 		}
 		return false;
