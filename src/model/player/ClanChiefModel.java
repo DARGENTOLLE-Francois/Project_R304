@@ -4,18 +4,31 @@ import model.character.*;
 import model.character.Character;
 import model.place.Place;
 import model.food.Food;
-import model.magicPotion.MagicPotion;
+import model.magicpotion.MagicPotion;
+import model.character.FantasticCreaturesLycanthropes;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+* The model class for the ClanChiefModel object and game logic.
+* Contains all the properties used by the operator to interact with it's environement, as examinePlace() or healAllCharacters().
+*
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein
+* @author      Nathan Griguer
+*/
 public class ClanChiefModel {
 
     private String name;
     private String sex;
     private Integer age;
     private Place place;
+    private Sex sexenum;
+    private CategoryAge categoryAge;
+    private Rank rank;
 
     public ClanChiefModel(String name, String sex, Integer age, Place place) {
         this.name = name;
@@ -56,7 +69,8 @@ public class ClanChiefModel {
             case 7:
                 return new General(name, sex, height, age, 26,18,30,0,0,0, this.place);    
             case 8:
-                return new FantasticCreaturesLycanthropes(name,sex,height,age,34,50,40,0,0,0, this.place);    
+                return new FantasticCreaturesLycanthropes(name, this.sexenum, height,this.categoryAge, 10,50,40,0,0,0,15,16,false, this.rank, true);
+
             default:
                 return null;
         }
@@ -93,7 +107,7 @@ public class ClanChiefModel {
     	}
     	return null;
     }
-    
+
 
     public MagicPotion getDruidPotion() {
         if (hasDruidInPlace()) {
@@ -105,28 +119,34 @@ public class ClanChiefModel {
     public MagicPotion askMagicPotion() {
     	if (!this.hasDruidInPlace()) return null;
     	Druid druid = (Druid) this.getDruid();
-        List<Food> ingredients = druid.prepareIngredients(); 
+        List<Food> ingredients = druid.prepareIngredients();
         MagicPotion newPotion = druid.MakePotion(ingredients);
-        
+
         druid.setMagicPotion(newPotion);
         return newPotion;
-    	
+
     }
-    
-    
+
+
     public boolean hasDruidInPlace() {
     	if (this.getDruid()!=null) {
     		return true;
     	}
     	return false;
     }
-    
+
     public List<String>  drinkMagicPotion(MagicPotion potion, Character charac) {
     	List<String> messages = charac.drinkMagicPotion(potion);
-    	
+
     	return messages;
     }
     
+
+    public void addPeople(Character charac) {
+    	place.addPeople(charac);
+    }
+
+
     public boolean checkValidIndex(int index) {
     	if (index>place.getPeople().size() || index<0) {
     		return false;

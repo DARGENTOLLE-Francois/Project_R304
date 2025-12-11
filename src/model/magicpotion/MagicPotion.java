@@ -1,15 +1,20 @@
-package model.magicPotion;
+package model.magicpotion;
 
 import java.util.List;
 import model.food.Food;
 
 /**
- * Représente UNE dose de potion magique
- * Plusieurs doses = plusieurs instances de MagicPotion dans une liste
- */
+* The model class for the MagicPotion object.
+* Contains the properties of the magic potion's game logic.
+*
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein
+* @author      Nathan Griguer
+*/
 public class MagicPotion {
-	
-    private int doses; 
+
+    private int doses;
     private final int MAX_DOSES = 5; 
 
     private boolean isValidRecipe;
@@ -22,7 +27,7 @@ public class MagicPotion {
     }
 
     private void analyzeMixture(List<Food> ingredients) {
-        // Vérifier ingrédients de base
+
         boolean hasBaseIngredients = ingredients.contains(Food.MISTLETOE) &&
                                      ingredients.contains(Food.CARROTS) &&
                                      ingredients.contains(Food.SALT) &&
@@ -32,28 +37,25 @@ public class MagicPotion {
                                      ingredients.contains(Food.MEAD) &&
                                      ingredients.contains(Food.SECRET_INGREDIENT);
 
-        
-        boolean hasBindingAgent = ingredients.contains(Food.ROCK_OIL) || 
+
+        boolean hasBindingAgent = ingredients.contains(Food.ROCK_OIL) ||
                                   ingredients.contains(Food.BEETROOT_JUICE);
 
         this.isValidRecipe = hasBaseIngredients && hasBindingAgent;
         this.doses=MAX_DOSES;
-        
+
         if (this.isValidRecipe) {
-            // Nourrissant = homard OU fraises OU jus de betterave
             this.isNourishing = ingredients.contains(Food.LOBSTER) ||
                                ingredients.contains(Food.STRAWBERRY) ||
                                ingredients.contains(Food.BEETROOT_JUICE);
 
-            // Déboulement (super vitesse)
             this.givesSuperSpeed = ingredients.contains(Food.MILK_FROM_A_TWOHEADED_UNICORN);
 
-            // Métamorphosis (lycanthropie)
             this.causesLycanthropy = ingredients.contains(Food.IDEFIX_HAIR);
         }
     }
-    
-    
+
+
     @Override
     public String toString() {
         if (!isValidRecipe) {
@@ -72,7 +74,7 @@ public class MagicPotion {
         if (causesLycanthropy) {
             sb.append("Lycanthropie");
         }
-        
+
         if (!isNourishing && !givesSuperSpeed && !causesLycanthropy) {
             sb.append("Standard (force + invincibilité)");
         }
@@ -80,22 +82,22 @@ public class MagicPotion {
         return sb.toString();
     }
 
-    public boolean isValid() { 
-        return isValidRecipe; 
+    public boolean isValid() {
+        return isValidRecipe;
     }
-    
-    public boolean isNourishing() { 
-        return isNourishing; 
+
+    public boolean isNourishing() {
+        return isNourishing;
     }
-    
-    public boolean givesSuperSpeed() { 
-        return givesSuperSpeed; 
+
+    public boolean givesSuperSpeed() {
+        return givesSuperSpeed;
     }
-    
-    public boolean causesLycanthropy() { 
-        return causesLycanthropy; 
+
+    public boolean causesLycanthropy() {
+        return causesLycanthropy;
     }
-    
+
     public boolean takeDose() {
         if (doses > 0) {
             doses--;
@@ -103,6 +105,6 @@ public class MagicPotion {
         }
         return false;
     }
-    
+
     public int getDoses() { return doses; }
 }

@@ -2,6 +2,15 @@ package view.character;
 
 import model.character.Character;
 
+/**
+* The view class for the Character object .
+* Displays informations about the characters given in the constructor.
+*
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public class CharacterView {
     public void showCharacter(Character c) {
         System.out.println("==== " + c.getName() + " - " + c.getClass().getSimpleName() + " ====");

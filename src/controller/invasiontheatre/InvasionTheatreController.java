@@ -1,57 +1,98 @@
-package controller.InvasionTheatre;
+package controller.invasiontheatre;
 
 import controller.player.ClanChiefController;
 import model.player.ClanChiefModel;
-import model.InvasionTheatre.*;
+import model.invasiontheatre.*;
 import model.place.Place;
 import view.player.ClanChiefView;
 import view.utils.Input;
-import view.InvasionTheatreView.InvasionTheatreView;
-
+import view.invasiontheatreview.InvasionTheatreView;
 import java.util.ArrayList;
 
 /**
- * CONTROLLER - InvasionTheatre
- * Gère les interactions entre le modèle et la vue du théâtre
- */
+* The controller class for the InvasionTheater object.
+* It is used as the main board of the game and the controller will be sort of the main axis between the programm and the operator.
+* It can execute the main functions of the simulation as such as:
+* - Start the simulation
+* - Send the simulation state to the view to be shown
+* - Listen to the operator's inputs to make the simulation go on.
+*
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein
+* @author      Nathan Griguer
+*/
 public class InvasionTheatreController {
+	/**
+     * The InvasionTheatre to control.
+     */
     private InvasionTheatreModel model;
+    /**
+     * The InvasionTheatre view.
+     */
     private InvasionTheatreView view;
 
+    /**
+     * Creates a InvasionTheatreController object. will make a relation with it's model and view.
+     *
+     * @param model        InvasionTheatreController to control.
+     * @param view         The view that will show the InvasionTheatreController info.
+     * @return             the newly created object
+     */
     public InvasionTheatreController(InvasionTheatreModel model, InvasionTheatreView view) {
         this.model = model;
         this.view = view;
     }
 
+    /**
+     * Gets all the places that exists from the model and sends them to the view in order to be shown.
+     *
+     * @return             void
+     */
     public void displayPlaces() {
         view.showPlaces(model.getName(), model.getPlaceNames());
     }
 
+    /**
+     * Gets the amount of characters that exists and sends it to the view in order to be shown.
+     *
+     * @return             void
+     */
     public void displayTotalCharacters() {
         int total = model.getTotalNumberOfCharacters();
         view.showTotalCharacters(total);
     }
 
+    /**
+     * Gets the all the characters that exists and sends them to the view in order to be shown.
+     *
+     * @return             void
+     */
     public void displayAllCharacters() {
         view.showAllCharacters(model.getAllCharactersInfo());
     }
 
-
+    /**
+     * Randomly alter the game state. to be used with threads and timers.
+     * Spawns food in some places, ages the ones that exists, give random status to characters.
+     *
+     * @return             void
+     */
     private void executeAutomaticEvents() {
 
-        // 1. Modification aléatoire des personnages
+        // 1. Random character's alteration
         view.showMessage("Modifications aléatoires des personnages...");
         model.alterCharacRandomly();
 
-        // 2. Apparition de nourriture
+        // 2. Food's spawn
         view.showMessage("Apparition de nourriture dans les lieux...");
         model.spawnFood();
 
-        // 3. Diminution de fraîcheur
+        // 3. Freshness reduction
         view.showMessage("Vieillissement de la nourriture...");
         model.decreaseFoodFreshness();
 
-        // 4. Combats (à implémenté)
+        // 4. Combats
 
         if (!model.isBattlefieldPresent()) {
         	view.showMessage("Il doit y avoir un champ de bataille dans le théatre d'envahissement");
@@ -65,23 +106,35 @@ public class InvasionTheatreController {
 
         }
 
+        view.showMessage("Gestion de la colonie de Lycanthropes...");
+        for (Place place : model.getPlaces()) {
+            if (place instanceof model.place.Enclosure) {
+
+                ((model.place.Enclosure) place).updateLycanthropes();
+            }
+        }
+
     }
 
-
+    /**
+     * Executes the clan chief's turn, displays it's action amount before the end of his turn.
+     * Also displays the possible actions for his next turn.
+     *
+     * @param model    	   InvasionTheatreController to control.
+     * @return             void
+     */
     private void executeClanChiefTurn(ClanChiefModel chief, int turnNumber) {
-    	//view.clearScreen();
-    	
-        // Affichage du tour
+        // Displays the turn.
         view.showTurnEvents(turnNumber, chief.getName());
 
-        // Tour du chef de clan
+        // Clan chief clan.
         ClanChiefView chiefView = new ClanChiefView();
         ClanChiefController chiefController = new ClanChiefController(chief, chiefView);
   
-        // Événements automatiques
+        // Automated events
         executeAutomaticEvents();
         
-        // Menu d'actions pour le chef
+        // Chief's action roaster
         int maxActions = 3;
         for (int i = 0; i < maxActions; i++) {
             view.showMessage("\n┌─ ACTIONS DISPONIBLES (" + (maxActions - i) + " restante(s)) ─┐");
@@ -141,9 +194,12 @@ public class InvasionTheatreController {
         }
     }
 
-
-
-
+    /**
+     * Ultron, start the simulation.
+     * Starts the simulation. initiates the turn properties and boots the game.
+     *
+     * @return             void
+     */
     public void startSimulation() {
         view.showMessage("Démarrage de la simulation du théâtre : " + model.getName());
 
@@ -168,10 +224,12 @@ public class InvasionTheatreController {
         }
     }
 
-    // ==================== MENU PRINCIPAL ====================
+    // ==================== Main Menu ====================
 
     /**
-     * Gère le menu principal du théâtre
+     * Manages the main menu.
+     *
+     * @return             void
      */
     public void showMainMenu() {
         boolean running = true;

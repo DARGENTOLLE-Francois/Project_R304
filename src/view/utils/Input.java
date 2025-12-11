@@ -2,6 +2,15 @@ package view.utils;
 
 import java.util.Scanner;
 
+/**
+* The input class .
+* Is used to ease the prompt the operator.
+*
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public class Input {
 	private static Scanner scanner = new Scanner(System.in);
 	

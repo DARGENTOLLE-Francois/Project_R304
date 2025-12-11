@@ -1,4 +1,4 @@
-package model.InvasionTheatre;
+package model.invasiontheatre;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,6 +10,15 @@ import model.place.Battlefield;
 import model.place.Place;
 import model.player.ClanChiefModel;
 
+/**
+* The model class for the InvasionTheater object.
+* Contains the properties relative to the current game and methods related to it or to a group of object like fightBelligerents().
+*
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public class InvasionTheatreModel {
 	private String name;
     private Integer maxNumberOfPlaces;
