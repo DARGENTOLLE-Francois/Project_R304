@@ -103,6 +103,12 @@ public class ClanChiefModel {
     	//TODO
     }
     
+    
+    public void addPeople(Character charac) {
+    	place.addPeople(charac);
+    }
+
+    
     public boolean checkValidIndex(int index) {
     	if (index>place.getPeople().size()) {
     		return false;

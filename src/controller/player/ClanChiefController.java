@@ -87,6 +87,7 @@ public class ClanChiefController {
         } else {
             view.showMessage("Personnage crée avec succès! \n");
             view.showCharacter(character);
+            clanChief.addPeople(character);
         }
 
         return character;
