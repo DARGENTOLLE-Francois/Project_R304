@@ -34,7 +34,7 @@ public class CharacterController {
      */
     private CharacterView view;
     /** 
-     * The scanner ti scan with.
+     * The scanner to scan with.
      */
     private Scanner scanner;
 

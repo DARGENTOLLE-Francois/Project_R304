@@ -24,4 +24,6 @@ module game {
 
     // --- EXCEPTIONS ---
     exports includes.exception;
+	requires junit;
+	requires org.junit.jupiter.api;
 }
