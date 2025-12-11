@@ -1,5 +1,6 @@
 package model.character;
 
+import model.lycanthrope.Pack;
 
 import model.place.Place;
 
@@ -38,8 +39,6 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	}
 	
 	private Integer domination_factor;
-	private double level;
-	private String domination_rank;
 	private Integer Impentuosity_factor;
 	private boolean sickness;
 	private Rank rank;
@@ -47,21 +46,22 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	private CategoryAge cage;
 	private boolean isMale;
 	private TypeHowling howl;
-	//private Pack pack
+	private Pack pack;
 	
-	public FantasticCreaturesLycanthropes(String name, Sex sexe, double height, CategoryAge age, Integer strength,
+	public FantasticCreaturesLycanthropes(String name, Sex sexe, double height, CategoryAge cage, Integer strength,
 			Integer stamina, Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion,
-			Integer domination_factor, double level, String domination_rank, Integer impentuosity_factor,
-			boolean sickness, Rank rank, boolean human, boolean isMale) {
-		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion);
+			Integer domination_factor, Integer impentuosity_factor,
+			boolean sickness, Rank rank, boolean isMale) {
+		super(name, sexe, height, null, strength, stamina, health, hunger, belligerence, levelOfPotion);
+		
 		this.domination_factor = domination_factor;
-		this.level = level;
-		this.domination_rank = domination_rank;
-		Impentuosity_factor = impentuosity_factor;
+		this.Impentuosity_factor = impentuosity_factor;
 		this.sickness = sickness;
 		this.rank = rank;
-		this.human = human;
+		this.human = false;
 		this.isMale = isMale;
+		this.cage = cage;
+		this.howl = TypeHowling.BELONGE_TO; //éviter le null (pas sur honnetement)
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	 * @return level
 	 */
 	public double getLevel() {
-		return level;
+		return calculateLevel();
 	}
 	
 	/**
@@ -110,27 +110,14 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	 * @param level
 	 * @return level
 	 */
-	public void setLevel(double level) {
-		this.level = level;
-	}
+	public double calculateLevel() {
+		double ageVal = (this.cage != null) ? this.cage.getValue() : 1.0;
 
-	/**
-	 * Getter for the rank of domination
-	 * @return domination_rank
-	 */
-	public String getDomination_rank() {
-		return domination_rank;
-	}
+		int rankScore = rank.getValue();
 
-	/**
-	 * Setter for the rank of domination
-	 * @param domination_rank
-	 * @return domination_rank
-	 */
-	public void setDomination_rank(String domination_rank) {
-		this.domination_rank = domination_rank;
+		return (getStrength() + domination_factor + rankScore) * ageVal;
 	}
-
+	
 	/**
 	 * Getter for the factor of impetuosity
 	 * @return Impentuosity_factor
@@ -206,9 +193,6 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	 * Method that calculate the level of the lycanthrope
 	 * @return Integer made by rank value, the impentuosity factor, the domination factor and the Category of age
 	 */
-	public double CalculateLevel() {
-		return (rank.getValue()+ domination_factor * Impentuosity_factor) * cage.getValue(); 
-	}
 	
 	/**
 	 * Method that transform the lycanthrope in human
@@ -225,21 +209,39 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	 * @return void
 	 */
 	public void attemptDomination(FantasticCreaturesLycanthropes target) {
+		int myPower = this.getStrength() * this.getImpentuosity_factor();
+
+		// Si soumission par hurlement
 		if(this.howl == TypeHowling.DOMINATION && target.howl == TypeHowling.SUBMISSION) {
 			this.domination_factor += 1;
-			System.out.println(this.getName() + " a dominé " + target.getName());
-			if(this.rank.getValue() > target.rank.getValue()){
-				System.out.println(target.getName() + " ne gagne pas de rang");
-			}
+			target.domination_factor -= 1;
+			System.out.println(this.getName() + " domine (soumission) " + target.getName());
 		}
-		if(this.howl == TypeHowling.DOMINATION && target.howl != TypeHowling.SUBMISSION) {
-			if(this.getDomination_factor() > target.getDomination_factor()) {
-				System.out.println(this.getName() + " a dominé " + target.getName());
-				this.domination_factor += 10;
-				this.rank = this.rank.next();
-				System.out.println(this.getName() + " monte dans la hiérarchie au rang de " + this.rank);
+		
+		// Si conflit
+		else if(this.howl == TypeHowling.DOMINATION && target.howl != TypeHowling.SUBMISSION) {
+			
+			if(myPower >= target.getStrength()) {
+				
+				if (this.calculateLevel() > target.calculateLevel() || target.getRank() == Rank.OMEGA) {
+					
+					System.out.println(this.getName() + " a dominé par la force " + target.getName());
+				
+					this.domination_factor += 1;
+					target.domination_factor -= 1;
+					
+					Rank temp = this.rank;
+					this.rank = target.rank;
+					target.rank = temp;
+					
+					System.out.println("Échange de rangs effectué ! " + this.getName() + " est maintenant " + this.rank);
+				} else {
+					// pas de chance
+					System.out.println(this.getName() + " a échoué (niveau insuffisant).");
+					this.domination_factor -= 1; 
+				}
 			} else {
-				System.out.println(this.getName() + " a échoué à dominer " + target.getName());
+				System.out.println(this.getName() + " n'est pas assez impétueux pour attaquer.");
 			}
 		}	
 	}
@@ -247,7 +249,7 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	// The howls must be "heard" by other lycanthropes nearby
 	public void howl(String message) {
 		this.howl = TypeHowling.BELONGE_TO; //placeholder
-		System.out.println("Je suis le loup" + this.getName()+ "et je crie jsp pk");
+		System.out.println("Je suis le loup" + this.getName()+ " [" + this.rank + "] et je hurle : " + message);
 		
 	}
 	/**
@@ -264,12 +266,33 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 	 * @return void
 	 */
 	public void naturalHierachydown() {
-		if (this.rank != Rank.OMEGA) {
-			if(this.rank.getValue() < 3) {
+		if (this.rank != Rank.OMEGA && this.rank != Rank.ALPHA) {
+			if(this.domination_factor < 3) {
 				this.rank = this.rank.previous();
 				System.out.println(this.getName() + " descend dans la hiérarchie au rang de " + this.rank);
 			}
 		}
 	}
+	
+	public Pack getPack() { 
+		return pack; 
+	}
+    public void setPack(Pack pack) { 
+    	this.pack = pack; 
+    }
 
+    public TypeHowling getHowl() {
+        return howl;
+    }
+
+    public void setHowl(TypeHowling howl) {
+        this.howl = howl;
+    }
+    public Sex getSex() {
+        if (this.isMale) {
+            return Sex.MALE;
+        } else {
+            return Sex.FEMALE;
+        }
+    }
 }

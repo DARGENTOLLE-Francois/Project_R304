@@ -17,7 +17,6 @@ import view.lycanthrope.lycanthropeView;
 public class lycanthropeController {
     private Colony colony;
     private lycanthropeView view;
-    private boolean isSeasonLove = false;
 
     public lycanthropeController() {
         this.colony = new Colony();
@@ -33,16 +32,46 @@ public class lycanthropeController {
     private void initializeDemoData() {
         // Create a pack and some wolves
         Pack pack1 = new Pack();
-        //set le couple alpha
-        pack1.setAlphaMale(new FantasticCreaturesLycanthropes("WOUF1", Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Alpha", 40, false, Rank.ALPHA, false, true));
-        pack1.setAlphaFemale(new FantasticCreaturesLycanthropes("WOUF2", Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Alpha", 40, false, Rank.ALPHA, false, false));
         
-        pack1.addMember(new FantasticCreaturesLycanthropes("WOUF1", Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Alpha", 40, false, Rank.ALPHA, false, true));// Strong male
-        pack1.addMember(new FantasticCreaturesLycanthropes("WOUF2", Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Alpha", 40, false, Rank.ALPHA, false, false));  // Strong female
-        pack1.addMember(new FantasticCreaturesLycanthropes("CHOSE", Sex.MALE, 2.1, CategoryAge.ADULT, 85, 70, 100, 30, 60, 0, 50, 12.5, "Beta", 40, false, Rank.OMEGA, false, true));   // Weaker
+        FantasticCreaturesLycanthropes alphaM = new FantasticCreaturesLycanthropes(
+                "AlphaWolf_M", Sex.MALE, 2.1, CategoryAge.ADULT, 
+                90, 100, 100, 0, 0, 0, 50, 80, false, Rank.ALPHA, true
+            );
+            
+        FantasticCreaturesLycanthropes alphaF = new FantasticCreaturesLycanthropes(
+                "AlphaWolf_F", Sex.FEMALE, 1.9, CategoryAge.ADULT, 
+                85, 100, 100, 0, 0, 0, 50, 80, false, Rank.ALPHA, false
+            );
+
+        FantasticCreaturesLycanthropes beta = new FantasticCreaturesLycanthropes(
+                "BetaWolf", Sex.MALE, 2.0, CategoryAge.ADULT, 
+                70, 100, 100, 0, 0, 0, 20, 60, false, Rank.BETA, true
+            );
+            
+        FantasticCreaturesLycanthropes omega = new FantasticCreaturesLycanthropes(
+                "OmegaWolf", Sex.FEMALE, 1.8, CategoryAge.ADULT, 
+                30, 100, 100, 0, 0, 0, 0, 20, false, Rank.OMEGA, true
+            );
+        FantasticCreaturesLycanthropes truc1 = new FantasticCreaturesLycanthropes(
+                "BetaWolf", Sex.MALE, 2.0, CategoryAge.ADULT, 
+                70, 100, 100, 0, 0, 0, 20, 60, false, Rank.KAPPA, true
+            );
+            
+        FantasticCreaturesLycanthropes truc2 = new FantasticCreaturesLycanthropes(
+                "OmegaWolf", Sex.FEMALE, 1.8, CategoryAge.ADULT, 
+                30, 100, 100, 0, 0, 0, 0, 20, false, Rank.DELTA, true
+            );
+        pack1.addMember(alphaM);
+        pack1.addMember(alphaF);
+        pack1.addMember(beta);
+        pack1.addMember(omega);
+        pack1.addMember(truc1);
+        pack1.addMember(truc2);
+            
+        alphaM.setHowl(TypeHowling.DOMINATION); // simple test ,surement à changer
+        omega.setHowl(TypeHowling.SUBMISSION);
+            
         colony.addPack(pack1);
-        
-        
         
     }
 
@@ -59,27 +88,11 @@ public class lycanthropeController {
 
         for (int i = 0; i < turns; i++) {
             System.out.println("\n[Turn " + i + "]");
-
-            for (Pack p : colony.getPacks()) {
-                p.recalculateHierarchy();
-                System.out.print("couple" + p.coupleAlphaString());
-
-                if (i != 0 && i % 3 == 0) { 
-                    System.out.println("--- C'est la saison des amours ! ---");
-                    p.reproduce();
-                }
-
-                if (Math.random() < 0.1) {
-                    if (!p.getMembers().isEmpty()) {
-                        p.getMembers().get(0).howl("Awoooo (Dominance)");
-                    }
-                }
-            }
-
+            
+            colony.fastForwardTime(1);
             view.displayColony(colony);
-
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2000); // pour avoir testé, faut un temps de pause
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
