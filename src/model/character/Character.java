@@ -278,7 +278,6 @@ abstract public class Character {
 		}
 	}
 	
-	// ajout partie potion
 	public List<String> drinkMagicPotion(MagicPotion potion) {
 	    List<String> messages = new ArrayList<>();
 	    if (isPetrified) {

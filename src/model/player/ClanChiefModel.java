@@ -148,7 +148,7 @@ public class ClanChiefModel {
 
 
     public boolean checkValidIndex(int index) {
-    	if (index>place.getPeople().size() || index<0) {
+    	if (index>place.getPeople().size() || index<=0) {
     		return false;
     	}
 		return true;

@@ -48,7 +48,6 @@ public class Druid extends Gallic implements Work, Rule, Fight, CookMagicPotion 
 			
 			MagicPotion cauldron = new MagicPotion(ingredientsAvailable);
 			
-			// On retourne potion pour qu'il puisse être stocker dans le lieu
 			return cauldron;
 			
 		} else {
@@ -67,7 +66,6 @@ public class Druid extends Gallic implements Work, Rule, Fight, CookMagicPotion 
 	public List<Food> prepareIngredients(){
         List<Food> ingredientList = new ArrayList<>();
 
-        // Potion Normale
 	    ingredientList.add(Food.MISTLETOE);
 	    ingredientList.add(Food.CARROTS);
 	    ingredientList.add(Food.SALT);

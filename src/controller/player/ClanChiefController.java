@@ -138,7 +138,6 @@ public class ClanChiefController {
     
     
     public boolean askMagicPotion() {
-        // 1. Vérification de sécurité : Y a-t-il un druide ?
         if (!clanChief.hasDruidInPlace()) {
             view.showMessage("Il n'y a pas de druide ici pour faire de la potion !");
             return false;
@@ -153,7 +152,6 @@ public class ClanChiefController {
             return false;
 
         } else {
-            // CAS B : Création d'une nouvelle potion
             view.showMessage("\n--- PRÉPARATION DE LA POTION ---");
             view.showMessage("Le druide commence à mélanger les ingrédients...");
 
@@ -198,9 +196,9 @@ public class ClanChiefController {
     public Character chooseCharac() {
     	view.showListCharacter(clanChief.getPlace().getPeople());
     	view.showMessage("Choisissez le numéro du personnage que vous voulez sélectionner :");
-
     	int choice = Input.getIntInput();
-    	while (!clanChief.checkValidIndex(choice)) {
+
+    	while (choice>clanChief.getPlace().getPeople().size() || choice<=0) {
     		 view.showMessage("Choix invalide. \nVeuillez réessayer :");
     		 choice = Input.getIntInput();
     	}
@@ -217,7 +215,7 @@ public class ClanChiefController {
     	view.showDestinations(destinations);
     	view.showMessage("Choisissez le numéro du lieu dans lequel vous voulez déplacer votre personnage :");
     	int choice = Input.getIntInput();
-    	while (choice>destinations.size() || choice<0) {
+    	while (choice>destinations.size() || choice<=0) {
     		 view.showMessage("Choix invalide. \nVeuillez réessayer :");
     		 choice = Input.getIntInput();
     	}

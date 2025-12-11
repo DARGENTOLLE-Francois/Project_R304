@@ -26,7 +26,6 @@ public enum CategoryAge {
         if (nextIndex < vals.length) {
             return vals[nextIndex];
         }
-        //si il est deja vieux, on fout la variable a null et on le dégageras dans la simulation
         return null;
 	}
 	

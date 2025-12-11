@@ -24,11 +24,8 @@ public class Battlefield extends Place{
 	
 	
 	public boolean canFight() {
-		if (this.getGallic().size()>0 && this.getRoman().size()>0) {
-			return true;
-		}
-		return false;
-	}
+        return !this.getGallic().isEmpty() && !this.getRoman().isEmpty();
+    }
     
     public ArrayList<Character> getGallic() {
     	ArrayList<Character> gallicPeople = new ArrayList<>();
@@ -44,8 +41,7 @@ public class Battlefield extends Place{
     public ArrayList<Character> getRoman() {
     	ArrayList<Character> romanPeople = new ArrayList<>();
     	for (Character c: this.getPeople()) {
-    		// à changer quand loup
-    		if (c.getPlaceOfOrigin() instanceof GalloRomanSettlement || 
+    		if (c.getPlaceOfOrigin() instanceof GalloRomanSettlement ||
     			c.getPlaceOfOrigin() instanceof RomanCity ||
     			c.getPlaceOfOrigin() instanceof RomanFortifiedCamp) {
     			romanPeople.add(c);

@@ -38,8 +38,6 @@ public class Colony {
 	 * @return void
 	 */
 	public void manageSolitaries() {
-		//TODO
-		//Il s'agit du maitre de zoo fantastique qui peut bouger les solitaires (chef de clan)
         System.out.println("Il y a " + solitaries.size() + " loups solitaires.");
     }
 	
@@ -61,17 +59,13 @@ public class Colony {
 	 * @return void 
 	 */
     public void fastForwardTime(int years) {
-        // ToDo : avancer le temps dans la colinie pour faire vieillir les lycanthropes , à voir avec la simulation du controleur
-    	//vieillir les loups/ réévaluer la hiérarchie/ générer hurlement au pif/ transformer en humain
-    	
-    	//penser a faire un thread pour le temps
+
     	Random rand = new Random();
     	
     	attemptCreatePackFromSolitaries();
     	List<Pack> packsToRemove = new ArrayList<>();
     	
     	for (Pack packs : getPacks()) {
-    		//reproduction
             if (rand.nextInt(100) < 35) {
                 packs.reproduce();
             }
@@ -83,7 +77,6 @@ public class Colony {
             List<FantasticCreaturesLycanthropes> toRemove = new ArrayList<>();
             
             for (FantasticCreaturesLycanthropes member : packs.getMembers()){
-                //vieillissement
                 if(rand.nextInt(100) <35) {
 
                     if (member.getCage() == CategoryAge.YOUNG) {
@@ -100,18 +93,15 @@ public class Colony {
                         }
                     }
                 }
-                //hurlements
                 if(rand.nextInt(100) < 20) {
-                    member.setHowl(TypeHowling.BELONGE_TO); // jsp quoi mettre comme hurlement
+                    member.setHowl(TypeHowling.BELONGE_TO);
                     member.howl("Wouf (pif)");
                 }
-                // transfo humain
-                if(rand.nextInt(100) < 5) { // pareil a voir
+                if(rand.nextInt(100) < 5) {
                     member.transformationHuman();
                     System.out.println(member.getName() + " devient humain et quitte la meute.");
                     toRemove.add(member);
                 }
-                //devient solitaire
                 if (member.getRank() == Rank.OMEGA && rand.nextInt(100) < 15) {
                     System.out.println(member.getName() + " en a marre d'être une merde et devient auto-entrepreneur");
                     toRemove.add(member);
@@ -119,7 +109,6 @@ public class Colony {
                 }
             }
             
-            // On supprime APRES avoir fait la boucle (30min de souffrance et d'incompréhension)
             for (FantasticCreaturesLycanthropes wolf : toRemove) {
                 packs.removeMember(wolf);
             }

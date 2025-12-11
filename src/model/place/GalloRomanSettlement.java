@@ -19,7 +19,6 @@ public class GalloRomanSettlement extends Place{
 	public GalloRomanSettlement(String name, double surface, ArrayList<Character> people,
 			ArrayList<Food> food) {
 		super(name, surface,  people, food);
-		// TODO Auto-generated constructor stub
 	}
 	
 }

@@ -140,7 +140,6 @@ public class InvasionTheatreModel {
             combatMessages.add(romanFighter.getName() + " du camps des Romains a frappé " + gallicFighter.getName()+" du camps des Gaulois de "+
             romanFighter.getStrength()*romanFighter.getStamina()+" points de dégats. PV restants : "+gallicFighter.getHealth() );
             
-            // Renvoyer vers endroit d'origine
             b.removePeople(romanFighter);
             if (!romanFighter.passAway()) {
                 combatMessages.add(romanFighter.getName() + " retourne à son lieu d'origine");
@@ -199,7 +198,6 @@ public class InvasionTheatreModel {
 	// Add boar and fairly fresh fish to all places except battlefield
     public void spawnFood() {
         for (Place place : places) {
-            // Ne pas spawner sur les champs de bataille
             if (!(place instanceof Battlefield)) {
                 place.getFood().add(Food.BOAR);
                 place.getFood().add(Food.FAIRLY_FRESH_FISH);
