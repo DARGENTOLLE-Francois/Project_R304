@@ -18,18 +18,12 @@ public class InvasionTheatreView {
         System.out.println(message);
     }
 
-    /**
-     * Affiche un titre de section
-     */
     public void showSectionTitle(String title) {
         System.out.println("\n" + "=".repeat(60));
         System.out.println("  " + title);
         System.out.println("=".repeat(60));
     }
 
-    /**
-     * Affiche la liste des lieux
-     */
     public void showPlaces(String theatreName, ArrayList<String> placeNames) {
         showSectionTitle("LIEUX DU THÉÂTRE : " + theatreName);
         
@@ -43,18 +37,12 @@ public class InvasionTheatreView {
         System.out.println();
     }
 
-    /**
-     * Affiche le nombre total de personnages
-     */
     public void showTotalCharacters(int total) {
         showSectionTitle("POPULATION DU THÉÂTRE");
         System.out.println("  Nombre total de personnages : " + total);
         System.out.println();
     }
 
-    /**
-     * Affiche tous les personnages de tous les lieux
-     */
     public void showAllCharacters(ArrayList<String> charactersInfo) {
         showSectionTitle("TOUS LES PERSONNAGES DU THÉÂTRE");
         
@@ -73,9 +61,6 @@ public class InvasionTheatreView {
     }
     
 
-    /**
-     * Affiche les événements automatiques d'un tour
-     */
     public void showTurnEvents(int turnNumber, String chiefName) {
         System.out.println("\n");
         System.out.println("╔" + "═".repeat(58) + "╗");

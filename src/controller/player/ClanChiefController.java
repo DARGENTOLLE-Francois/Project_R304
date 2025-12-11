@@ -3,11 +3,13 @@ package controller.player;
 import model.player.ClanChiefModel;
 import model.character.Character;
 import model.character.Rank;
+import model.magicpotion.MagicPotion;
 import model.place.Place;
 import view.player.ClanChiefView;
 import view.utils.Input;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -19,25 +21,25 @@ import java.util.ArrayList;
 * - Make the characters eat
 * - Manage the characters position though the board.
 * As it is a controller it will only gather the user's input and send the informations to the model and the view to be used...
-* 
+*
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
-* @author      William Edelstein 
+* @author      William Edelstein
 * @author      Nathan Griguer
 */
 public class ClanChiefController {
-	/** 
+	/**
      * The clanChief to control.
      */
     private ClanChiefModel clanChief;
-    /** 
+    /**
      * The clanChief view.
      */
     private ClanChiefView view;
     
-    /** 
+    /**
      * Creates a InvasionTheatreController object. will make a relation with it's model and view.
-     *  
+     *
      * @param model        The ClanChief to control.
      * @param view         The view that will show the ClanChief info.
      * @return             the newly created object
@@ -47,7 +49,7 @@ public class ClanChiefController {
         this.view = view;
     }
 
-    /** 
+    /**
      * Asks the model for the place's informations and sends them to the view.
      *
      * @return             void
@@ -57,7 +59,7 @@ public class ClanChiefController {
         view.showPlaceInfo(info);
     }
 
-    /** 
+    /**
      * Prompts the operator for the new character's informations and if they're valid creates it through the model.
      *
      * @return             void
@@ -84,7 +86,7 @@ public class ClanChiefController {
             view.showRank();
             Integer rank = Input.getIntInput();
         }
-        
+
 
         Character character = clanChief.createCharacter(name, sex, height, age, type);
         
@@ -101,7 +103,7 @@ public class ClanChiefController {
         return character;
     }
 
-    /** 
+    /**
      * Heals all the character through the model.
      *
      * @return             void
@@ -111,7 +113,7 @@ public class ClanChiefController {
         view.showMessage("Tous les personnages sur le terrain ont été soignés!");
     }
 
-    /** 
+    /**
      * Make all the characters eat.
      *
      * @return             void
@@ -121,7 +123,7 @@ public class ClanChiefController {
         view.showMessage(result);
     }
     
-    /** 
+    /**
      * Checks if the current place is empty
      *
      * @return             boolean is the place empty?
@@ -134,17 +136,69 @@ public class ClanChiefController {
     	return false;
     }
     
-    /** 
+    
+    public boolean askMagicPotion() {
+        if (!clanChief.hasDruidInPlace()) {
+            view.showMessage("Il n'y a pas de druide ici pour faire de la potion !");
+            return false;
+        }
+
+        MagicPotion existingPotion = clanChief.getDruidPotion();
+
+        if (existingPotion != null) {
+            view.showMessage("\n--- POTION DÉJÀ PRÊTE ---");
+            view.showMessage("Le druide sort une marmite qui était déjà prête.");
+            view.showMessage(existingPotion.toString());
+            return false;
+
+        } else {
+            view.showMessage("\n--- PRÉPARATION DE LA POTION ---");
+            view.showMessage("Le druide commence à mélanger les ingrédients...");
+
+            MagicPotion newPotion = clanChief.askMagicPotion();
+
+            if (newPotion != null) {
+                view.showMessage("La potion est terminée !");
+                view.showMessage(newPotion.toString());
+                return true;
+            } else {
+                view.showMessage("Erreur lors de la création.");
+                return true;
+            }
+        }
+    }
+
+
+    public boolean drinkMagicPotion() {
+        if (!clanChief.hasDruidInPlace()) {
+            view.showMessage("Il n'y a pas de druide ici pour faire de la potion !");
+            return false;
+        }
+
+    	if (clanChief.getDruidPotion()!=null) {
+        	Character charac = this.chooseCharac();
+        	MagicPotion magicPotion = clanChief.askMagicPotion();
+        	List<String> results = clanChief.drinkMagicPotion(magicPotion, charac);
+        	view.showMessage(clanChief.getDruidPotion().toString());
+        	view.showListString(results);
+        	return true;
+    	}
+    	view.showMessage("On doit d'abord créer une potion avant de l'utiliser");
+    	return false;
+    }
+
+    
+    /**
      * Prompts the operator to choose a character and returns it.
      *
      * @return             Character the chosen one.
      */
     public Character chooseCharac() {
     	view.showListCharacter(clanChief.getPlace().getPeople());
-    	view.showMessage("Choisissez le numéro du personnage que vous voulez déplacer :");
-
+    	view.showMessage("Choisissez le numéro du personnage que vous voulez sélectionner :");
     	int choice = Input.getIntInput();
-    	while (!clanChief.checkValidIndex(choice)) {
+
+    	while (choice>clanChief.getPlace().getPeople().size() || choice<=0) {
     		 view.showMessage("Choix invalide. \nVeuillez réessayer :");
     		 choice = Input.getIntInput();
     	}
@@ -152,7 +206,7 @@ public class ClanChiefController {
     	return chosenCharac;
     }
     
-    /** 
+    /**
      * Prompts the operator to choose a destination and returns it.
      *
      * @return             Place the chosen one.
@@ -161,7 +215,7 @@ public class ClanChiefController {
     	view.showDestinations(destinations);
     	view.showMessage("Choisissez le numéro du lieu dans lequel vous voulez déplacer votre personnage :");
     	int choice = Input.getIntInput();
-    	while (choice <= 0 || choice > destinations.size()) {
+    	while (choice>destinations.size() || choice<=0) {
     		 view.showMessage("Choix invalide. \nVeuillez réessayer :");
     		 choice = Input.getIntInput();
     	}
@@ -169,7 +223,7 @@ public class ClanChiefController {
     	return chosenPlace;
     }
     
-    /** 
+    /**
      * Prompts the operator to choose a character to transfer and the destination.
      * Will use the chooseCharac and ChooseDestination functions.
      *

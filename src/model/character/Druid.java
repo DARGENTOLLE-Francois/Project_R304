@@ -4,19 +4,22 @@ import model.food.Food;
 import model.magicpotion.MagicPotion;
 import model.place.Place;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
 * The Druid class, extends the Gallic class and implements the Work, Rule, Fight, CookMagicPotion interface.s.
-* 
+*
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
-* @author      William Edelstein 
+* @author      William Edelstein
 * @author      Nathan Griguer
 */
 public class Druid extends Gallic implements Work, Rule, Fight, CookMagicPotion {
+	private MagicPotion magicPotion;
 
-	/** 
+
+	/**
      * Creates an instance with the given parameters
      *
      *
@@ -31,26 +34,48 @@ public class Druid extends Gallic implements Work, Rule, Fight, CookMagicPotion 
      * @param belligerence  The belligerence of the character
      * @param levelOfPotion The levelOfPotion of the character
      * @param placeOfOrigin The placeOfOrigin of the character
-     * 
+     *
      * @return             The newly created object
      */
 	public Druid(String name, String sexe, double height, Integer age, Integer strength, Integer stamina,
 			Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion, Place placeOfOrigin) {
 		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion, placeOfOrigin);
-	}
 
-	private boolean haveingredient = true; // variable de test(a changer quand on aura les lieux)
+	}
 	
 	public MagicPotion MakePotion(List<Food> ingredientsAvailable) {
-		if(haveingredient && ingredientsAvailable != null) {
+		if(ingredientsAvailable != null) {
 			
 			MagicPotion cauldron = new MagicPotion(ingredientsAvailable);
 			
-			// On retourne potion pour qu'il puisse être stocker dans le lieu
 			return cauldron;
 			
 		} else {
 			return null;
 		}
+	}
+
+	public void setMagicPotion(MagicPotion magicPotion) {
+		this.magicPotion=magicPotion;
+	}
+
+	public MagicPotion getMagicPotion() {
+		return this.magicPotion;
+	}
+
+	public List<Food> prepareIngredients(){
+        List<Food> ingredientList = new ArrayList<>();
+
+	    ingredientList.add(Food.MISTLETOE);
+	    ingredientList.add(Food.CARROTS);
+	    ingredientList.add(Food.SALT);
+	    ingredientList.add(Food.FOURLEAF_CLOVER);
+	    ingredientList.add(Food.FAIRLY_FRESH_FISH);
+	    ingredientList.add(Food.HONEY);
+	    ingredientList.add(Food.MEAD);
+	    ingredientList.add(Food.SECRET_INGREDIENT);
+	    ingredientList.add(Food.ROCK_OIL);
+
+		return ingredientList;
 	}
 }

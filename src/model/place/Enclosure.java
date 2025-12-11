@@ -19,33 +19,30 @@ import model.lycanthrope.Pack;
 */
 public class Enclosure extends Place {
 
-    private Colony colony; // Lier la colonie à l'enclos
+    private Colony colony;
 
     public Enclosure(String name, double surface, ArrayList<Character> people, ArrayList<Food> food) {
         super(name, surface, people, food);
         this.colony = new Colony();
-        // Créer une meute par défaut pour accueillir les nouveaux arrivants
         this.colony.addPack(new Pack());
     }
 
-    // Surcharge de addPeople pour gérer l'ajout spécifique des Lycanthropes
     @Override
     public void addPeople(Character charac) {
-        super.addPeople(charac); // Ajout à la liste générique 'people' de Place
+        super.addPeople(charac);
         
         if (charac instanceof FantasticCreaturesLycanthropes) {
             FantasticCreaturesLycanthropes wolf = (FantasticCreaturesLycanthropes) charac;
-            // Ajout du loup à la première meute de la colonie par défaut
             if (!colony.getPacks().isEmpty()) {
                 colony.getPacks().get(0).addMember(wolf);
             }
         }
     }
     
-    // Méthode pour déclencher le vieillissement/logique des loups à chaque tour
-    public void updateLycanthropes() {
-        // On avance le temps de 1 an par tour (ou selon votre choix)
-        colony.fastForwardTime(1); 
+    public ArrayList<String> updateLycanthropes() {
+        ArrayList<String> messages = new ArrayList<>();
+        messages = colony.fastForwardTime(1);
+        return messages;
     }
     
     public Colony getColony() {

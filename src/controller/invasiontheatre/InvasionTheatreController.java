@@ -16,25 +16,25 @@ import java.util.ArrayList;
 * - Start the simulation
 * - Send the simulation state to the view to be shown
 * - Listen to the operator's inputs to make the simulation go on.
-* 
+*
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
-* @author      William Edelstein 
+* @author      William Edelstein
 * @author      Nathan Griguer
 */
 public class InvasionTheatreController {
-	/** 
+	/**
      * The InvasionTheatre to control.
      */
     private InvasionTheatreModel model;
-    /** 
+    /**
      * The InvasionTheatre view.
      */
     private InvasionTheatreView view;
-    	
-    /** 
+
+    /**
      * Creates a InvasionTheatreController object. will make a relation with it's model and view.
-     *  
+     *
      * @param model        InvasionTheatreController to control.
      * @param view         The view that will show the InvasionTheatreController info.
      * @return             the newly created object
@@ -44,18 +44,18 @@ public class InvasionTheatreController {
         this.view = view;
     }
 
-    /** 
+    /**
      * Gets all the places that exists from the model and sends them to the view in order to be shown.
-     * 
+     *
      * @return             void
      */
     public void displayPlaces() {
         view.showPlaces(model.getName(), model.getPlaceNames());
     }
 
-    /** 
+    /**
      * Gets the amount of characters that exists and sends it to the view in order to be shown.
-     * 
+     *
      * @return             void
      */
     public void displayTotalCharacters() {
@@ -63,19 +63,19 @@ public class InvasionTheatreController {
         view.showTotalCharacters(total);
     }
 
-    /** 
+    /**
      * Gets the all the characters that exists and sends them to the view in order to be shown.
-     * 
+     *
      * @return             void
      */
     public void displayAllCharacters() {
         view.showAllCharacters(model.getAllCharactersInfo());
     }
 
-    /** 
-     * Randomly alter the game state. to be used with threads and timers. 
+    /**
+     * Randomly alter the game state. to be used with threads and timers.
      * Spawns food in some places, ages the ones that exists, give random status to characters.
-     * 
+     *
      * @return             void
      */
     private void executeAutomaticEvents() {
@@ -92,7 +92,7 @@ public class InvasionTheatreController {
         view.showMessage("Vieillissement de la nourriture...");
         model.decreaseFoodFreshness();
 
-        // 4. Combats (TODO)
+        // 4. Combats
 
         if (!model.isBattlefieldPresent()) {
         	view.showMessage("Il doit y avoir un champ de bataille dans le théatre d'envahissement");
@@ -105,18 +105,20 @@ public class InvasionTheatreController {
             }
 
         }
-        
+
         view.showMessage("Gestion de la colonie de Lycanthropes...");
         for (Place place : model.getPlaces()) {
             if (place instanceof model.place.Enclosure) {
-            	
-                ((model.place.Enclosure) place).updateLycanthropes();
+                ArrayList<String>  messages = ((model.place.Enclosure) place).updateLycanthropes();
+                for (String message : messages) {
+                    view.showMessage(message);
+                }
             }
         }
 
     }
 
-    /** 
+    /**
      * Executes the clan chief's turn, displays it's action amount before the end of his turn.
      * Also displays the possible actions for his next turn.
      *
@@ -124,8 +126,6 @@ public class InvasionTheatreController {
      * @return             void
      */
     private void executeClanChiefTurn(ClanChiefModel chief, int turnNumber) {
-    	view.clearScreen();
-    	
         // Displays the turn.
         view.showTurnEvents(turnNumber, chief.getName());
 
@@ -163,13 +163,17 @@ public class InvasionTheatreController {
                     break;
                 case 5:
                     view.showMessage("\n➤ Demande de potion magique à un druide");
-                    // TODO
-                    view.showMessage("Fonctionnalité à implémenter");
+                    //Success or failure of the potion's creation or absence of the druid
+                    if (!chiefController.askMagicPotion()) {
+                    	--i;
+                    }
                     break;
                 case 6:
                     view.showMessage("\n➤ Faire boire de la potion magique");
-                    // TODO
-                    view.showMessage("Fonctionnalité à implémenter");
+                    //Success or failure in using the potion, or absence of a druid
+                    if(!chiefController.drinkMagicPotion()) {
+                    	--i;
+                    }
                     break;
                 case 7:
                     view.showMessage("\n➤ Transférer un personnage");
@@ -192,7 +196,7 @@ public class InvasionTheatreController {
         }
     }
 
-    /** 
+    /**
      * Ultron, start the simulation.
      * Starts the simulation. initiates the turn properties and boots the game.
      *
@@ -224,7 +228,7 @@ public class InvasionTheatreController {
 
     // ==================== Main Menu ====================
 
-    /** 
+    /**
      * Manages the main menu.
      *
      * @return             void

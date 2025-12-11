@@ -56,10 +56,12 @@ public class Game {
 
 		GallicVillage gallicVillage = new GallicVillage("Village Gaulois", 500, new ArrayList<>(), new ArrayList<>());
 		
+		// Stats : Nom, Sexe, Taille, age, force, stamina, vie, faim, belligerence, niveau de potion, Place d'origine
 		General general1 = new General("François", "Jte dis pas", 0.55, 30, 5, 10, 10, 0,0,0, romanCity);
 		General general2 = new General("Enzo", "Obscur", 2.80, 20, 40, 10, 10, 0,0,0, romanCity);
 		GallicMerchant gallic1 = new GallicMerchant("Dinesh", "Indien", 0.25, 10,5,1,1,0,0,0, gallicVillage);
 		Gallic gallic2 = new GallicMerchant("Samuel", "Renoi", 0.40, 18,10,1,20,0,0,0, gallicVillage);
+		Druid druid1 = new Druid("Axel", "La chose", 1.40, 14, 2, 2, 20, 0, 0, 0, gallicVillage);
 		
         FantasticCreaturesLycanthropes alphaM = new FantasticCreaturesLycanthropes(
                 "AlphaWolf_M", Sex.MALE, 2.1, CategoryAge.ADULT, 
@@ -99,9 +101,10 @@ public class Game {
 		enclosure.getFood().add(Food.BOAR);
 		
 		battlefield.addPeople(gallic1);
+		battlefield.addPeople(gallic2);
 		battlefield.addPeople(general1);
 		battlefield.addPeople(general2);
-		battlefield.addPeople(gallic2);
+		gallicVillage.addPeople(druid1);
 		
 		// Add Places into array of Places
         ArrayList<Place> places = new ArrayList<>();

@@ -29,8 +29,6 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
      * @param hunger	    The hunger of the character
      * @param belligerence  The belligerence of the character
      * @param levelOfPotion The levelOfPotion of the character
-     * @param placeOfOrigin The placeOfOrigin of the character
-     * 
      * @return             The newly created object
      */
 	public FantasticCreaturesLycanthropes(String name, Sex sexe, double height, CategoryAge age, Integer strength,

@@ -278,7 +278,6 @@ abstract public class Character {
 		}
 	}
 	
-	// ajout partie potion
 	public List<String> drinkMagicPotion(MagicPotion potion) {
 	    List<String> messages = new ArrayList<>();
 	    if (isPetrified) {
@@ -291,6 +290,7 @@ abstract public class Character {
 	            strength += 50;
 	            ++levelOfPotion;
 	            dosesConsumed++;
+	            
 	            
 	            if (potion.isNourishing()) hunger = Math.max(0, hunger - 20);
 	            if (potion.givesSuperSpeed()) hasSuperSpeed = true;

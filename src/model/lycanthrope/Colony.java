@@ -34,16 +34,6 @@ public class Colony {
     }
 	
 	/**
-	 * Method that manage the lycanthrope in solitary state
-	 * @return void
-	 */
-	public void manageSolitaries() {
-		//TODO
-		//Il s'agit du maitre de zoo fantastique qui peut bouger les solitaires (chef de clan)
-        System.out.println("Il y a " + solitaries.size() + " loups solitaires.");
-    }
-	
-	/**
 	 * Getter for the list of pack
 	 * @return packs
 	 */
@@ -60,20 +50,17 @@ public class Colony {
 	 * @param years
 	 * @return void 
 	 */
-    public void fastForwardTime(int years) {
-        // ToDo : avancer le temps dans la colinie pour faire vieillir les lycanthropes , à voir avec la simulation du controleur
-    	//vieillir les loups/ réévaluer la hiérarchie/ générer hurlement au pif/ transformer en humain
-    	
-    	//penser a faire un thread pour le temps
+    public ArrayList<String> fastForwardTime(int years) {
+
     	Random rand = new Random();
-    	
+    	ArrayList<String> messages = new ArrayList<>();
     	attemptCreatePackFromSolitaries();
     	List<Pack> packsToRemove = new ArrayList<>();
     	
     	for (Pack packs : getPacks()) {
-    		//reproduction
             if (rand.nextInt(100) < 35) {
-                packs.reproduce();
+                ArrayList<String> reproductionMessages = packs.reproduce();
+                messages.addAll(reproductionMessages);
             }
             
             packs.decreaseRanksNaturally();
@@ -83,43 +70,38 @@ public class Colony {
             List<FantasticCreaturesLycanthropes> toRemove = new ArrayList<>();
             
             for (FantasticCreaturesLycanthropes member : packs.getMembers()){
-                //vieillissement
                 if(rand.nextInt(100) <35) {
 
                     if (member.getCage() == CategoryAge.YOUNG) {
                         member.setCage(CategoryAge.ADULT);
-                        System.out.println(member.getName() + " est devenu ADULTE.");
+                        messages.add(member.getName() + " est devenu ADULTE.\n");
                     } else if (member.getCage() == CategoryAge.ADULT) {
                         member.setCage(CategoryAge.OLD);
-                        System.out.println(member.getName() + " est devenu VIEUX.");
+                        messages.add(member.getName() + " est devenu VIEUX.\n");
                     }
                     else if (member.getCage() == CategoryAge.OLD) {
                         if (rand.nextInt(100) < 25) {
-                            System.out.println(member.getName() + " est mort de vieillesse.");
+                            messages.add(member.getName() + " est mort de vieillesse.\n");
                             toRemove.add(member);
                         }
                     }
                 }
-                //hurlements
                 if(rand.nextInt(100) < 20) {
-                    member.setHowl(TypeHowling.BELONGE_TO); // jsp quoi mettre comme hurlement
+                    member.setHowl(TypeHowling.BELONGE_TO);
                     member.howl("Wouf (pif)");
                 }
-                // transfo humain
-                if(rand.nextInt(100) < 5) { // pareil a voir
+                if(rand.nextInt(100) < 5) {
                     member.transformationHuman();
-                    System.out.println(member.getName() + " devient humain et quitte la meute.");
+                    messages.add(member.getName() + " devient humain et quitte la meute.\n");
                     toRemove.add(member);
                 }
-                //devient solitaire
                 if (member.getRank() == Rank.OMEGA && rand.nextInt(100) < 15) {
-                    System.out.println(member.getName() + " en a marre d'être une merde et devient auto-entrepreneur");
+                    messages.add(member.getName() + " en a marre d'être une merde et devient auto-entrepreneur\n");
                     toRemove.add(member);
                     this.solitaries.add(member);
                 }
             }
             
-            // On supprime APRES avoir fait la boucle (30min de souffrance et d'incompréhension)
             for (FantasticCreaturesLycanthropes wolf : toRemove) {
                 packs.removeMember(wolf);
             }
@@ -127,10 +109,11 @@ public class Colony {
             packs.recalculateHierarchy();
             
             if (packs.getMembers().isEmpty()) {
-                System.out.println("--- UNE MEUTE A DISPARU (Plus de membres) ---");
+                messages.add("--- UNE MEUTE A DISPARU (Plus de membres) ---");
                 packsToRemove.add(packs);
             }
         }
+        return messages;
     }
     
     private void attemptCreatePackFromSolitaries() {
@@ -147,8 +130,6 @@ public class Colony {
         }
 
         if (maleFound != null && femaleFound != null) {
-            System.out.println("nouvelle meute des loosers");
-            
             Pack newPack = new Pack();
             newPack.addMember(maleFound);
             newPack.addMember(femaleFound);

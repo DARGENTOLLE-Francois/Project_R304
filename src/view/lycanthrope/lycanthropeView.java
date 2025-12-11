@@ -16,7 +16,6 @@ public class lycanthropeView {
             packIndex++;
         }
 
-        // solitaires
         if (!colony.getSolitaries().isEmpty()) {
             System.out.println("\n--- SOLITAIRES ---");
             for (FantasticCreaturesLycanthropes loup : colony.getSolitaries()) {
@@ -30,7 +29,6 @@ public class lycanthropeView {
     }
 
     private void displayPack(Pack pack) {
-        // print couple Alpha
         FantasticCreaturesLycanthropes alphaM = pack.getAlphaMale();
         FantasticCreaturesLycanthropes alphaF = pack.getAlphaFemale();
 

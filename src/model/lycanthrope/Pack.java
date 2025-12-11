@@ -59,9 +59,7 @@ public class Pack {
 		
 		FantasticCreaturesLycanthropes bestMale = null;
         FantasticCreaturesLycanthropes bestFemale = null;
-        
-        // ON COMMENCE PAR LA PIERRE (le male, ref a gon tu connais)
-        
+
 		for (FantasticCreaturesLycanthropes member : members) {
 			if(member.isMale()) {
 				if (bestMale == null || member.getLevel() > bestMale.getLevel()) { // je change ma logique, ca me parait plus simple
@@ -74,11 +72,10 @@ public class Pack {
                 }
 			}
 		}
-		// après la boucle qui check qui est le best, on setup les potentiels nouveaux alpha çipjfeziç
-		
+
         if (bestMale != null) {
             if (this.alphaMale != null && this.alphaMale != bestMale) {
-                this.alphaMale.setRank(Rank.BETA); // bouh le gros nul a perdu sa place, cheh
+                this.alphaMale.setRank(Rank.BETA);
             }
             this.alphaMale = bestMale;
             this.alphaMale.setRank(Rank.ALPHA);
@@ -86,7 +83,7 @@ public class Pack {
 
         if (bestFemale != null) {
             if (this.alphaFemale != null && this.alphaFemale != bestFemale) {
-                this.alphaFemale.setRank(Rank.BETA); // bouh la grosse nulle a perdu sa place, cheh
+                this.alphaFemale.setRank(Rank.BETA);
             }
             this.alphaFemale = bestFemale;
             this.alphaFemale.setRank(Rank.ALPHA);
@@ -99,15 +96,16 @@ public class Pack {
      * the rank of everyone in the pack</p>
      * @return void
 	 */
-	public void reproduce() {
+	public ArrayList<String> reproduce() {
+		ArrayList<String> messages = new ArrayList<>();
         if (alphaMale != null && alphaFemale != null) {
             
             Random rand = new Random();
-            int litterSize = 1 + rand.nextInt(7); // 1 à 7 petits
+            int litterSize = 1 + rand.nextInt(7);
             
-            System.out.println("Reproduction : " + litterSize + " pôti loup tout mignon et sanguinaire sont nés !");
+            messages.add("Reproduction : " + litterSize + " pôti loup tout mignon et sanguinaire sont nés !\n");
             
-            boolean hasBeta = members.stream().anyMatch(w -> w.getRank() == Rank.BETA); // j'ai mis 20 min a écrire cette ligne putain de merde
+            boolean hasBeta = members.stream().anyMatch(w -> w.getRank() == Rank.BETA);
             Rank childRank = hasBeta ? Rank.GAMMA : Rank.BETA;
 
             for (int i = 0; i < litterSize; i++) {
@@ -122,10 +120,11 @@ public class Pack {
             }
         } else 
         {
-            System.out.println("Pas de couple Alpha complet, pas de reproduction.");
+            messages.add("Pas de couple Alpha complet, pas de reproduction.\n");
         }
+		return messages;
     }
-	//faire doc ^^
+
 	public void decreaseRanksNaturally() {
 		for (FantasticCreaturesLycanthropes member : members) {
 			member.naturalHierachydown();

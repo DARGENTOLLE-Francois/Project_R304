@@ -4,10 +4,13 @@ import model.character.*;
 import model.character.Character;
 import model.place.Place;
 import model.food.Food;
+import model.magicpotion.MagicPotion;
 import model.character.FantasticCreaturesLycanthropes;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
 * The model class for the ClanChiefModel object and game logic.
@@ -15,7 +18,7 @@ import java.util.Iterator;
 *
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
-* @author      William Edelstein 
+* @author      William Edelstein
 * @author      Nathan Griguer
 */
 public class ClanChiefModel {
@@ -50,22 +53,22 @@ public class ClanChiefModel {
     }
 
     public Character createCharacter(String name, String sex, double height, int age, int type) {
-    	
+
         switch(type) {
             case 1:
                 return new Druid(name, sex, height, age, 10,40,30,0,0,0, this.place);
             case 2:
-				return new Blacksmith(name, sex, height, age, 10,40,60,0,0,0, this.place);          
+				return new Blacksmith(name, sex, height, age, 10,40,60,0,0,0, this.place);
 			case 3:
-                return new Innkeeper(name, sex, height, age, 10,40,20,0,0,0, this.place);   
+                return new Innkeeper(name, sex, height, age, 10,40,20,0,0,0, this.place);
             case 4:
-                return new GallicMerchant(name, sex, height, age, 15,20,25,0,0,0, this.place);  
+                return new GallicMerchant(name, sex, height, age, 15,20,25,0,0,0, this.place);
             case 5:
-                return new Legionnaire(name, sex, height, age, 20,30,25,0,0,0, this.place);    
+                return new Legionnaire(name, sex, height, age, 20,30,25,0,0,0, this.place);
             case 6:
-                return new Prefect(name, sex, height, age, 22,12,35,0,0,0, this.place);  
+                return new Prefect(name, sex, height, age, 22,12,35,0,0,0, this.place);
             case 7:
-                return new General(name, sex, height, age, 26,18,30,0,0,0, this.place);    
+                return new General(name, sex, height, age, 26,18,30,0,0,0, this.place);
             case 8:
                 return new FantasticCreaturesLycanthropes(name, this.sexenum, height,this.categoryAge, 10,50,40,0,0,0,15,16,false, this.rank, true);
 
@@ -81,15 +84,18 @@ public class ClanChiefModel {
     }
 
     public String charactersEat() {
-        Iterator<Character> it = place.getPeople().iterator();
+        ListIterator<Character> it = place.getPeople().listIterator();
         int fed = 0;
 
         while (it.hasNext()) {
             if (place.getFood().isEmpty()) {
                 return "No more food available. " + fed + " characters have eaten.";
             }
+
             Character c = it.next();
+
             Food food = place.getFood().remove(0);
+
             c.eat(food);
             fed++;
         }
@@ -97,22 +103,56 @@ public class ClanChiefModel {
         return fed + " characters have eaten.";
     }
     
-    public void askMagicPotion() {
-    	//TODO
+    public Druid getDruid() {
+    	for (Character c: place.getPeople()) {
+    		if (c instanceof Druid) {
+    			return (Druid)c;
+    		}
+    	}
+    	return null;
+    }
+
+
+    public MagicPotion getDruidPotion() {
+        if (hasDruidInPlace()) {
+            return this.getDruid().getMagicPotion();
+        }
+        return null;
     }
     
-    public void drinkMagicPotion() {
-    	//TODO
+    public MagicPotion askMagicPotion() {
+    	if (!this.hasDruidInPlace()) return null;
+    	Druid druid = (Druid) this.getDruid();
+        List<Food> ingredients = druid.prepareIngredients();
+        MagicPotion newPotion = druid.MakePotion(ingredients);
+
+        druid.setMagicPotion(newPotion);
+        return newPotion;
+
+    }
+
+
+    public boolean hasDruidInPlace() {
+    	if (this.getDruid()!=null) {
+    		return true;
+    	}
+    	return false;
+    }
+
+    public List<String>  drinkMagicPotion(MagicPotion potion, Character charac) {
+    	List<String> messages = charac.drinkMagicPotion(potion);
+
+    	return messages;
     }
     
-    
+
     public void addPeople(Character charac) {
     	place.addPeople(charac);
     }
 
-    
+
     public boolean checkValidIndex(int index) {
-    	if (index>place.getPeople().size()) {
+    	if (index>place.getPeople().size() || index<=0) {
     		return false;
     	}
 		return true;
