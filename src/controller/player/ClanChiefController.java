@@ -2,6 +2,7 @@ package controller.player;
 
 import model.player.ClanChiefModel;
 import model.character.Character;
+import model.character.Rank;
 import model.place.Place;
 import view.player.ClanChiefView;
 import view.utils.Input;
@@ -77,6 +78,13 @@ public class ClanChiefController {
         view.showMessage("Entrer le type du personnage: ");
         view.showType();
         int type = Input.getIntInput();
+
+        if(type == 8){
+            view.showMessage("Entrer le rang du personnage: ");
+            view.showRank();
+            Integer rank = Input.getIntInput();
+        }
+        
 
         Character character = clanChief.createCharacter(name, sex, height, age, type);
         
