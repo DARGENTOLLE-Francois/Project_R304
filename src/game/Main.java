@@ -1,5 +1,5 @@
 package game;
-import controller.lycanthrope.lycanthropeController;
+
 /**
  * Main class of the program. Starts the game.
  * 
@@ -16,10 +16,10 @@ public class Main {
 	 * @return             void
 	 */
     public static void main(String[] args) {
-    	
+    	/*
         lycanthropeController lycanController = new lycanthropeController();
         lycanController.startSimulation(20);
-        
+        */
         Game game = new Game();
         game.start();          
     }

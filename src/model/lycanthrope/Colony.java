@@ -72,7 +72,7 @@ public class Colony {
     	
     	for (Pack packs : getPacks()) {
     		//reproduction
-            if (rand.nextInt(100) < 35) { //35 % de chance (a voir si je vais pas plutot le mettre tout les x temps)
+            if (rand.nextInt(100) < 35) {
                 packs.reproduce();
             }
             

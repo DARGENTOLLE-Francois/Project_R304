@@ -21,60 +21,8 @@ public class lycanthropeController {
     public lycanthropeController() {
         this.colony = new Colony();
         this.view = new lycanthropeView();
-        initializeDemoData();
     }
     
-    /**
-     * This Method initialize the first wolves into a pack which is add into one colony
-     * <p> It has been decide for the start of the simulation to only add manually the wolves in the wait of a generator of wolves </p>
-     * @return void
-     */
-    private void initializeDemoData() {
-        // Create a pack and some wolves
-        Pack pack1 = new Pack();
-        
-        FantasticCreaturesLycanthropes alphaM = new FantasticCreaturesLycanthropes(
-                "AlphaWolf_M", Sex.MALE, 2.1, CategoryAge.ADULT, 
-                90, 100, 100, 0, 0, 0, 50, 80, false, Rank.ALPHA, true
-            );
-            
-        FantasticCreaturesLycanthropes alphaF = new FantasticCreaturesLycanthropes(
-                "AlphaWolf_F", Sex.FEMALE, 1.9, CategoryAge.ADULT, 
-                85, 100, 100, 0, 0, 0, 50, 80, false, Rank.ALPHA, false
-            );
-
-        FantasticCreaturesLycanthropes beta = new FantasticCreaturesLycanthropes(
-                "BetaWolf", Sex.MALE, 2.0, CategoryAge.ADULT, 
-                70, 100, 100, 0, 0, 0, 20, 60, false, Rank.BETA, true
-            );
-            
-        FantasticCreaturesLycanthropes omega = new FantasticCreaturesLycanthropes(
-                "OmegaWolf", Sex.FEMALE, 1.8, CategoryAge.ADULT, 
-                30, 100, 100, 0, 0, 0, 0, 20, false, Rank.OMEGA, true
-            );
-        FantasticCreaturesLycanthropes truc1 = new FantasticCreaturesLycanthropes(
-                "BetaWolf", Sex.MALE, 2.0, CategoryAge.ADULT, 
-                70, 100, 100, 0, 0, 0, 20, 60, false, Rank.KAPPA, true
-            );
-            
-        FantasticCreaturesLycanthropes truc2 = new FantasticCreaturesLycanthropes(
-                "OmegaWolf", Sex.FEMALE, 1.8, CategoryAge.ADULT, 
-                30, 100, 100, 0, 0, 0, 0, 20, false, Rank.DELTA, true
-            );
-        pack1.addMember(alphaM);
-        pack1.addMember(alphaF);
-        pack1.addMember(beta);
-        pack1.addMember(omega);
-        pack1.addMember(truc1);
-        pack1.addMember(truc2);
-            
-        alphaM.setHowl(TypeHowling.DOMINATION); // simple test ,surement à changer
-        omega.setHowl(TypeHowling.SUBMISSION);
-            
-        colony.addPack(pack1);
-        
-    }
-
     // Si j'ai la force, je vais faire une simulation de test 
     // qu'on pourra reprendre pour plus tard
     /**

@@ -7,7 +7,6 @@ import model.place.Place;
 import view.player.ClanChiefView;
 import view.utils.Input;
 import view.invasiontheatreview.InvasionTheatreView;
-
 import java.util.ArrayList;
 
 /**
@@ -32,7 +31,7 @@ public class InvasionTheatreController {
      * The InvasionTheatre view.
      */
     private InvasionTheatreView view;
-
+    	
     /** 
      * Creates a InvasionTheatreController object. will make a relation with it's model and view.
      *  
@@ -105,6 +104,14 @@ public class InvasionTheatreController {
                 view.showCombatResults(combatResults);
             }
 
+        }
+        
+        view.showMessage("Gestion de la colonie de Lycanthropes...");
+        for (Place place : model.getPlaces()) {
+            if (place instanceof model.place.Enclosure) {
+            	
+                ((model.place.Enclosure) place).updateLycanthropes();
+            }
         }
 
     }
