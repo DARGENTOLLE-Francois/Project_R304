@@ -4,6 +4,7 @@ import model.character.*;
 import model.character.Character;
 import model.place.Place;
 import model.food.Food;
+import model.character.FantasticCreaturesLycanthropes;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,6 +26,7 @@ public class ClanChiefModel {
     private Place place;
     private Sex sexenum;
     private CategoryAge categoryAge;
+    private Rank rank;
 
     public ClanChiefModel(String name, String sex, Integer age, Place place) {
         this.name = name;
@@ -65,7 +67,7 @@ public class ClanChiefModel {
             case 7:
                 return new General(name, sex, height, age, 26,18,30,0,0,0, this.place);    
             case 8:
-                return new FantasticCreaturesLycanthropes(name,sexenum,height,categoryAge,34,50,40,0,0,0);
+                return new FantasticCreaturesLycanthropes(name, this.sexenum, height,this.categoryAge, 10,50,40,0,0,0,15,16,false, this.rank, true);
 
             default:
                 return null;

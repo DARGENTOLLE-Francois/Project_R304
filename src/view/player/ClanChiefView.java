@@ -28,6 +28,11 @@ public class ClanChiefView {
         System.out.println("=== PLACE INFORMATION ===");
         System.out.println(info);
     }
+
+    public void showRank() {
+        System.out.println("- ALPHA tapez 1" + "\n" + "- BETA tapez 2"+ "\n" + "- GAMMA tapez 3"+ "\n" + "- DELTA tapez 4" + "\n" + "- EPSILON tapez 5"+"\n" + "- ZETA tapez 6" + "\n"+ "- ETA tapez 7" + "\n"+ "- KAPPA tapez 8" 
+                            + "\n"+ "- LAMBDA tapez 9" + "\n"+ "- SIGMA tapez 10" + "\n"+ "- OMEGA tapez 11" );
+    }
     
     
     public void showType() {
