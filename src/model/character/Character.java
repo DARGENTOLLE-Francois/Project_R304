@@ -5,7 +5,7 @@ import java.util.List;
 
 import model.food.Food;
 import model.food.NutritionalValue;
-import model.magicPotion.MagicPotion;
+import model.magicpotion.MagicPotion;
 import model.place.Place;
 
 /**
@@ -193,6 +193,18 @@ abstract public class Character {
 	public void setLevelOfPotion(Integer levelOfPotion) {
 		this.levelOfPotion = levelOfPotion;
 	}
+	public CategoryAge getCategoryAge() {
+		return categoryAge;
+	}
+	public void setCategoryAge(CategoryAge categoryAge) {
+		this.categoryAge = categoryAge;
+	}
+	public Sex getSexenum() {
+		return sexenum;
+	}
+	public void setSexenum(Sex sexenum) {
+		this.sexenum = sexenum;
+	}
 	public boolean isInvincible() { return isInvincible; }
 	public boolean isPetrified() { return isPetrified; }
 	public boolean isLycanthrope() { return isLycanthrope; }
@@ -204,9 +216,14 @@ abstract public class Character {
 		return placeOfOrigin;
 	}
 
+
+	private CategoryAge categoryAge;
+	private Sex sexenum;
+	
 	public Place getCurrentPlace() {
 		return currentPlace;
 	}
+
 	
 	
 	public void setCurrentPlace(Place currentPlace) {
@@ -229,6 +246,20 @@ abstract public class Character {
 		this.placeOfOrigin = placeOfOrigin;
 		this.currentPlace = placeOfOrigin;
 	}
+
+	public Character(String name, Sex sexenum, double height, CategoryAge categoryAge, Integer strength, Integer stamina,
+			Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion) {
+		this.name = name;
+		this.sexenum = sexenum;
+		this.height = height;
+		this.categoryAge = categoryAge;
+		this.strength = strength;
+		this.stamina = stamina;
+		this.health = health;
+		this.hunger = hunger;
+		this.belligerence = belligerence;
+		this.levelOfPotion = levelOfPotion;
+	}
 	
 	public void strike(Character c1) {
 		if (!this.isPetrified) 
@@ -236,13 +267,13 @@ abstract public class Character {
 	}
 	
 	public void heal() {
-		if (!this.isPetrified) { // statue donc cheh
+		if (!this.isPetrified) { 
 			++this.health;
 		}
 	}
 	
 	public void eat() {
-		if (!this.isPetrified) { // statue donc cheh
+		if (!this.isPetrified) { 
 			--this.hunger;
 		}
 	}
@@ -282,14 +313,14 @@ abstract public class Character {
 	}
 	
 	public boolean passAway() {
-		if (!this.isPetrified && this.health<0) { // statue donc cheh
+		if (!this.isPetrified && this.health<0) {
 			return true;
 		}
 		return false;
 	}
 
 	public void eat(Food food) {
-		if (this.isPetrified) return; // statue donc cheh
+		if (this.isPetrified) return; 
 		
 		if (food.getNutritionalValue()==NutritionalValue.GOOD) {
 			this.hunger=this.hunger-20;
