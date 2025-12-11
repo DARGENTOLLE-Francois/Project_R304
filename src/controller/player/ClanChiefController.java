@@ -1,5 +1,7 @@
 package controller.player;
 
+import includes.exception.ExceptionEmptyField;
+import includes.exception.ExceptionValidationField;
 import model.player.ClanChiefModel;
 import model.character.Character;
 import model.character.Rank;
@@ -19,8 +21,8 @@ import java.util.List;
 * - Create a character
 * - Heal the characters
 * - Make the characters eat
-* - Manage the characters position though the board.
-* As it is a controller it will only gather the user's input and send the informations to the model and the view to be used...
+* - Manage the character position though the board.
+* As it is a controller, it will only gather the user's input and send the informations to the model and the view to be used...
 *
 * @author      Alexandre Benhafessa
 * @author      François Dargentolle
@@ -38,9 +40,9 @@ public class ClanChiefController {
     private ClanChiefView view;
     
     /**
-     * Creates a InvasionTheatreController object. will make a relation with it's model and view.
+     * Creates an InvasionTheatreController object. will make a relation with it's model and view.
      *
-     * @param model        The ClanChief to control.
+     * @param clanChief        The ClanChief to control.
      * @param view         The view that will show the ClanChief info.
      * @return             the newly created object
      */
@@ -84,20 +86,20 @@ public class ClanChiefController {
         if(type == 8){
             view.showMessage("Entrer le rang du personnage: ");
             view.showRank();
-            Integer rank = Input.getIntInput();
+            Input.getIntInput();
         }
 
+        Character character = null;
 
-        Character character = clanChief.createCharacter(name, sex, height, age, type);
-        
-        
+        try {
+            character = clanChief.createCharacter(name, sex, height, age, type);
 
-        if (character == null) {
-            view.showMessage("Type invalide. Erreur lors de la création du personnage");
-        } else {
             view.showMessage("Personnage crée avec succès! \n");
             view.showCharacter(character);
             clanChief.addPeople(character);
+
+        } catch (ExceptionEmptyField | ExceptionValidationField e) {
+            view.showMessage("ERREUR : " + e.getMessage());
         }
 
         return character;
@@ -169,7 +171,7 @@ public class ClanChiefController {
     }
 
 
-    public boolean drinkMagicPotion() {
+    public boolean drinkMagicPotion() throws ExceptionValidationField {
         if (!clanChief.hasDruidInPlace()) {
             view.showMessage("Il n'y a pas de druide ici pour faire de la potion !");
             return false;
@@ -194,16 +196,24 @@ public class ClanChiefController {
      * @return             Character the chosen one.
      */
     public Character chooseCharac() {
-    	view.showListCharacter(clanChief.getPlace().getPeople());
-    	view.showMessage("Choisissez le numéro du personnage que vous voulez sélectionner :");
-    	int choice = Input.getIntInput();
+        view.showListCharacter(clanChief.getPlace().getPeople());
 
-    	while (choice>clanChief.getPlace().getPeople().size() || choice<=0) {
-    		 view.showMessage("Choix invalide. \nVeuillez réessayer :");
-    		 choice = Input.getIntInput();
-    	}
-    	Character chosenCharac = clanChief.chooseCharac(choice);
-    	return chosenCharac;
+        Character chosenCharac = null;
+        boolean validChoice = false;
+
+        while (!validChoice) {
+            view.showMessage("Choisissez le numéro du personnage que vous voulez sélectionner :");
+            int choice = Input.getIntInput();
+
+            try {
+                chosenCharac = clanChief.chooseCharac(choice);
+                validChoice = true;
+            } catch (ExceptionValidationField e) {
+                view.showMessage("Erreur de saisie : " + e.getMessage());
+                view.showMessage("Veuillez réessayer.");
+            }
+        }
+        return chosenCharac;
     }
     
     /**
@@ -212,15 +222,24 @@ public class ClanChiefController {
      * @return             Place the chosen one.
      */
     public Place chooseDestination(ArrayList<Place> destinations) {
-    	view.showDestinations(destinations);
-    	view.showMessage("Choisissez le numéro du lieu dans lequel vous voulez déplacer votre personnage :");
-    	int choice = Input.getIntInput();
-    	while (choice>destinations.size() || choice<=0) {
-    		 view.showMessage("Choix invalide. \nVeuillez réessayer :");
-    		 choice = Input.getIntInput();
-    	}
-    	Place chosenPlace = clanChief.chooseDestination(destinations, choice);
-    	return chosenPlace;
+        view.showDestinations(destinations);
+
+        Place chosenPlace = null;
+        boolean validChoice = false;
+
+        while (!validChoice) {
+            view.showMessage("Choisissez le numéro du lieu dans lequel vous voulez déplacer votre personnage :");
+            int choice = Input.getIntInput();
+
+            try {
+                chosenPlace = clanChief.chooseDestination(destinations, choice);
+                validChoice = true;
+            } catch (ExceptionValidationField e) {
+                view.showMessage("Erreur de saisie : " + e.getMessage());
+                view.showMessage("Veuillez réessayer.");
+            }
+        }
+        return chosenPlace;
     }
     
     /**
@@ -229,7 +248,7 @@ public class ClanChiefController {
      *
      * @return             void
      */
-    public void moveCharac(ArrayList<Place> destinations) {
+    public void moveCharac(ArrayList<Place> destinations) throws ExceptionValidationField {
     	Character chosenCharac= this.chooseCharac();
     	Place chosenPlace = this.chooseDestination(destinations);
     	if (clanChief.moveCharac(chosenCharac, chosenPlace)) {
