@@ -1,12 +1,12 @@
-package controller.InvasionTheatre;
+package controller.invasiontheatre;
 
 import controller.player.ClanChiefController;
 import model.player.ClanChiefModel;
-import model.InvasionTheatre.*;
+import model.invasiontheatre.*;
 import model.place.Place;
 import view.player.ClanChiefView;
 import view.utils.Input;
-import view.InvasionTheatreView.InvasionTheatreView;
+import view.invasiontheatreview.InvasionTheatreView;
 
 import java.util.ArrayList;
 
@@ -156,12 +156,12 @@ public class InvasionTheatreController {
                     break;
                 case 5:
                     view.showMessage("\n➤ Demande de potion magique à un druide");
-                    // TODO: À implémenter avec le système de potion
+                    // TODO
                     view.showMessage("Fonctionnalité à implémenter");
                     break;
                 case 6:
                     view.showMessage("\n➤ Faire boire de la potion magique");
-                    // TODO: À implémenter
+                    // TODO
                     view.showMessage("Fonctionnalité à implémenter");
                     break;
                 case 7:

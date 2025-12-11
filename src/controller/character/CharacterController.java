@@ -2,7 +2,7 @@ package controller.character;
 
 import model.character.Character;
 import model.food.Food;
-import model.magicPotion.MagicPotion;
+import model.magicpotion.MagicPotion;
 import view.character.CharacterView;
 
 import java.util.List;

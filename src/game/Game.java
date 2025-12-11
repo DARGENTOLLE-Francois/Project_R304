@@ -2,14 +2,14 @@ package game;
 
 import model.player.ClanChiefModel;
 import model.place.*;
-import model.InvasionTheatre.InvasionTheatreModel;
+import model.invasiontheatre.InvasionTheatreModel;
 import model.character.*;
 import model.food.Food;
-import view.InvasionTheatreView.InvasionTheatreView;
+import view.invasiontheatreview.InvasionTheatreView;
 
 import java.util.ArrayList;
 
-import controller.InvasionTheatre.InvasionTheatreController;
+import controller.invasiontheatre.InvasionTheatreController;
 
 /**
 * The Game class.

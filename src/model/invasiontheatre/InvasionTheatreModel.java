@@ -1,4 +1,4 @@
-package model.InvasionTheatre;
+package model.invasiontheatre;
 
 import java.util.ArrayList;
 import java.util.Random;

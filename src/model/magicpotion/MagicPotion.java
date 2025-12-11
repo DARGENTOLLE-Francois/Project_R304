@@ -1,4 +1,4 @@
-package model.magicPotion;
+package model.magicpotion;
 
 import java.util.List;
 

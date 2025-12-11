@@ -1,24 +1,25 @@
 package game;
-
+import controller.lycanthrope.lycanthropeController;
 /**
-* The main class.
-* Is the main... What else do you need to know...
-* Will create a game object and start it ?
-* 
-* @author      Alexandre Benhafessa
-* @author      François Dargentolle
-* @author      William Edelstein 
-* @author      Nathan Griguer
-*/
+ * Main class of the program. Starts the game.
+ * 
+ * @author      Alexandre Benhafessa
+ * @author      François Dargentolle
+ * @author      William Edelstein 
+ * @author      Nathan Griguer
+ */
 public class Main {
-	
 	/** 
 	 * The Main function.
-     * Creates a game and starts it.
-     *
-     * @return             void
-     */
+	 * Creates a game and starts it.
+	 *
+	 * @return             void
+	 */
     public static void main(String[] args) {
+    	
+        lycanthropeController lycanController = new lycanthropeController();
+        lycanController.startSimulation(10);
+        
         Game game = new Game();
         game.start();          
     }

@@ -1,4 +1,4 @@
-package view.InvasionTheatreView;
+package view.invasiontheatreview;
 
 import java.util.ArrayList;
 

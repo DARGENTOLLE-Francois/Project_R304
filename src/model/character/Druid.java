@@ -1,7 +1,7 @@
 package model.character;
 
 import model.food.Food;
-import model.magicPotion.MagicPotion;
+import model.magicpotion.MagicPotion;
 import model.place.Place;
 
 import java.util.List;
