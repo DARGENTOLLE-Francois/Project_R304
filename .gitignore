@@ -199,3 +199,8 @@ README.html
 *.iml
 .idea
 .exercism
+
+### Documentation ###
+
+doc/*
+Documentation/*

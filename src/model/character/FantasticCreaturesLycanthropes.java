@@ -2,17 +2,37 @@ package model.character;
 
 import model.lycanthrope.Pack;
 
+import model.place.Place;
+
 /**
- * Model of the Lycanthrope objects
- * 
- * <p> This class is used to initialize all the attributes and method of a lycanthrope </p>
- * @author Benhafessa Alexandre
- * @author Dargentolle François
- * @author Edelstein William
- * @author Griguer Nathan
- */
+* The FantasticCreaturesLycanthropes class, extends the Character class and implements the Fight interface.s.
+* 
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
+
 public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 
+	/** 
+     * Creates an instance with the given parameters
+     *
+     *
+     * @param name		    The name of the character
+     * @param sexe		    The gender of the character
+     * @param height	    The height of the character
+     * @param age		    The age of the character
+     * @param strength	    The strength stat of the character
+     * @param stamina	    The stamina stat of the character
+     * @param health	    The health stat of the character
+     * @param hunger	    The hunger of the character
+     * @param belligerence  The belligerence of the character
+     * @param levelOfPotion The levelOfPotion of the character
+     * @param placeOfOrigin The placeOfOrigin of the character
+     * 
+     * @return             The newly created object
+     */
 	public FantasticCreaturesLycanthropes(String name, Sex sexe, double height, CategoryAge age, Integer strength,
 			Integer stamina, Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion) {
 		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion);
@@ -226,7 +246,7 @@ public class FantasticCreaturesLycanthropes  extends Character implements Fight{
 		}	
 	}
 
-	// Faire en sorte que les hurlements soit "entendu" par les autres lycanthropes dans un certain rayon
+	// The howls must be "heard" by other lycanthropes nearby
 	public void howl(String message) {
 		this.howl = TypeHowling.BELONGE_TO; //placeholder
 		System.out.println("Je suis le loup" + this.getName()+ " [" + this.rank + "] et je hurle : " + message);

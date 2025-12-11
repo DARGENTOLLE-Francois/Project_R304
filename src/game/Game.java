@@ -2,21 +2,44 @@ package game;
 
 import model.player.ClanChiefModel;
 import model.place.*;
-import model.InvasionTheatre.InvasionTheatreModel;
+import model.invasiontheatre.InvasionTheatreModel;
 import model.character.*;
 import model.food.Food;
-import view.InvasionTheatreView.InvasionTheatreView;
+import view.invasiontheatreview.InvasionTheatreView;
 
 import java.util.ArrayList;
 
-import controller.InvasionTheatre.InvasionTheatreController;
+import controller.invasiontheatre.InvasionTheatreController;
 
+/**
+* The Game class.
+* This class is the starter component of the game, it will give a link between the three Invasion Theatre MVC elements.
+* From this class, the game can run.
+* 
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 public class Game {
-
+	/** 
+     * The InvasionTheaterController for the game
+     */
     private InvasionTheatreController controller;
+    /** 
+     * The InvasionTheatreModel for the game
+     */
     private InvasionTheatreModel model;
+    /** 
+     * The InvasionTheatreView for the game
+     */
     private InvasionTheatreView view;
 
+    /** 
+     * Creates a game with static parameters chosen by us (the gods).
+     *
+     * @return             The newly created object
+     */
     public Game() {
     	
     	// Definition of Places
@@ -64,6 +87,11 @@ public class Game {
         
     }
     
+    /** 
+     * Starts the game by starting the loops in the InvasionTheaterController.
+     *
+     * @return             void
+     */
     public void start() {
     	controller.showMainMenu();
     }

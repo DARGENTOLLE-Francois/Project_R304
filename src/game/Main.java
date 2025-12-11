@@ -1,16 +1,20 @@
 package game;
 import controller.lycanthrope.lycanthropeController;
 /**
- * Class Main of the lycanthrope simulation
+ * Main class of the program. Starts the game.
  * 
- * <p> This class is used to initialize the controller and start the simulation</p>
- * @author Benhafessa Alexandre
- * @author Dargentolle François
- * @author Edelstein William
- * @author Griguer Nathan
+ * @author      Alexandre Benhafessa
+ * @author      François Dargentolle
+ * @author      William Edelstein 
+ * @author      Nathan Griguer
  */
 public class Main {
-
+	/** 
+	 * The Main function.
+	 * Creates a game and starts it.
+	 *
+	 * @return             void
+	 */
     public static void main(String[] args) {
     	
         lycanthropeController lycanController = new lycanthropeController();

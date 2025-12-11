@@ -5,30 +5,115 @@ import java.util.List;
 
 import model.food.Food;
 import model.food.NutritionalValue;
-import model.magicPotion.MagicPotion;
+import model.magicpotion.MagicPotion;
 import model.place.Place;
 
+/**
+* The abstract model for the characters.
+* Every characters will extend this class at some degree.
+* It contains the basics properties for the characters in our game which is:
+* - Their name
+* - Their age
+* - Their gender
+* - Their height
+* - Their strength
+* - Their stamina
+* - Their hunger level
+* - Their belligerence
+* - Their level of magic potion
+* - Their current lace
+* - Their original place
+* - Their invincibility (boolean)
+* - Their petrification status (boolean)
+* - Their lycanthrope status (boolean)
+* - Their super speed status (boolean)
+* - Their amount of potion doses consumed
+* 
+* They also can:
+* - Die
+* - Strike another character
+* - Modify the properties above through getters, setters and methods like "heal()".
+* 
+* @author      Alexandre Benhafessa
+* @author      François Dargentolle
+* @author      William Edelstein 
+* @author      Nathan Griguer
+*/
 abstract public class Character {
-
+	/**
+	* The name of the character
+	*/
 	private String name;
+	/**
+	* The gender of the character
+	*/
 	private String sexe;
+	/**
+	* The height of the character
+	*/
 	private double height;
+	/**
+	* The age of the character
+	*/
 	private Integer age;
+	/**
+	* The strength of the character
+	*/
 	private Integer strength;
+	/**
+	* The stamina of the character
+	*/
 	private Integer stamina;
+	/**
+	* The health of the character
+	*/
 	private Integer health;
+	/**
+	* The hunger of the character
+	*/
 	private Integer hunger;
+	/**
+	* The belligerence of the character
+	*/
 	private Integer belligerence;
+	/**
+	* The levelOfPotion of the character
+	*/
 	private Integer levelOfPotion;
+	/**
+	* The Invincibility of the character
+	*/
 	private boolean isInvincible = false;
+	/**
+	* The Petrification of the character
+	*/
 	private boolean isPetrified = false;
+	/**
+	* The Lycanthropy of the character
+	*/
 	private boolean isLycanthrope = false;
+	/**
+	* The super speed of the character
+	*/
 	private boolean hasSuperSpeed = false;
+	/**
+	* The amount of doses consumed of the character
+	*/
 	private int dosesConsumed = 0;
+	/**
+	* The place of origin of the character
+	*/
     private Place placeOfOrigin; 
+    /**
+	* The current place of the character
+	*/
     private Place currentPlace;  
 	
-
+    /**
+	* Returns the name of the character
+	* 
+	* @return the name of the character
+	*/
 	public String getName() {
 		return name;
 	}
@@ -182,13 +267,13 @@ abstract public class Character {
 	}
 	
 	public void heal() {
-		if (!this.isPetrified) { // statue donc cheh
+		if (!this.isPetrified) { 
 			++this.health;
 		}
 	}
 	
 	public void eat() {
-		if (!this.isPetrified) { // statue donc cheh
+		if (!this.isPetrified) { 
 			--this.hunger;
 		}
 	}
@@ -228,14 +313,14 @@ abstract public class Character {
 	}
 	
 	public boolean passAway() {
-		if (!this.isPetrified && this.health<0) { // statue donc cheh
+		if (!this.isPetrified && this.health<0) {
 			return true;
 		}
 		return false;
 	}
 
 	public void eat(Food food) {
-		if (this.isPetrified) return; // statue donc cheh
+		if (this.isPetrified) return; 
 		
 		if (food.getNutritionalValue()==NutritionalValue.GOOD) {
 			this.hunger=this.hunger-20;

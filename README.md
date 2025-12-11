@@ -5,3 +5,6 @@ https://gist.github.com/fedir/cd58012d42c8c1edbb3fff611de6c2f6
 
 clear Console :
 https://stackoverflow.com/questions/2979383/how-to-clear-the-console-using-java
+
+Commande pour générer la doc
+javadoc -d Documentation -sourcepath src -subpackages controller:model:view:includes:game
