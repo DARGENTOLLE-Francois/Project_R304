@@ -80,21 +80,20 @@ public class ClanChiefController {
     }
     
     
-    public void askMagicPotion() {
+    public boolean askMagicPotion() {
         // 1. Vérification de sécurité : Y a-t-il un druide ?
         if (!clanChief.hasDruidInPlace()) {
             view.showMessage("Il n'y a pas de druide ici pour faire de la potion !");
-            return;
+            return false;
         }
 
-        // 2. LOGIQUE SINGLETON : On vérifie d'abord si une potion existe
         MagicPotion existingPotion = clanChief.getDruidPotion();
 
         if (existingPotion != null) {
-            // CAS A : Potion déjà existante
             view.showMessage("\n--- POTION DÉJÀ PRÊTE ---");
             view.showMessage("Le druide sort une marmite qui était déjà prête.");
             view.showMessage(existingPotion.toString());
+            return false;
             
         } else {
             // CAS B : Création d'une nouvelle potion
@@ -106,23 +105,31 @@ public class ClanChiefController {
             if (newPotion != null) {
                 view.showMessage("La potion est terminée !");
                 view.showMessage(newPotion.toString());
+                return true;
             } else {
                 view.showMessage("Erreur lors de la création.");
+                return true;
             }
         }
     }
     
     
-    public void drinkMagicPotion() {
+    public boolean drinkMagicPotion() {
+        if (!clanChief.hasDruidInPlace()) {
+            view.showMessage("Il n'y a pas de druide ici pour faire de la potion !");
+            return false;
+        }
+
     	if (clanChief.getDruidPotion()!=null) {
         	Character charac = this.chooseCharac();
         	MagicPotion magicPotion = clanChief.askMagicPotion();
         	List<String> results = clanChief.drinkMagicPotion(magicPotion, charac);
         	view.showMessage(clanChief.getDruidPotion().toString());
         	view.showListString(results);
+        	return true;
     	}
     	view.showMessage("On doit d'abord créer une potion avant de l'utiliser");
-    	
+    	return false;
     }
    
     

@@ -108,12 +108,17 @@ public class InvasionTheatreController {
                     break;
                 case 5:
                     view.showMessage("\n➤ Demande de potion magique à un druide");
-                    chiefController.askMagicPotion();
+                    //Echec ou réussite de la conception de la potion ou non présence de druid
+                    if (!chiefController.askMagicPotion()) {
+                    	--i;
+                    }
                     break;
                 case 6:
                     view.showMessage("\n➤ Faire boire de la potion magique");
-                    chiefController.drinkMagicPotion();
-                    
+                    //Echec ou réussite de l'utilisation de la potion ou non présence de druid
+                    if(!chiefController.drinkMagicPotion()) {
+                    	--i;
+                    }
                     break;
                 case 7:
                     view.showMessage("\n➤ Transférer un personnage");
