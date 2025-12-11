@@ -2,88 +2,73 @@ package model.player;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import includes.exception.ExceptionEmptyField;
+import includes.exception.ExceptionValidationField;
+import model.place.RomanCity;
+import model.place.Place;
+import model.food.Food;
+import model.character.Character;
 
 class ClanChiefModelTest {
 
-	@Test
-	void testClanChiefModel() {
-		fail("Not yet implemented");
+	private ClanChiefModel chief;
+	private RomanCity city;
+
+	@BeforeEach
+	void setUp() {
+		city = new RomanCity("Lutèce", 100, new ArrayList<Character>(), new ArrayList<Food>());
+		chief = new ClanChiefModel("Abraracourcix", "Homme", 50, city);
 	}
 
 	@Test
-	void testGetName() {
-		fail("Not yet implemented");
+	void testCreateCharacterThrowsExceptionEmptyFieldWhenNameIsNull() {
+		ExceptionEmptyField exception = assertThrows(ExceptionEmptyField.class, () -> {
+			chief.createCharacter(null, "Homme", 1.80, 25, 1);
+		});
+
+		assertEquals("Le nom du personnage ne peut pas être vide !", exception.getMessage());
 	}
 
 	@Test
-	void testGetSex() {
-		fail("Not yet implemented");
+	void testCreateCharacterThrowsExceptionEmptyFieldWhenNameIsEmpty() {
+		assertThrows(ExceptionEmptyField.class, () -> {
+			chief.createCharacter(" ", "Homme", 1.80, 25, 1);
+		});
+	}
+
+
+	@Test
+	void testCreateCharacterThrowsExceptionValidationFieldInvalidType() {
+		ExceptionValidationField exception = assertThrows(ExceptionValidationField.class, () -> {
+			chief.createCharacter("Obélix", "Homme", 1.90, 30, 99);
+		});
+
+		assertTrue(exception.getMessage().contains("n'existe pas"));
 	}
 
 	@Test
-	void testGetAge() {
-		fail("Not yet implemented");
+	void testChooseCharacThrowsExceptionValidationFieldInvalidIndex() {
+		assertThrows(ExceptionValidationField.class, () -> {
+			chief.chooseCharac(0);
+		});
+
+		assertThrows(ExceptionValidationField.class, () -> {
+			chief.chooseCharac(1);
+		});
 	}
 
 	@Test
-	void testGetPlace() {
-		fail("Not yet implemented");
-	}
+	void testChooseDestinationThrowsExceptionValidationFieldInvalidIndex() {
+		ArrayList<Place> destinations = new ArrayList<>();
+		destinations.add(new RomanCity("Rome", 500, new ArrayList<>(), new ArrayList<>()));
 
-	@Test
-	void testExaminePlace() {
-		fail("Not yet implemented");
+		assertThrows(ExceptionValidationField.class, () -> {
+			chief.chooseDestination(destinations, 2);
+		});
 	}
-
-	@Test
-	void testCreateCharacter() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testHealAllCharacters() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testCharactersEat() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testAskMagicPotion() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testDrinkMagicPotion() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testAddPeople() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testCheckValidIndex() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testChooseCharac() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testChooseDestination() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testMoveCharac() {
-		fail("Not yet implemented");
-	}
-
 }
