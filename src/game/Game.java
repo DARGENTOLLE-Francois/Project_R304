@@ -1,5 +1,6 @@
 package game;
 
+import includes.exception.ExceptionValidationField;
 import model.player.ClanChiefModel;
 import model.place.*;
 import model.invasiontheatre.InvasionTheatreModel;
@@ -134,7 +135,7 @@ public class Game {
      *
      * @return             void
      */
-    public void start() {
+    public void start() throws ExceptionValidationField {
     	controller.showMainMenu();
     }
 }

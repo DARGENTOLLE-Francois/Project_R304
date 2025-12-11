@@ -1,5 +1,7 @@
 package game;
 
+import includes.exception.ExceptionValidationField;
+
 /**
  * Main class of the program. Starts the game.
  * 
@@ -15,7 +17,7 @@ public class Main {
 	 *
 	 * @return             void
 	 */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExceptionValidationField {
         Game game = new Game();
         game.start();          
     }

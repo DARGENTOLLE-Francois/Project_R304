@@ -1,6 +1,7 @@
 package controller.invasiontheatre;
 
 import controller.player.ClanChiefController;
+import includes.exception.ExceptionValidationField;
 import model.player.ClanChiefModel;
 import model.invasiontheatre.*;
 import model.place.Place;
@@ -125,7 +126,7 @@ public class InvasionTheatreController {
      * @param model    	   InvasionTheatreController to control.
      * @return             void
      */
-    private void executeClanChiefTurn(ClanChiefModel chief, int turnNumber) {
+    private void executeClanChiefTurn(ClanChiefModel chief, int turnNumber) throws ExceptionValidationField {
         // Displays the turn.
         view.showTurnEvents(turnNumber, chief.getName());
 
@@ -202,7 +203,7 @@ public class InvasionTheatreController {
      *
      * @return             void
      */
-    public void startSimulation() {
+    public void startSimulation() throws ExceptionValidationField {
         view.showMessage("Démarrage de la simulation du théâtre : " + model.getName());
 
         if (model.getClanChiefs().isEmpty()) {
@@ -233,7 +234,7 @@ public class InvasionTheatreController {
      *
      * @return             void
      */
-    public void showMainMenu() {
+    public void showMainMenu() throws ExceptionValidationField {
         boolean running = true;
 
         while (running) {

@@ -1,5 +1,7 @@
 package model.player;
 
+import includes.exception.ExceptionEmptyField;
+import includes.exception.ExceptionValidationField;
 import model.character.*;
 import model.character.Character;
 import model.place.Place;
@@ -52,31 +54,27 @@ public class ClanChiefModel {
         return sb.toString();
     }
 
-    public Character createCharacter(String name, String sex, double height, int age, int type) {
+    public Character createCharacter(String name, String sex, double height, int age, int type)
+            throws ExceptionEmptyField, ExceptionValidationField {
+
+        if (name == null || name.trim().isEmpty()) {
+            throw new ExceptionEmptyField("Le nom du personnage ne peut pas être vide !");
+        }
 
         switch(type) {
-            case 1:
-                return new Druid(name, sex, height, age, 10,40,30,0,0,0, this.place);
-            case 2:
-				return new Blacksmith(name, sex, height, age, 10,40,60,0,0,0, this.place);
-			case 3:
-                return new Innkeeper(name, sex, height, age, 10,40,20,0,0,0, this.place);
-            case 4:
-                return new GallicMerchant(name, sex, height, age, 15,20,25,0,0,0, this.place);
-            case 5:
-                return new Legionnaire(name, sex, height, age, 20,30,25,0,0,0, this.place);
-            case 6:
-                return new Prefect(name, sex, height, age, 22,12,35,0,0,0, this.place);
-            case 7:
-                return new General(name, sex, height, age, 26,18,30,0,0,0, this.place);
-            case 8:
-                return new FantasticCreaturesLycanthropes(name, this.sexenum, height,this.categoryAge, 10,50,40,0,0,0,15,16,false, this.rank, true);
+            case 1: return new Druid(name, sex, height, age, 10,40,30,0,0,0, this.place);
+            case 2: return new Blacksmith(name, sex, height, age, 10,40,60,0,0,0, this.place);
+            case 3: return new Innkeeper(name, sex, height, age, 10,40,20,0,0,0, this.place);
+            case 4: return new GallicMerchant(name, sex, height, age, 15,20,25,0,0,0, this.place);
+            case 5: return new Legionnaire(name, sex, height, age, 20,30,25,0,0,0, this.place);
+            case 6: return new Prefect(name, sex, height, age, 22,12,35,0,0,0, this.place);
+            case 7: return new General(name, sex, height, age, 26,18,30,0,0,0, this.place);
+            case 8: return new FantasticCreaturesLycanthropes(name, this.sexenum, height,this.categoryAge, 10,50,40,0,0,0,15,16,false, this.rank, true);
 
             default:
-                return null;
+                throw new ExceptionValidationField("Le type de personnage sélectionné (" + type + ") n'existe pas.");
         }
     }
-
     public void healAllCharacters() {
         for (Character c : place.getPeople()) {
             c.heal();
@@ -151,38 +149,24 @@ public class ClanChiefModel {
     }
 
 
-    public boolean checkValidIndex(int index) {
-    	if (index>place.getPeople().size() || index<=0) {
-    		return false;
-    	}
-		return true;
+    public Character chooseCharac(int index) throws ExceptionValidationField {
+        int realIndex = index - 1;
+
+        if (realIndex < 0 || realIndex >= place.getPeople().size()) {
+            throw new ExceptionValidationField("Numéro de personnage invalide : " + index);
+        }
+
+        return place.getPeople().get(realIndex);
     }
-    
-    
-    public Character chooseCharac(int index) {
-    	--index;
-    	int i=0;
-    	for (Character c : place.getPeople()) {
-    		if (i==index) {
-    			return c; 
-    		}
-    		++i;
-    	}
-    	// à changer avec exception ?
-		return null;
-    }
-    
-    public Place chooseDestination(ArrayList<Place> destinations, int index) {
-    	--index;
-    	int i=0;
-    	for (Place p : destinations) {
-    		if (i==index) {
-    			return p; 
-    		}
-    		++i;
-    	}
-    	// à changer avec exception ?
-		return null;
+
+    public Place chooseDestination(ArrayList<Place> destinations, int index) throws ExceptionValidationField {
+        int realIndex = index - 1;
+
+        if (realIndex < 0 || realIndex >= destinations.size()) {
+            throw new ExceptionValidationField("Numéro de destination invalide : " + index);
+        }
+
+        return destinations.get(realIndex);
     }
     
     
