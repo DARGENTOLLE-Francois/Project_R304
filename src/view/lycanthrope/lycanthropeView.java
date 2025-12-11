@@ -27,6 +27,10 @@ public class lycanthropeView {
         
         System.out.println("====================================================\n");
     }
+    
+    public void displayMessage(String message) {
+    	System.out.println(message);
+    }
 
     private void displayPack(Pack pack) {
         FantasticCreaturesLycanthropes alphaM = pack.getAlphaMale();
