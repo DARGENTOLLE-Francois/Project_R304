@@ -101,9 +101,9 @@ public class Game {
 		enclosure.getFood().add(Food.BOAR);
 		
 		battlefield.addPeople(gallic1);
+		battlefield.addPeople(gallic2);
 		battlefield.addPeople(general1);
 		battlefield.addPeople(general2);
-		gallicVillage.addPeople(gallic2);
 		gallicVillage.addPeople(druid1);
 		
 		// Add Places into array of Places
