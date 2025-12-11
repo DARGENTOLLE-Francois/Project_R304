@@ -16,6 +16,10 @@ public class lycanthropeView {
             displayLycanthrope(l);
         }
     }
+    
+    public void displayMessage(String message) {
+    	System.out.println();
+    }
 
     public void displayColony(Colony c) {
         System.out.println("COLONY STATUS");

@@ -58,14 +58,14 @@ public class lycanthropeController {
     public void startSimulation(int turns) {
 
         for (int i = 0; i < turns; i++) {
-            System.out.println("\n[Turn " + i + "]");
+        	this.view.displayMessage("\n[Turn " + i + "]");
 
             for (Pack p : colony.getPacks()) {
                 p.recalculateHierarchy();
-                System.out.print("couple" + p.coupleAlphaString());
+                this.view.displayMessage("couple" + p.coupleAlphaString());
 
                 if (i != 0 && i % 3 == 0) { 
-                    System.out.println("--- C'est la saison des amours ! ---");
+                	this.view.displayMessage("--- C'est la saison des amours ! ---");
                     p.reproduce();
                 }
 
