@@ -34,5 +34,10 @@ public class Innkeeper extends Character implements Work{
 			Integer health, Integer hunger, Integer belligerence, Integer levelOfPotion, Place placeOfOrigin) {
 		super(name, sexe, height, age, strength, stamina, health, hunger, belligerence, levelOfPotion, placeOfOrigin);
 	}
+	public Innkeeper(String string, Sex sex, int i, CategoryAge categoryAge, int j, int k, int l, int m, int n,
+			int o) {
+		super(string, sex, i, categoryAge, j, k, l, m, n, o);
+		// TODO Auto-generated constructor stub
+	}
 
 }
